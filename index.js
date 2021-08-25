@@ -1,3 +1,4 @@
+console.log("Hola soy mariana")
 console.log("hola equipo")
 
 const a = 1
