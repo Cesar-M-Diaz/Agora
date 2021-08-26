@@ -1,0 +1,99 @@
+$primary-color: #22B8D9;
+$primary-color-dark: #1c8ca5;
+$secondary-color: #FFFFFF;
+$secondary-color-dark: #e2e2e2;
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    height: 141px;
+    background-color: $primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.header__logo{
+    width: 254px;
+}
+
+.header__search-container{
+    display: flex;
+    align-items: center;
+}
+
+.search-container__input{
+    font-family: 'Open Sans';
+    width: 25vw;
+    height: 41px;
+    border-radius: 10px;
+    border: none;
+    padding-left: 20px;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    letter-spacing: 3px;
+}
+
+.search-container__input:focus{
+    outline: none;
+}
+
+.search-container__icon-container{
+    position: relative;
+    right: 40px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px 0 5px;
+}
+
+.search-container__icon-container > svg{
+    color: $primary-color;
+    font-size: 1.4em;
+    cursor: pointer;
+    transition: color 1s;
+}
+
+.search-container__icon-container > svg:hover{
+    color: $primary-color-dark;
+}
+
+.header__buttons-container{
+    display: flex;
+    gap: 25px;
+}
+
+.button-container__signin-button, .button-container__register-button{
+    width: 171px;
+    height: 43px;
+    border-radius: 10px;
+    font-family: 'Open Sans';
+    font-size: 1.2em;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: background-color .5s;
+}
+
+.button-container__signin-button{
+    border: 3px solid $secondary-color;
+    background-color: $primary-color;
+    color: $secondary-color;
+}
+
+.button-container__signin-button:hover{
+    background-color: $primary-color-dark;
+}
+
+.button-container__register-button{
+    border: none;
+    background-color: $secondary-color;
+    color: $primary-color;
+}
+
+.button-container__register-button:hover{
+    background-color: $secondary-color-dark;
+}
