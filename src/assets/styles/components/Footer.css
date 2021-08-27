@@ -1,0 +1,25 @@
+.footer {
+  font-family: "Open Sans";
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: 100px;
+  margin: auto;
+  border-top: 2px solid #22B8D9;
+  color: #22B8D9;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.footer__social {
+  font-size: 38px;
+  display: flex;
+  gap: 10px;
+}
+
+.footer__social > a > svg {
+  color: #22B8D9;
+}
+
+/*# sourceMappingURL=Footer.css.map */
