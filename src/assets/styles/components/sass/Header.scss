@@ -13,8 +13,9 @@ body{
     background-color: $primary-color;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
+    justify-content: space-around;
+    position: fixed;
+    width: 100%;
 }
 
 .header__logo{
@@ -96,4 +97,11 @@ body{
 
 .button-container__register-button:hover{
     background-color: $secondary-color-dark;
+}
+
+.header__profile-photo{
+    border-radius: 100%;
+    width: 100px;
+    border: 2px solid $secondary-color;
+    cursor: pointer;
 }
