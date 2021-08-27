@@ -3,7 +3,6 @@ import Logo from '../assets/images/Logo.png'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
 import '../assets/styles/components/Header.css';
 
@@ -34,8 +33,8 @@ class Header extends React.Component{
                 </div>
                 
                 {this.state.isAuth ? 
-                    <a href="#">
-                        <img className="header__profile-photo" src={currentStudent.profile_photo} alt="Profile Image" />
+                    <a href="/">
+                        <img className="header__profile-photo" src={currentStudent.profile_photo} alt="Profile" />
                     </a>
 
                     :
