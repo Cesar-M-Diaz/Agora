@@ -12,7 +12,7 @@ const currentStudent = mockStudents[0];
 
 class Header extends React.Component{
     state = {
-        isAuth: true,
+        isAuth: false,
         searchInput: ''
     }
 
