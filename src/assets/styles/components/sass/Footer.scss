@@ -16,6 +16,7 @@ $secondary-color-dark: #e2e2e2;
     color: $primary-color;
     letter-spacing: 1px;
     font-size: 18px;
+    flex-wrap: wrap;
 }
 
 .footer__social{
@@ -26,4 +27,22 @@ $secondary-color-dark: #e2e2e2;
 
 .footer__social > a > svg{
     color: $primary-color;
+}
+
+.footer__message{
+    top: 40px;
+    order: 1;
+    width: 100%;
+    text-align: center;
+}
+
+@media (min-width: 1025px){
+    .footer{
+        flex-wrap: nowrap;
+    }
+    .footer__message{
+        order: 0;
+        width: initial;
+        
+    }
 }

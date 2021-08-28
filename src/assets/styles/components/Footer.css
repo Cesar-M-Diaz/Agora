@@ -10,6 +10,7 @@
   color: #22B8D9;
   letter-spacing: 1px;
   font-size: 18px;
+  flex-wrap: wrap;
 }
 
 .footer__social {
@@ -20,6 +21,24 @@
 
 .footer__social > a > svg {
   color: #22B8D9;
+}
+
+.footer__message {
+  top: 40px;
+  order: 1;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 1025px) {
+  .footer {
+    flex-wrap: nowrap;
+  }
+
+  .footer__message {
+    order: 0;
+    width: initial;
+  }
 }
 
 /*# sourceMappingURL=Footer.css.map */
