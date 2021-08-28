@@ -8,18 +8,28 @@ body {
   background-color: #22B8D9;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 20px;
   position: sticky;
   top: 0;
   width: 100%;
+  box-sizing: border-box;
+  z-index: 20;
+}
+
+.mobile-nav-buttons-container {
+  display: flex;
+  gap: 30px;
+  font-size: 30px;
+  color: white;
 }
 
 .header__logo {
-  width: 254px;
+  width: 200px;
 }
 
 .header__search-container {
-  display: flex;
+  display: none;
   align-items: center;
 }
 
@@ -60,7 +70,7 @@ body {
 }
 
 .header__buttons-container {
-  display: flex;
+  display: none;
   gap: 25px;
 }
 
@@ -95,11 +105,144 @@ body {
   background-color: #e2e2e2;
 }
 
+.header__profile-photo-link {
+  display: none;
+}
+
 .header__profile-photo {
   border-radius: 100%;
   width: 100px;
   border: 2px solid #FFFFFF;
   cursor: pointer;
+  display: none;
+}
+
+.mobile-menu a {
+  display: flex;
+  flex-direction: column;
+}
+.mobile-menu .header__profile-photo {
+  display: block;
+}
+.mobile-menu span {
+  font-size: 1.2rem;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mobile-search-input {
+  height: 100vh;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 50px 0;
+  transition: all 0.5s;
+  visibility: collapse;
+}
+.mobile-search-input .search-container__input {
+  background-color: transparent;
+  margin-left: 50px;
+  width: 80%;
+  transition: all 0.5s;
+}
+.mobile-search-input .search-container__input::placeholder {
+  color: transparent;
+  transition: all 0.5s;
+}
+.mobile-search-input .search-container__icon-container svg {
+  color: transparent;
+  transition: all 0.5s;
+}
+
+.mobile-search-input.active {
+  background-color: lightgray;
+  visibility: visible;
+}
+.mobile-search-input.active .search-container__input {
+  background-color: white;
+}
+.mobile-search-input.active .search-container__input::placeholder {
+  color: gray;
+}
+.mobile-search-input.active .search-container__icon-container svg {
+  color: #22B8D9;
+}
+
+.mobile-menu {
+  position: absolute;
+  background-color: white;
+  height: 100vh;
+  left: -100vw;
+  top: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 50px 0;
+  transition: all 0.5s;
+}
+
+.mobile-menu.active {
+  left: 0;
+}
+
+.mobile-menu .mobile__buttons-container {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+.mobile-menu .mobile__buttons-container .button-container__signin-button {
+  border-radius: 0;
+  background-color: #F7F7F7;
+  border: none;
+  color: #22B8D9;
+  width: 80vw;
+}
+.mobile-menu .mobile__buttons-container .button-container__register-button {
+  border-radius: 0;
+  background-color: #22B8D9;
+  color: #FFFFFF;
+  width: 80vw;
+}
+
+@media (min-width: 1000px) {
+  .header__buttons-container {
+    display: flex;
+  }
+
+  .header {
+    justify-content: space-around;
+    padding: 0;
+  }
+
+  .header__logo {
+    width: 254px;
+  }
+
+  .header__search-container {
+    display: flex;
+  }
+
+  .mobile-nav-buttons-container {
+    display: none;
+  }
+
+  .mobile-search-input, .mobile-menu {
+    display: none;
+  }
+
+  .header__profile-photo-link {
+    display: block;
+  }
+
+  .header__profile-photo {
+    display: block;
+  }
 }
 
 /*# sourceMappingURL=Header.css.map */
