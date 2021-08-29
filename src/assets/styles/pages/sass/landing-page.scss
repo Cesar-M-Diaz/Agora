@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+
+$subtitle-color: #5b5b5b;
+$title-color: #3f3f3f;
+$color-a: #22b8d9;
+$color-b: #0de26f;
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* here starts the code */
+
+html {
+  font-size: 16px;
+}
+
+#Highlight {
+  color: $color-b;
+}
+
+.BaseContainer {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.LPContainer {
+  margin: 90px 10vw;
+  width: 95%;
+}
+
+.HeroContainer {
+  margin: 0px 10vw 120px 10vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.HeroTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.DescriptionContainer {
+  margin: 0px 10vw 50px 10vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.DescriptionTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.TutorsContainer {
+  margin: 0px 10vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.MockTutorsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Categories {
+  width: 95%;
+  margin-top: 50px;
+  align-self: center;
+}
+
+.Illustration {
+  width: 90%;
+  margin-bottom: 20px;
+  margin-top: 55px;
+}
+
+.SecondLine::before {
+  content: '\a';
+  white-space: pre;
+}
+
+.Line {
+  height: 5px;
+  width: 85%;
+  background-color: $color-b;
+}
+
+.Title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 3rem;
+  text-align: center;
+  color: $title-color;
+  letter-spacing: 4px;
+  margin: 15px 2vw;
+}
+
+.TitleT {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 3rem;
+  text-align: center;
+  color: $title-color;
+  letter-spacing: 4px;
+  margin: 100px 2vw 40px;
+}
+
+.MockTutors {
+  background-color: $color-a;
+  width: 300px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.mockH {
+  background-color: $color-a;
+  color: white;
+  width: 100%;
+  height: 75px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+.mockF {
+  background-color: $color-a;
+  color: white;
+  width: 100%;
+  height: 75px;
+}
+
+.Subtitle {
+  margin: 20px 5vw;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2rem;
+  color: $subtitle-color;
+  letter-spacing: 4px;
+}
+
+@media (min-width: 768px) {
+  .LPContainer {
+    margin: 150px 10vw;
+  }
+
+  .Illustration {
+    width: 80%;
+    margin: 80px 0px;
+  }
+
+  .TitleT {
+    margin: 100px 2vw 80px;
+  }
+}
+
+@media (min-width: 992px) {
+  .LPContainer {
+    margin: 150px 3vw 100px;
+    width: 990px;
+  }
+
+  .HeroContainer {
+    margin: 130px 25px 220px 25px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .HeroTextContainer {
+    align-items: flex-start;
+  }
+
+  .Illustration {
+    width: 550px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+  .Title {
+    font-size: 2rem;
+    line-height: 4rem;
+    text-align: left;
+    margin: 15px 0px;
+  }
+
+  .Subtitle {
+    margin: 20px 0px;
+    text-align: left;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    padding-right: 20%;
+  }
+
+  .DescriptionContainer {
+    margin: 0px 25px 160px 25px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .TutorsContainer {
+    margin: 50px 25px 20px 25px;
+    display: grid;
+    grid-template-columns: 300px auto;
+    grid-template-rows: 100px 500px;
+  }
+
+  .TitleT {
+    margin: 10px;
+    grid-row: 1;
+    grid-column: 1 / span 3;
+  }
+
+  #Common {
+    display: none;
+  }
+
+  .Categories {
+    width: 95%;
+    margin: 0;
+    grid-column: 1;
+    grid-row: 2 / 3;
+  }
+
+  .MockTutorsContainer {
+    grid-row: 2 / span 2;
+    grid-column: 2 / span 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .LPContainer {
+    margin: 150px 3vw 100px;
+    width: 1150px;
+  }
+
+  .HeroContainer {
+    margin: 100px 0px 240px 0px;
+  }
+
+  .HeroTextContainer {
+    width: 400px;
+  }
+
+  .Illustration {
+    width: 700px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+  .Title {
+    padding-right: 10%;
+  }
+
+  .DescriptionContainer {
+    margin: 0px 0px 160px 0px;
+  }
+
+  .TutorsContainer {
+    margin: 50px 0px 20px 0px;
+    display: grid;
+    grid-template-columns: 300px auto;
+    grid-template-rows: 100px 500px;
+  }
+}

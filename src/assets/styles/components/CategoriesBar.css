@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap");
+.CBContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  width: 100%;
+}
+
+.Category {
+  border: none;
+  text-align: center;
+  padding-left: 30px;
+  height: 45px;
+  background-color: #f7f7f7;
+  margin-bottom: 15px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 20px;
+  font-weight: 400;
+  color: #5b5b5b;
+  letter-spacing: 3px;
+}
+
+.Category:hover {
+  transform: translateY(-3px);
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
+  background-color: #0de26f;
+  color: white;
+}
+
+@media (min-width: 992px) {
+  .Category {
+    text-align: left;
+  }
+}
+
+/*# sourceMappingURL=CategoriesBar.css.map */
