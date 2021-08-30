@@ -88,4 +88,10 @@ body {
   width: calc(100% - 5px);
 }
 
+@media screen and (min-width: 1200px) {
+  .login-form {
+    width: 40vw;
+  }
+}
+
 /*# sourceMappingURL=LoginPage.css.map */
