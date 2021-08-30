@@ -6,9 +6,9 @@ import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 
 import '../assets/styles/components/Header.css';
 
-import { mockStudents } from './data';
+// import { mockStudents } from './data';
 
-const currentStudent = mockStudents[0];
+// const currentStudent = mockStudents[0];
 
 class Header extends React.Component{
     state = {
@@ -61,9 +61,9 @@ class Header extends React.Component{
                         {this.state.isAuth ? 
                             <div className="mobile-menu__profile-photo-container">
                                 <a className="header__profile-photo-link" href="/">
-                                    <img className="header__profile-photo" src={currentStudent.profile_photo} alt="Profile" />
+                                    {/* <img className="header__profile-photo" src={currentStudent.profile_photo} alt="Profile" /> */}
                                 </a>
-                                <span>{currentStudent.name}</span>
+                                {/* <span>{currentStudent.name}</span> */}
                             </div>
                             :
                             <div className="mobile__buttons-container">
@@ -77,7 +77,7 @@ class Header extends React.Component{
                 
                 {this.state.isAuth ? 
                     <a className="header__profile-photo-link" href="/">
-                        <img className="header__profile-photo" src={currentStudent.profile_photo} alt="Profile" />
+                        {/* <img className="header__profile-photo" src={currentStudent.profile_photo} alt="Profile" /> */}
                     </a>
                     :
                     <div className="header__buttons-container">
