@@ -36,5 +36,14 @@ $color-b: #0de26f;
 @media (min-width: 992px) {
   .Category {
     text-align: left;
+    font-size: 0.9rem;
+    padding-left: 25px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Category {
+    font-size: 1.1rem;
+    padding-left: 30px;
   }
 }

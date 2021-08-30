@@ -6,144 +6,17 @@ $title-color: #3f3f3f;
 $color-a: #22b8d9;
 $color-b: #0de26f;
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+* {
   margin: 0;
   padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol,
-ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* here starts the code */
 
 html {
   font-size: 16px;
 }
 
 #Highlight {
-  color: $color-b;
+  color: #0de26f;
 }
 
 .BaseContainer {
@@ -223,7 +96,7 @@ html {
 .Line {
   height: 5px;
   width: 85%;
-  background-color: $color-b;
+  background-color: #0de26f;
 }
 
 .Title {
@@ -232,7 +105,7 @@ html {
   font-weight: 700;
   line-height: 3rem;
   text-align: center;
-  color: $title-color;
+  color: #3f3f3f;
   letter-spacing: 4px;
   margin: 15px 2vw;
 }
@@ -243,20 +116,20 @@ html {
   font-weight: 700;
   line-height: 3rem;
   text-align: center;
-  color: $title-color;
+  color: #3f3f3f;
   letter-spacing: 4px;
   margin: 100px 2vw 40px;
 }
 
 .MockTutors {
-  background-color: $color-a;
-  width: 300px;
-  height: 200px;
+  background-color: #22b8d9;
+  width: 350px;
+  height: 220px;
   margin-bottom: 20px;
 }
 
 .mockH {
-  background-color: $color-a;
+  background-color: #22b8d9;
   color: white;
   width: 100%;
   height: 75px;
@@ -266,7 +139,7 @@ html {
 }
 
 .mockF {
-  background-color: $color-a;
+  background-color: #22b8d9;
   color: white;
   width: 100%;
   height: 75px;
@@ -279,7 +152,7 @@ html {
   font-size: 1rem;
   font-weight: 400;
   line-height: 2rem;
-  color: $subtitle-color;
+  color: #5b5b5b;
   letter-spacing: 4px;
 }
 
@@ -297,11 +170,16 @@ html {
     margin: 100px 2vw 80px;
   }
 }
-
 @media (min-width: 992px) {
   .LPContainer {
-    margin: 150px 3vw 100px;
+    margin: 60px 3vw 60px;
     width: 990px;
+  }
+
+  .MockTutors {
+    width: 350px;
+    height: 220px;
+    margin-bottom: 14px;
   }
 
   .HeroContainer {
@@ -344,7 +222,7 @@ html {
   .TutorsContainer {
     margin: 50px 25px 20px 25px;
     display: grid;
-    grid-template-columns: 300px auto;
+    grid-template-columns: 200px auto;
     grid-template-rows: 100px 500px;
   }
 
@@ -362,7 +240,7 @@ html {
     width: 95%;
     margin: 0;
     grid-column: 1;
-    grid-row: 2 / 3;
+    grid-row: 2/3;
   }
 
   .MockTutorsContainer {
@@ -374,10 +252,8 @@ html {
     align-items: center;
   }
 }
-
 @media (min-width: 1200px) {
   .LPContainer {
-    margin: 150px 3vw 100px;
     width: 1150px;
   }
 
@@ -406,7 +282,14 @@ html {
   .TutorsContainer {
     margin: 50px 0px 20px 0px;
     display: grid;
-    grid-template-columns: 300px auto;
+    grid-template-columns: 350px auto;
     grid-template-rows: 100px 500px;
+  }
+
+  .Categories {
+    width: 100%;
+    margin: 0;
+    grid-column: 1;
+    grid-row: 2/3;
   }
 }
