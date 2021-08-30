@@ -4,7 +4,7 @@ body {
 }
 
 .header {
-  height: 141px;
+  height: 100px;
   background-color: #22B8D9;
   display: flex;
   align-items: center;
@@ -218,6 +218,7 @@ body {
   .header {
     justify-content: space-around;
     padding: 0;
+    height: 141px;
   }
 
   .header__logo {

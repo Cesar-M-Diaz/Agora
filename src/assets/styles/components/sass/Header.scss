@@ -9,7 +9,7 @@ body{
 }
 
 .header{
-    height: 141px;
+    height: 100px;
     background-color: $primary-color;
     display: flex;
     align-items: center;
@@ -232,6 +232,7 @@ $transition-time: .5s;
     .header{
         justify-content: space-around;
         padding: 0;
+        height: 141px;
     }
 
     .header__logo{
