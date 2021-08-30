@@ -3,24 +3,28 @@
 
 $subtitle-color: #5b5b5b;
 $color-b: #0de26f;
+$color-button-backgroud: #f7f7f7;
+
+.html {
+  font-size: 16px;
+}
 
 .CBContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   width: 100%;
 }
 
 .Category {
   border: none;
   text-align: center;
-  padding-left: 30px;
   height: 45px;
-  background-color: #f7f7f7;
+  background-color: $color-button-backgroud;
   margin-bottom: 15px;
   font-family: 'Source Code Pro', monospace;
-  font-size: 20px;
+  font-size: 1rem;
   font-weight: 400;
   color: $subtitle-color;
   letter-spacing: 3px;
@@ -29,8 +33,9 @@ $color-b: #0de26f;
 .Category:hover {
   transform: translateY(-3px);
   box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
-  background-color: $color-b;
+  background-color: #0de26f;
   color: white;
+  cursor: pointer;
 }
 
 @media (min-width: 992px) {
@@ -40,7 +45,6 @@ $color-b: #0de26f;
     padding-left: 25px;
   }
 }
-
 @media (min-width: 1200px) {
   .Category {
     font-size: 1.1rem;

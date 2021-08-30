@@ -16,7 +16,7 @@ html {
 }
 
 #Highlight {
-  color: #0de26f;
+  color: $color-b;
 }
 
 .BaseContainer {
@@ -29,12 +29,12 @@ html {
 }
 
 .LPContainer {
-  margin: 90px 10vw;
+  margin: 0px 10vw;
   width: 95%;
 }
 
 .HeroContainer {
-  margin: 0px 10vw 120px 10vw;
+  margin: 20px 10vw 120px 10vw;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -96,7 +96,7 @@ html {
 .Line {
   height: 5px;
   width: 85%;
-  background-color: #0de26f;
+  background-color: $color-b;
 }
 
 .Title {
@@ -105,7 +105,7 @@ html {
   font-weight: 700;
   line-height: 3rem;
   text-align: center;
-  color: #3f3f3f;
+  color: $title-color;
   letter-spacing: 4px;
   margin: 15px 2vw;
 }
@@ -116,33 +116,33 @@ html {
   font-weight: 700;
   line-height: 3rem;
   text-align: center;
-  color: #3f3f3f;
+  color: $title-color;
   letter-spacing: 4px;
   margin: 100px 2vw 40px;
 }
 
 .MockTutors {
-  background-color: #22b8d9;
+  background-color: $color-a;
   width: 350px;
   height: 220px;
   margin-bottom: 20px;
 }
 
 .mockH {
-  background-color: #22b8d9;
+  background-color: $color-a;
   color: white;
   width: 100%;
-  height: 75px;
-  position: fixed;
+  height: 100px;
+  position: sticky;
   top: 0;
   z-index: 10;
 }
 
 .mockF {
-  background-color: #22b8d9;
+  border-top: 2px solid $color-a;
   color: white;
   width: 100%;
-  height: 75px;
+  height: 102px;
 }
 
 .Subtitle {
@@ -152,13 +152,13 @@ html {
   font-size: 1rem;
   font-weight: 400;
   line-height: 2rem;
-  color: #5b5b5b;
+  color: $subtitle-color;
   letter-spacing: 4px;
 }
 
 @media (min-width: 768px) {
   .LPContainer {
-    margin: 150px 10vw;
+    margin: 100px 10vw;
   }
 
   .Illustration {
@@ -172,18 +172,16 @@ html {
 }
 @media (min-width: 992px) {
   .LPContainer {
-    margin: 60px 3vw 60px;
+    margin: 0px 3vw 60px;
     width: 990px;
   }
 
   .MockTutors {
-    width: 350px;
-    height: 220px;
     margin-bottom: 14px;
   }
 
   .HeroContainer {
-    margin: 130px 25px 220px 25px;
+    margin: 90px 25px 220px 25px;
     flex-direction: row;
     justify-content: space-between;
   }
@@ -243,6 +241,10 @@ html {
     grid-row: 2/3;
   }
 
+  .mockH {
+    height: 141px;
+  }
+
   .MockTutorsContainer {
     grid-row: 2 / span 2;
     grid-column: 2 / span 2;
@@ -258,7 +260,7 @@ html {
   }
 
   .HeroContainer {
-    margin: 100px 0px 240px 0px;
+    margin: 80px 0px 240px 0px;
   }
 
   .HeroTextContainer {
