@@ -1,3 +1,4 @@
+$primary-color-dark: #1a90aa;
 $primary-color: #22B8D9;
 $secondary-color: #FFFFFF;
 $secondary-color-dark: #d3d3d3;
@@ -6,7 +7,6 @@ $alpha-background: #55555555;
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
 body{
-    background-color: $primary-color;
     color: $secondary-color;
     font-family: 'Open Sans', sans-serif;
 }
@@ -21,26 +21,26 @@ body{
 
 .login-form{
     width: 70vw;
-    height: 80%;
     display: flex;
     flex-direction: column;
+    border: 1px solid $primary-color;
+    color: black;
 }
 
 .login-form__legend{
     font-weight: bold;
     font-size: 30px;
+    text-align: center;
+    margin: 50px 0;
 }
 
 .login-login-fieldset{
-    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 40px;  
     border: none;
     margin: 0;
-    background: $alpha-background;
-    border-radius: 10px 10px 0 0;
 }
 
 .login-signup-fieldset{
@@ -48,9 +48,7 @@ body{
     border: none;
     display: flex;
     flex-direction: column;
-    background: $alpha-background;
     margin: 0;
-    border-radius: 0 0 10px 10px;
 }
 
 .login-input-container{
@@ -58,22 +56,20 @@ body{
     flex-direction: column;
 }
 
-.login-form__submit, .login-form__signup{
-    height: 40px;
-    width: 200px;
-    margin: 0 auto;
-    border-radius: 10px;
-    border: 1px solid black;
+.login-form__submit{
+    width: 100%;
+    padding: 17px 0;
+    color: $secondary-color;
     background-color: $primary-color;
-    background-color: $secondary-color;
-    font-weight: bold;
     font-size: 20px;
-    cursor: pointer;
-    transition: background-color 200ms;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 40px;
 }
 
-.login-form__submit:hover, .login-form__signup:hover{
-    background-color: $secondary-color-dark;
+.login-form__submit:hover{
+    background-color: $primary-color-dark;
+    cursor: pointer;
 }
 
 .login-input__label{
@@ -82,21 +78,43 @@ body{
 }
 
 .login-input__input{
-    height: 20px;
-    margin-top: 5px;
-    padding: 2px;
-    border: none;
-    border-bottom: 1px solid $secondary-color;
-    background-color: #00000000;
-    color: white;
-    outline: none;
+    height: 40px;
+    width: 100%;
+    padding-left: 30px;
+    justify-content: flex-start;
     font-size: 20px;
-    width: calc(100% - 5px);
 }
 
+.input-container__input{
+    display: flex;
+}
 
-@media screen and(min-width: 1200px) {
+.login-input__icon{
+    align-self: center;
+    position: absolute;
+    margin-left: 10px;
+    color: gray;
+}
+
+.signup__text{
+    text-align: center;
+    margin: auto;
+}
+
+@media screen and(min-width: 992px) {
     .login-form{
         width: 40vw;
     }   
+    .signup__text{
+        font-size: 25px;
+    }
+}
+
+@media screen and(min-width: 1200px) {
+    .login-form{
+        width: 20vw;
+    }   
+    .signup__text{
+        font-size: 25px;
+    }
 }

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 
 import '../assets/styles/pages/LoginPage.css';
 
@@ -90,20 +92,25 @@ function LoginPage(){
                 <fieldset className="login-login-fieldset">
                     <h1 className="login-form__legend">Sign In</h1>
                     <div className="login-input-container">
-                        <label className="login-input__label" htmlFor="login-email">E-mail: </label>
-                        <input onChange={handleChange} className="login-input__input" type="email" name="login-email" id="login-email" required />
-                        <span style={{color: 'yellow', visibility: emailErrorVisibility}} className="email-error-span">{emailErrorMessage}</span>
+                        <div className="input-container__input">
+                            <span className="login-input__icon"><FontAwesomeIcon icon={faUser}/></span><input onChange={handleChange} className="login-input__input" type="email" name="login-email" id="login-email" placeholder="Email" required />
+                        </div>
+                        <div className="input-container__error-message">
+                            <span style={{color: 'red', visibility: emailErrorVisibility}} className="email-error-span">{emailErrorMessage}</span>
+                        </div>
                     </div>
                     <div className="login-input-container">
-                        <label className="login-input__label" htmlFor="login-password">Password: </label>
-                        <input onChange={handleChange} className="login-input__input" type="password" name="login-password" id="login-password" required />
-                        <span style={{color: 'yellow', visibility: passwordErrorVisibility}} className="password-error-span">{passwordErrorMessage}</span>
+                        <div className="input-container__input">
+                            <span className="login-input__icon"><FontAwesomeIcon icon={faKey}/></span><input onChange={handleChange} className="login-input__input" type="password" name="login-password" id="login-password" placeholder="Password" required />
+                        </div>
+                        <div className="input-container__error-message">
+                            <span style={{color: 'red', visibility: passwordErrorVisibility}} className="password-error-span">{passwordErrorMessage}</span>
+                        </div>
                     </div>
                     <button onClick={handleClick} className="login-form__submit" type="submit">Sign In</button>
                 </fieldset>
                 <fieldset className="login-signup-fieldset">
-                    <h1 className="login-form__legend">New user?</h1>
-                    <button onClick={handleClick} className="login-form__signup" type="button">Sign Up</button>
+                    <p className="signup__text">Don't have an account? <a href="/">Register</a></p>
                 </fieldset>
             </form>
         </div>
