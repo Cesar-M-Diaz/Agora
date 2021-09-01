@@ -40,19 +40,19 @@ class Header extends React.Component{
                     <img className="header__logo" src={Logo} alt="Logo" />
                 </a>
                 <div className="header__search-container">
-                    <input onChange={handleChange} className="search-container__input" type="text" placeholder="Search" />
+                    <input onChange={this.handleChange} className="search-container__input" type="text" placeholder="Search" />
                     <div className="search-container__icon-container">
                         <FontAwesomeIcon icon={faSearch} />
                     </div>
                 </div>
 
                 <div className="mobile-nav-buttons-container">
-                    <FontAwesomeIcon onClick={toggleSearchCollapse} icon={faSearch} />
-                    <FontAwesomeIcon onClick={toggleMenuCollapse} icon={faBars} />
+                    <FontAwesomeIcon onClick={this.toggleSearchCollapse} icon={faSearch} />
+                    <FontAwesomeIcon onClick={this.toggleMenuCollapse} icon={faBars} />
                 </div>
 
                 <div className={`mobile-search-input ${!this.state.isSearchCollapsed && 'active'}`}>
-                    <input onChange={handleChange} className="search-container__input" type="text" placeholder="Search" />
+                    <input onChange={this.handleChange} className="search-container__input" type="text" placeholder="Search" />
                     <div className="search-container__icon-container">
                         <FontAwesomeIcon icon={faSearch} />
                     </div>   
