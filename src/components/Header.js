@@ -19,21 +19,21 @@ class Header extends React.Component{
         isMenuCollapsed: true
     }
 
+    handleChange(e){
+        this.setState({searchInput: e.target.value})
+    }
+
+    toggleSearchCollapse(){
+        if(!this.state.isMenuCollapsed) this.setState({isMenuCollapsed: !this.state.isMenuCollapsed});
+        this.setState({isSearchCollapsed: !this.state.isSearchCollapsed});
+    }
+
+    toggleMenuCollapse(){
+        if(!this.state.isSearchCollapsed) this.setState({isSearchCollapsed: !this.state.isSearchCollapsed});
+        this.setState({isMenuCollapsed: !this.state.isMenuCollapsed});
+    }
+
     render(){
-        const handleChange = e => {
-            this.setState({searchInput: e.target.value})
-        }
-
-        const toggleSearchCollapse = () => {
-            if(!this.state.isMenuCollapsed) this.setState({isMenuCollapsed: !this.state.isMenuCollapsed});
-            this.setState({isSearchCollapsed: !this.state.isSearchCollapsed});
-        }
-
-        const toggleMenuCollapse = () => {
-            if(!this.state.isSearchCollapsed) this.setState({isSearchCollapsed: !this.state.isSearchCollapsed});
-            this.setState({isMenuCollapsed: !this.state.isMenuCollapsed});
-        }
-
         return(
             <header className="header">
                 <a href="/">
