@@ -1,6 +1,12 @@
+import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
+
 function App() {
   return (
-    <div>App</div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={} />
+      </Switch>
+    </Router>
   );
 }
 
