@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 import '../assets/styles/pages/LoginPage.css';
 
-function LoginPage(){
-    const [emailErrorVisibility, setEmailErrorVisibility] = useState('hidden');
-    const [passwordErrorVisibility, setPasswordErrorVisibility] = useState('hidden');
-
-    const [emailErrorMessage, setEmailErrorMessage] = useState('');
-    const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
-
-    const [currentEmail, setCurrentEmail] = useState('');
-    const [currentPassword, setCurrentPassword] = useState('');
+function LoginPage(props){
 
     const [state, setState] = useState({
         "emailErrorVisibility": 'hidden',
@@ -23,28 +16,9 @@ function LoginPage(){
         "currentPassword": ''
     })
 
-
-
-    const handleClick = e => {
-        if(e.target.outerText === 'Sign Up') {
-            /////////////////////////////////
-            //REDIRECT TO SIGN UP PAGE HERE//
-            /////////////////////////////////
-            console.log('REDIRECT TO SIGN UP PAGE')
-            return 0;
-        }
-        e.preventDefault();
-
-        setEmailErrorMessage('');
-        setPasswordErrorMessage('');
-        setEmailErrorVisibility('hidden');
-        setPasswordErrorVisibility('hidden');
-
-        // Validations
-
+    const validateInputs = (currentEmail, currentPassword) => {
         let emailIsValid = true;
         let passwordIsValid = true;
-
         let emailHasAnAt = false;
         let emailHasADomain = true;
         currentEmail.split('').forEach((char, index, arr) => {
@@ -57,36 +31,45 @@ function LoginPage(){
         })
         if(currentEmail === ''){
             emailIsValid = false;
-            setEmailErrorMessage('Please enter your email');
-            setEmailErrorVisibility('visible');
+            setState(prevState => ({...prevState, emailErrorMessage: 'Please enter your email', emailErrorVisibility: 'visible'}));
         } else if(!emailHasAnAt){
             emailIsValid = false;
-            setEmailErrorMessage('Invalid email, please add an @ to the email');
-            setEmailErrorVisibility('visible');
+            setState(prevState => ({...prevState, emailErrorMessage: 'Invalid email, please add an @ to the email', emailErrorVisibility: 'visible'}));
         } else if(!emailHasADomain){
             emailIsValid = false;
-            setEmailErrorMessage('Invalid email, add a domain next to the @');
-            setEmailErrorVisibility('visible');
+            setState(prevState => ({...prevState, emailErrorMessage: 'Invalid email, add a domain next to the @', emailErrorVisibility: 'visible'}));
         }
 
         if(currentPassword.length < 4){
             passwordIsValid = false;
             if(currentPassword === ''){
-                setPasswordErrorMessage('Please enter your password');
-                setPasswordErrorVisibility('visible');
+                setState(prevState => ({...prevState, passwordErrorMessage: 'Please enter your password', passwordErrorVisibility: 'visible'}));
             } else {
-                setPasswordErrorMessage('Invalid password, the password is too short');
-                setPasswordErrorVisibility('visible');
+                setState(prevState => ({...prevState, passwordErrorMessage: 'Invalid password, the password is too short', passwordErrorVisibility: 'visible'}));
             }  
         }
 
         if(emailIsValid && passwordIsValid){
-            /////////////////////////////
-            //REDIRECT TO HOMEPAGE HERE//
-            /////////////////////////////
-            console.log('REDIRECT TO HOMEPAGE')
+            return true
         }
+        return false;           
+    }
 
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        setState(prevState => (
+            {...prevState, 
+            setEmailErrorMessage: '', 
+            setPasswordErrorMessage: '', 
+            setEmailErrorVisibility: '', 
+            setPasswordErrorVisibility: ''
+            }))
+
+        if(validateInputs(state.currentEmail, state.currentPassword)){
+            props.history.replace('/'); 
+        }
+        
     }
 
     const handleChange = (e, current) => {
@@ -104,7 +87,7 @@ function LoginPage(){
                             <input onChange={e => handleChange(e, 'currentEmail')} className="login-input__input" type="email" name="login-email" id="login-email" placeholder="Email" required />
                         </div>
                         <div className="input-container__error-message">
-                            <span style={{color: 'red', visibility: emailErrorVisibility}} className="email-error-span">{emailErrorMessage}</span>
+                            <span style={{color: 'red', visibility: state.emailErrorVisibility}} className="email-error-span">{state.emailErrorMessage}</span>
                         </div>
                     </div>
                     <div className="login-input-container">
@@ -113,13 +96,13 @@ function LoginPage(){
                             <input onChange={e => handleChange(e, 'currentPassword')} className="login-input__input" type="password" name="login-password" id="login-password" placeholder="Password" required />
                         </div>
                         <div className="input-container__error-message">
-                            <span style={{color: 'red', visibility: passwordErrorVisibility}} className="password-error-span">{passwordErrorMessage}</span>
+                            <span style={{color: 'red', visibility: state.passwordErrorVisibility}} className="password-error-span">{state.passwordErrorMessage}</span>
                         </div>
                     </div>
-                    <button onClick={handleClick} className="login-form__submit" type="submit">Sign In</button>
+                    <button onClick={handleSubmit} className="login-form__submit" type="submit">Sign In</button>
                 </fieldset>
                 <fieldset className="login-signup-fieldset">
-                    <p className="signup__text">Don't have an account? <a href="/">Register</a></p>
+                    <p className="signup__text">Don't have an account? <Link to="/register">Register</Link></p>
                 </fieldset>
             </form>
         </div>
