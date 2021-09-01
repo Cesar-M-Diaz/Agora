@@ -14,6 +14,17 @@ function LoginPage(){
     const [currentEmail, setCurrentEmail] = useState('');
     const [currentPassword, setCurrentPassword] = useState('');
 
+    const [state, setState] = useState({
+        "emailErrorVisibility": 'hidden',
+        "passwordErrorVisibility": 'hidden',
+        "emailErrorMessage": '',
+        "passwordErrorMessage": '',
+        "currentEmail": '',
+        "currentPassword": ''
+    })
+
+
+
     const handleClick = e => {
         if(e.target.outerText === 'Sign Up') {
             /////////////////////////////////
@@ -78,12 +89,8 @@ function LoginPage(){
 
     }
 
-    const handleChange = e => {
-        if(e.target.name === 'login-email'){
-            setCurrentEmail(e.target.value);
-        } else {
-            setCurrentPassword(e.target.value);
-        }
+    const handleChange = (e, current) => {
+        setState((prevState) => ({...prevState, [current]: e.target.value}));
     }
 
     return(
@@ -93,7 +100,8 @@ function LoginPage(){
                     <h1 className="login-form__legend">Sign In</h1>
                     <div className="login-input-container">
                         <div className="input-container__input">
-                            <span className="login-input__icon"><FontAwesomeIcon icon={faUser}/></span><input onChange={handleChange} className="login-input__input" type="email" name="login-email" id="login-email" placeholder="Email" required />
+                            <span className="login-input__icon"><FontAwesomeIcon icon={faUser}/></span>
+                            <input onChange={e => handleChange(e, 'currentEmail')} className="login-input__input" type="email" name="login-email" id="login-email" placeholder="Email" required />
                         </div>
                         <div className="input-container__error-message">
                             <span style={{color: 'red', visibility: emailErrorVisibility}} className="email-error-span">{emailErrorMessage}</span>
@@ -101,7 +109,8 @@ function LoginPage(){
                     </div>
                     <div className="login-input-container">
                         <div className="input-container__input">
-                            <span className="login-input__icon"><FontAwesomeIcon icon={faKey}/></span><input onChange={handleChange} className="login-input__input" type="password" name="login-password" id="login-password" placeholder="Password" required />
+                            <span className="login-input__icon"><FontAwesomeIcon icon={faKey}/></span>
+                            <input onChange={e => handleChange(e, 'currentPassword')} className="login-input__input" type="password" name="login-password" id="login-password" placeholder="Password" required />
                         </div>
                         <div className="input-container__error-message">
                             <span style={{color: 'red', visibility: passwordErrorVisibility}} className="password-error-span">{passwordErrorMessage}</span>
