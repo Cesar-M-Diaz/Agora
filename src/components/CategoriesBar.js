@@ -1,19 +1,20 @@
-import React from 'react'
-import '../assets/styles/components/CategoriesBar.css'
+import React from 'react';
+import '../assets/styles/components/CategoriesBar.css';
+import { categoriesData as categories } from './MockCategoriesData';
 
-function CategoriesBar() {
-    return (
-        <div className="CBContainer">
-            <button className="Category">Math</button>
-            <button className="Category">Biology</button>
-            <button className="Category">Computer science</button>
-            <button className="Category">Chemistry</button>
-            <button className="Category">Philosophy</button>
-            <button className="Category">Art</button>
-            <button className="Category">Design</button>
-            <button className="Category">Engineering</button>
-        </div>
-    )
+function CategoriesBar({ onClick }) {
+  return (
+    <main className="categories__container">
+      {/* get the first n elements of the categories mock data */}
+      {categories.slice(0, 8).map(({ subject, _id }) => {
+        return (
+          <button key={_id} className="category__button" onClick={onClick}>
+            {subject}
+          </button>
+        );
+      })}
+    </main>
+  );
 }
 
-export default CategoriesBar
+export { CategoriesBar };

@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
 
 $subtitle-color: #5b5b5b;
+$title-color: #3f3f3f;
+$color-a: #22b8d9;
 $color-b: #0de26f;
 $color-button-backgroud: #f7f7f7;
 
@@ -9,7 +11,7 @@ $color-button-backgroud: #f7f7f7;
   font-size: 16px;
 }
 
-.CBContainer {
+.categories__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +19,7 @@ $color-button-backgroud: #f7f7f7;
   width: 100%;
 }
 
-.Category {
+.category__button {
   border: none;
   text-align: center;
   height: 45px;
@@ -30,23 +32,31 @@ $color-button-backgroud: #f7f7f7;
   letter-spacing: 3px;
 }
 
-.Category:hover {
+.category__button:hover {
+  transform: translateY(-3px);
+  /* box-shadow: -5px 5px rgba(0, 0, 0, 0.2); */
+  background-color: $color-b;
+  color: white;
+  cursor: pointer;
+}
+
+.category__button:focus {
   transform: translateY(-3px);
   box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
-  background-color: #0de26f;
+  background-color: $color-b;
   color: white;
   cursor: pointer;
 }
 
 @media (min-width: 992px) {
-  .Category {
+  .category__button {
     text-align: left;
     font-size: 0.9rem;
     padding-left: 25px;
   }
 }
 @media (min-width: 1200px) {
-  .Category {
+  .category__button {
     font-size: 1.1rem;
     padding-left: 30px;
   }
