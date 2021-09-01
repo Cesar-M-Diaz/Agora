@@ -1,79 +1,55 @@
+import { render } from '@testing-library/react';
 import React from 'react'
 import register from '../assets/styles/pages/register.css'
-import {FaUserAlt} from "react-icons/fa";
-import {FaEnvelope} from "react-icons/fa";
-import {FaKey} from "react-icons/fa";
+import { FaUserAlt, FaEnvelope, FaKey } from "react-icons/fa";
+import { useState } from 'react'
+import FormTutor from '../components/FormTutor';
 
-class Student_Tutor extends React.Component {
-    state = {
-      register:'tutor',
-    }
-    handleStudent = () => {
-        this.setState({ register: 'student' })
-    }
-    handleTutor = () => {
-        this.setState({ register: 'tutor' })
-      }
-    render() {
-        const rol={
-        student:<RegisterStudent/>,
-        tutor:<RegisterTutor/>,
-    }
-    const {student,tutor}=rol;
-    let stateActive=rol[this.state.register];
-    return (
-        <div className="radios">
-            <h2 className="tittle-rol">Do you want to be student or tutor?</h2>
-            <h2 className="rol"><input type="radio" checked={stateActive===student ? true:false} onClick={this.handleStudent}/>student</h2>
-            <h2 className="rol"><input type="radio" checked={stateActive===tutor ? true:false} onClick={this.handleTutor}/>tutor</h2>
-            <p>{rol[this.state.register]}</p>
-        </div>
-      )
-    }
+function Register() {
+  const [form, setForm] = useState({ role: 'student' })
+  const [errorData, setErrorData] = useState('')
+
+  function addData(e) {
+    setForm({ ...form, [e.target.name]: e.target.value })
   }
-
-
-function Register(){
-    return(
-    <form className="form-register">
+  function validateInfo() {
+    !form.Name || !form.Email || !form.Password ? setErrorData("please fill in all the fields") : setErrorData("")
+  }
+  function handleSubmit(e) {
+    validateInfo()
+    e.preventDefault();
+  }
+  return (
+    <>
+      <form className="form">
         <h2>Register</h2>
-        <div className="inputs">
-            <FaUserAlt fontSize="12px" color="#aaa"/>
-            <input type="text" placeholder="Username"/>
-            </div>
-            <div className="inputs">
-                <FaEnvelope fontSize="12px" color="#aaa"/>
-                <input  type="email" placeholder="Email"/>
-            </div>
-            <div className="inputs">
-                <FaKey fontSize="15px" color="#aaa"/>
-                <input type="password" placeholder="Password"/>
-            </div>
-                <Student_Tutor/>
-                <button type="submit">Register</button>
-                <p>Do you already have a account? <a href="#">Long in</a> </p>
-            </form>
-    )
+        <div className="form__inputs">
+          <FaUserAlt className="form__icon" />
+          <input type="text" placeholder="Name" name="Name" onChange={addData} />
+        </div>
+        <div className="form__inputs">
+          <FaEnvelope className="form__icon" />
+          <input type="text" placeholder="Email" name="Email" onChange={addData} />
+        </div>
+        <div className="form__inputs">
+          <FaKey className="form__icon" />
+          <input type="password" placeholder="Password" name="Password" onChange={addData} />
+        </div>
+        <div className="form__choose-role">
+          <h5 className="form__t-s">Do you want being student or tutor?</h5>
+          <select name='role' onChange={addData}>
+            <option>student</option>
+            <option>tutor</option>
+          </select>
+        </div>
+        <p className="form__tutor">{form.role === 'tutor' ? <FormTutor addData={addData} /> : ""}</p>
+        <div>
+          <p className="form__error">{errorData}</p>
+        </div>
+        <button className="form__button" onClick={handleSubmit}>Register</button>
+        <p className="form__account">Do you already have an account? <a href="#">Sign in</a> </p>
+      </form>
+    </>
+  )
 }
-function RegisterTutor(){
-    return(
-            <form>
-                <div className="inputs">
-                <input type="text" placeholder="Profession"></input>    
-                </div>
-                <div className="inputs">
-                <input type="email" placeholder="Focus"></input>    
-                </div>
-            </form>
-    )
-}
-function RegisterStudent(){
-    return(
-            <form>
-                <div className="inputs">
-                <input type="text" placeholder="where do you study?"></input>    
-                </div>
-            </form>
-    )
-}
-export {Register}
+export default Register;
