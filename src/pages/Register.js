@@ -4,6 +4,7 @@ import register from '../assets/styles/pages/register.css'
 import { FaUserAlt, FaEnvelope, FaKey } from "react-icons/fa";
 import { useState } from 'react'
 import FormTutor from '../components/FormTutor';
+import { Link, link } from 'react-router-dom'
 
 function Register() {
   const [form, setForm] = useState({ role: 'student' })
@@ -47,7 +48,7 @@ function Register() {
           <p className="form__error">{errorData}</p>
         </div>
         <button className="form__button" onClick={handleSubmit}>Register</button>
-        <p className="form__account">Do you already have an account? <a href="#">Sign in</a> </p>
+        <p className="form__account">Do you already have an account? <Link to="/sign in">Sign in</Link> </p>
       </form>
     </>
   )
