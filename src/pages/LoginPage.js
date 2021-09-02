@@ -10,8 +10,8 @@ function LoginPage(props){
     const [state, setState] = useState({
         "emailErrorVisibility": 'hidden',
         "passwordErrorVisibility": 'hidden',
-        "emailErrorMessage": '',
-        "passwordErrorMessage": '',
+        "emailErrorMessage": 'none\nnone',
+        "passwordErrorMessage": 'none\nnone',
         "currentEmail": '',
         "currentPassword": ''
     })
@@ -60,16 +60,30 @@ function LoginPage(props){
 
         setState(prevState => (
             {...prevState, 
-            setEmailErrorMessage: '', 
-            setPasswordErrorMessage: '', 
-            setEmailErrorVisibility: '', 
-            setPasswordErrorVisibility: ''
+            emailErrorMessage: 'none\nnone', 
+            passwordErrorMessage: 'none\nnone', 
+            emailErrorVisibility: 'hidden', 
+            passwordErrorVisibility: 'hidden'
             }))
 
         if(validateInputs(state.currentEmail, state.currentPassword)){
-            props.history.replace('/'); 
+            const loginData = { email: state.currentEmail, password: state.currentPassword }
+            if(validateCredentials(loginData)){
+                props.history.replace('/'); 
+            } else {
+                setState(prevState => ({
+                  ...prevState,
+                  passwordErrorMessage: 'Incorrect email or password, please try again.', 
+                  passwordErrorVisibility: 'visible'
+                }))
+            }
         }
         
+    }
+
+    const validateCredentials = (loginData) => {
+        //Send data to backend to validate credentials
+        return false;
     }
 
     const handleChange = (e, current) => {
