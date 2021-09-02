@@ -1,32 +1,43 @@
 import React, { useState } from 'react';
 import Logo from '../assets/images/Logo.png'
+import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 
 import '../assets/styles/components/Header.css';
 
+import { student } from './mock/student';
+
 function Header(){
     const [state, setState] = useState({
-        isAuth: false,
+        isAuth: true,
         searchInput: '',
         isSearchCollapsed: true,
-        isMenuCollapsed: true
+        isMenuCollapsed: true,
+        currentStudent: student[0],
+        isProfileTooltipCollapsed: true
     });
 
     const handleChange = e => {
         setState(prevState => ({...prevState, searchInput: e.target.value}))
+        console.log(state.currentStudent.profilePhoto);
     }
 
     const toggleSearchCollapse = () => {
-        if(!state.isMenuCollapsed) setState({isMenuCollapsed: !state.isMenuCollapsed});
+        if(!state.isMenuCollapsed) setState(prevState => ({...prevState, isMenuCollapsed: !state.isMenuCollapsed}));
         setState(prevState => ({...prevState, isSearchCollapsed: !state.isSearchCollapsed}));
 
     }
 
     const toggleMenuCollapse = () => {
-        if(!state.isSearchCollapsed) setState({isSearchCollapsed: !state.isSearchCollapsed});
+        if(!state.isSearchCollapsed) setState(prevState => ({...prevState, isSearchCollapsed: !state.isSearchCollapsed}));
         setState(prevState => ({...prevState, isMenuCollapsed: !state.isMenuCollapsed}));
+    }
+
+    const SignOut = () => {
+        
+        setState(prevState => ({...prevState, isAuth: !state.isAuth, isMenuCollapsed: true, isProfileTooltipCollapsed: true}))
     }
 
     return(
@@ -55,30 +66,37 @@ function Header(){
 
             <div className={`mobile-menu ${!state.isMenuCollapsed && 'active'}`}>
                 {state.isAuth ? 
-                    <div className="mobile-menu__profile-photo-container">
-                        <a className="header__profile-photo-link" href="/">
-                            {/* <img className="header__profile-photo" src={currentStudent.profile_photo} alt="Profile" /> */}
-                        </a>
-                        {/* <span>{currentStudent.name}</span> */}
-                    </div>
+                    <>
+                        <div className="mobile-menu__profile-photo-container">
+                            <img className="header__profile-photo" src={state.currentStudent.profilePhoto} alt="Profile" />
+                            <span className="header__profile-name">{state.currentStudent.name}</span>
+                        </div>
+                        <div className="mobile-menu__buttons">
+                            <Link to="/" className="mobile-menu__profile-button">Profile</Link>
+                            <Link onClick={SignOut} to="/" className="mobile-menu__signout-button">Sign out</Link>
+                        </div>
+                    </>
                     :
                     <div className="mobile__buttons-container">
-                        <button className="button-container__signin-button" type="button">Sign in</button>
-                        <button className="button-container__register-button" type="button">Register</button>
+                        <Link to="/login" onClick={toggleMenuCollapse} className="button-container__signin-button" type="button">Sign in</Link>
+                        <Link to="/register" onClick={toggleMenuCollapse} className="button-container__register-button" type="button">Register</Link>
                     </div>
-                
                 }
-                {/* SUBJECTS COMPONENT WOULD GO HERE */}
             </div>
             
             {state.isAuth ? 
-                <a className="header__profile-photo-link" href="/">
-                    {/* <img className="header__profile-photo" src={currentStudent.profile_photo} alt="Profile" /> */}
-                </a>
+                <div className="header__profile-photo-container" href="/">
+                    <img onClick={() => setState(prevState => ({...prevState, isProfileTooltipCollapsed: !state.isProfileTooltipCollapsed}))} className="header__profile-photo" src={state.currentStudent.profilePhoto} alt="Profile" />
+                    <div className={`header__profile-tooltip ${!state.isProfileTooltipCollapsed && 'active'}`}>
+                        <h3 className="profile-tooltip__name">{state.currentStudent.name}</h3>
+                        <Link to="/" className="profile-tooltip__profile">Profile</Link>
+                        <Link onClick={SignOut} to="/" className="profile-tooltip__signout">Sign out</Link>
+                    </div>
+                </div>
                 :
                 <div className="header__buttons-container">
-                    <button className="button-container__signin-button" type="button">Sign in</button>
-                    <button className="button-container__register-button" type="button">Register</button>
+                    <Link to="/login" className="button-container__signin-button" type="button">Sign in</Link>
+                    <Link to="/register" className="button-container__register-button" type="button">Register</Link>
                 </div>
             }
         </header>
