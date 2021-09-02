@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap");
+.html {
+  font-size: 16px;
+}
+
+.categories__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  width: 100%;
+}
+
+.category__button {
+  border: none;
+  text-align: center;
+  height: 45px;
+  background-color: #f7f7f7;
+  margin-bottom: 15px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #5b5b5b;
+  letter-spacing: 3px;
+}
+
+.category__button:hover {
+  transform: translateY(-3px);
+  /* box-shadow: -5px 5px rgba(0, 0, 0, 0.2); */
+  background-color: #0de26f;
+  color: white;
+  cursor: pointer;
+}
+
+.category__button:focus {
+  transform: translateY(-3px);
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
+  background-color: #0de26f;
+  color: white;
+  cursor: pointer;
+}
+
+@media (min-width: 992px) {
+  .category__button {
+    text-align: left;
+    font-size: 0.9rem;
+    padding-left: 25px;
+  }
+}
+@media (min-width: 1200px) {
+  .category__button {
+    font-size: 1.1rem;
+    padding-left: 30px;
+  }
+}
+
+/*# sourceMappingURL=CategoriesBar.css.map */
