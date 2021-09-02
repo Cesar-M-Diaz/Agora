@@ -1,6 +1,16 @@
+import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
+
+import Layout from './components/Layout'
+
 function App() {
   return (
-    <div>App</div>
+    <Layout>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={} />
+        </Switch>
+      </Router>
+    </Layout>
   );
 }
 
