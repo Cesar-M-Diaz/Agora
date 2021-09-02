@@ -1,15 +1,16 @@
 import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
 
-import LoginPage from './pages/LoginPage';
-
+import Layout from './components/Layout'
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/login" component={LoginPage} />
-      </Switch>
-    </Router>
+    <Layout>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={} />
+        </Switch>
+      </Router>
+    </Layout>
   );
 }
 
