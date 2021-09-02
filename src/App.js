@@ -1,8 +1,12 @@
-import Register from './pages/Register'
+import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <Register />
+    <Router>
+      <Switch>
+        <Route exact path="/" component={} />
+      </Switch>
+    </Router>
   );
 }
 
