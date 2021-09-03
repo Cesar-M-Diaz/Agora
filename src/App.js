@@ -1,16 +1,16 @@
-import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Layout from './components/Layout'
 
 function App() {
   return (
-    <Layout>
-      <Router>
+    <Router>
+      <Layout>
         <Switch>
           <Route exact path="/" component={} />
         </Switch>
-      </Router>
-    </Layout>
+      </Layout>
+    </Router>
   );
 }
 
