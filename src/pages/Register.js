@@ -12,11 +12,11 @@ function Register() {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  function onSubmit(data) {
+  function onSubmit(){
     console.log(form)
   }
   const addData = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    setForm((form) => ({...form, [e.target.name]: e.target.value }))
   }
   return (
     <Fragment>
