@@ -95,6 +95,19 @@ body {
   margin: auto;
 }
 
+.input-container__error-message {
+  display: flex;
+}
+
+.email-error-span, .password-error-span {
+  height: 30px;
+}
+
+.login-form__submit.disabled {
+  background-color: #1a90aa;
+  cursor: auto;
+}
+
 @media screen and (min-width: 992px) {
   .login-form {
     width: 40vw;
