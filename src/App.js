@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
-import Register from './pages/Register'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Layout from './components/Layout'
+import Layout from './components/Layout';
+import Register from './pages/Register';
+import { LandingPage } from './pages/LandingPage';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       </Switch>
       <Layout>
         <Switch>
-          <Route exact path="/" component={} />
+          <Route exact path="/" component={LandingPage} />
         </Switch>
       </Layout>
     </Router>
