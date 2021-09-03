@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+.tray {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  border: 3px gray solid;
+  width: 300px;
+  height: 150px;
+  display: flex;
+  margin: 25px auto;
+  padding: 20px;
+  font-family: "Open Sans";
+  cursor: pointer;
+  user-select: none;
+}
+
+.card:hover {
+  border: 3px #0de26f solid;
+  transform: translateY(-3px);
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.card-visual-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 150px;
+  height: 150px;
+}
+.card-visual-info img {
+  max-width: 150px;
+  height: auto;
+  margin-top: 5px;
+  clip-path: circle(40% at 50% 50%);
+}
+.card-visual-info h1 {
+  font-size: 15px;
+  margin: 0;
+}
+.card-visual-info p {
+  font-size: 10px;
+  margin: 0;
+}
+.card-visual-info h2 {
+  font-size: 13px;
+  margin: 0;
+}
+
+.card-tutor-info {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.card-tutor-info h3 {
+  font-size: 13px;
+  font-style: italic;
+  margin: 0;
+}
+.card-tutor-info p {
+  font-size: 10px;
+}
+
+.card-stars {
+  width: 100px;
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .card {
+    width: 300px;
+    height: 200px;
+  }
+
+  .card-visual-info {
+    width: 100px;
+    height: 200px;
+  }
+  .card-visual-info img {
+    max-width: 125px;
+    height: auto;
+  }
+  .card-visual-info h1 {
+    font-size: 1.4rem;
+  }
+  .card-visual-info p {
+    font-size: 0.9rem;
+  }
+
+  .card-tutor-info {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+  }
+  .card-tutor-info h2 {
+    font-size: 1.4rem;
+  }
+  .card-tutor-info h3 {
+    font-size: 1.1rem;
+  }
+  .card-tutor-info p {
+    font-size: 0.7rem;
+    margin: 5px;
+  }
+
+  .card-stars {
+    width: 80px;
+    height: 30px;
+  }
+}
+/* Monitores */
+@media (min-width: 992px) {
+  .card {
+    width: 350px;
+    height: 220px;
+  }
+
+  .card-visual-info {
+    width: 150px;
+    height: 220px;
+  }
+  .card-visual-info img {
+    max-width: 150px;
+    height: auto;
+  }
+  .card-visual-info h1 {
+    font-size: 1.5rem;
+  }
+  .card-visual-info p {
+    font-size: 1rem;
+  }
+
+  .card-tutor-info {
+    width: 200px;
+    height: 220px;
+  }
+  .card-tutor-info h2 {
+    font-size: 1.5rem;
+  }
+  .card-tutor-info h3 {
+    font-size: 1.2rem;
+  }
+  .card-tutor-info p {
+    font-size: 0.8rem;
+    margin: 5px;
+  }
+
+  .card-stars {
+    width: 100px;
+  }
+}
+
+/*# sourceMappingURL=tutorCards.css.map */

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/styles/components/CategoriesBar.css';
-import { categoriesData as categories } from './MockCategoriesData';
+import { categories } from './mock/categories';
 
 function CategoriesBar({ onClick }) {
   return (
