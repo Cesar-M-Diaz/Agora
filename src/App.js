@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
-import HookForm from './pages/Register';
 import Register from './pages/Register'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './components/Layout'
