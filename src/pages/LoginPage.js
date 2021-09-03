@@ -54,6 +54,7 @@ function LoginPage(props){
 
     const validateCredentials = ({email, password}) => {
         //Send data to backend to validate credentials
+        props.history.replace('/');
         return false;
     }
 
