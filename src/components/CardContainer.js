@@ -1,21 +1,39 @@
 import React from 'react';
 import '../assets/styles/components/CardContainer.css';
-import { tutorsData as tutors } from './MockTutorsData';
+import { tutor } from './mock/tutor';
+import TutorsCard from './tutorsCard';
 
 function CardContainer({ categoryName }) {
-  const filteredTutorArr = tutors
-    .filter((tutor) => tutor.category === categoryName)
+  const filteredTutorArr = tutor
+    .filter((tutor) => tutor.focus === categoryName)
     .slice(0, 4);
 
   return (
     <main className="cards__container">
-      {filteredTutorArr.map(({ category, _id, name }) => {
-        return (
-          <div key={_id} className="cards__card-mock">
-            {category}
-          </div>
-        );
-      })}
+      {filteredTutorArr.map(
+        ({
+          focus,
+          profilePhoto,
+          rating,
+          name,
+          description,
+          profession,
+          _id,
+        }) => {
+          console.log(rating);
+          return (
+            <TutorsCard
+              key={_id}
+              focus={focus}
+              profPic={profilePhoto}
+              rating={rating}
+              name={name}
+              description={description}
+              profession={profession}
+            />
+          );
+        },
+      )}
     </main>
   );
 }

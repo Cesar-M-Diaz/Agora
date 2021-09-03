@@ -5,7 +5,7 @@ import { CardContainer } from './CardContainer';
 
 function TutorsContainer() {
   /* change the category filter word */
-  const [filterKeyword, setFilterKeyword] = useState('Math');
+  const [filterKeyword, setFilterKeyword] = useState('math');
 
   /* get the category name of the clicked button to pass as the filter word */
   const onClick = (e) => {
