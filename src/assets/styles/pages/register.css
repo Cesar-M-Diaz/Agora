@@ -50,6 +50,7 @@ html {
   padding: 15px;
   font-size: 0.8rem;
   color: #fff;
+  margin-right: 18px;
 }
 
 .form__choose-role {
@@ -71,6 +72,12 @@ html {
 
 .form__tutor, .form__error, .form__account {
   font-size: 0.6rem;
+}
+
+.form__v {
+  font-size: 12px;
+  text-align: left;
+  color: #d34242;
 }
 
 @media (min-width: 768px) {
