@@ -1,22 +1,20 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  BrowserRouter,
-} from 'react-router-dom';
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './components/Layout';
+import Register from './pages/Register';
 import { LandingPage } from './pages/LandingPage';
 
 function App() {
   return (
-    <Layout>
-      <Router>
+    <Router>
+      <Switch>
+        <Route exact path="/register" component={Register} />
+      </Switch>
+      <Layout>
         <Switch>
           <Route exact path="/" component={LandingPage} />
         </Switch>
-      </Router>
-    </Layout>
+      </Layout>
+    </Router>
   );
 }
 

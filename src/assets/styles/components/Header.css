@@ -5,7 +5,7 @@ body {
 
 .header {
   height: 100px;
-  background-color: #22B8D9;
+  background-color: #22b8d9;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,7 +59,7 @@ body {
 }
 
 .search-container__icon-container > svg {
-  color: #22B8D9;
+  color: #22b8d9;
   font-size: 1.4em;
   cursor: pointer;
   transition: color 1s;
@@ -74,7 +74,8 @@ body {
   gap: 25px;
 }
 
-.button-container__signin-button, .button-container__register-button {
+.button-container__signin-button,
+.button-container__register-button {
   width: 171px;
   height: 43px;
   border-radius: 10px;
@@ -83,12 +84,16 @@ body {
   letter-spacing: 3px;
   cursor: pointer;
   transition: background-color 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
 
 .button-container__signin-button {
-  border: 3px solid #FFFFFF;
-  background-color: #22B8D9;
-  color: #FFFFFF;
+  border: 3px solid #ffffff;
+  background-color: #22b8d9;
+  color: #ffffff;
 }
 
 .button-container__signin-button:hover {
@@ -97,24 +102,98 @@ body {
 
 .button-container__register-button {
   border: none;
-  background-color: #FFFFFF;
-  color: #22B8D9;
+  background-color: #ffffff;
+  color: #22b8d9;
 }
 
 .button-container__register-button:hover {
   background-color: #e2e2e2;
 }
 
-.header__profile-photo-link {
+.header__profile-photo-container {
   display: none;
 }
 
 .header__profile-photo {
   border-radius: 100%;
   width: 100px;
-  border: 2px solid #FFFFFF;
-  cursor: pointer;
+  height: 100px;
+  border: 2px solid #ffffff;
   display: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.mobile-menu__buttons {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.mobile-menu__profile-button, .mobile-menu__signout-button {
+  display: flex;
+  background-color: #22b8d9;
+  width: 60vw;
+  text-align: center;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 25px;
+  color: #ffffff;
+  font-family: sans-serif;
+}
+
+.header__profile-name {
+  text-transform: capitalize;
+  margin-top: 10px;
+}
+
+.header__profile-tooltip {
+  visibility: visible;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 200px;
+  height: 150px;
+  background-color: #1c8ca5;
+  top: -100px;
+  transition: top 400ms;
+  z-index: -1;
+}
+
+.header__profile-tooltip.active {
+  visibility: visible;
+  top: 141px;
+}
+
+.profile-tooltip__profile, .profile-tooltip__signout {
+  width: 80%;
+  padding: 7px;
+  text-align: center;
+  background-color: #22b8d9;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: sans-serif;
+  transition: color 200ms;
+}
+
+.profile-tooltip__profile:hover, .profile-tooltip__signout:hover {
+  color: #e2e2e2;
+}
+
+.profile-tooltip__name {
+  margin: 0;
+  align-self: flex-start;
+  margin-left: 15px;
+  text-transform: capitalize;
+  font-size: 1.4rem;
+  color: #ffffff;
 }
 
 .mobile-menu a {
@@ -170,7 +249,7 @@ body {
   color: gray;
 }
 .mobile-search-input.active .search-container__icon-container svg {
-  color: #22B8D9;
+  color: #22b8d9;
 }
 
 .mobile-menu {
@@ -181,7 +260,8 @@ body {
   top: 100%;
   width: 100vw;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   box-sizing: border-box;
   padding: 50px 0;
   transition: all 0.5s;
@@ -198,15 +278,15 @@ body {
 }
 .mobile-menu .mobile__buttons-container .button-container__signin-button {
   border-radius: 0;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   border: none;
-  color: #22B8D9;
+  color: #22b8d9;
   width: 80vw;
 }
 .mobile-menu .mobile__buttons-container .button-container__register-button {
   border-radius: 0;
-  background-color: #22B8D9;
-  color: #FFFFFF;
+  background-color: #22b8d9;
+  color: #ffffff;
   width: 80vw;
 }
 
@@ -233,16 +313,23 @@ body {
     display: none;
   }
 
-  .mobile-search-input, .mobile-menu {
+  .mobile-search-input,
+.mobile-menu {
     display: none;
   }
 
-  .header__profile-photo-link {
-    display: block;
+  .header__profile-photo-container {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    background-color: #22b8d9;
+    height: 100%;
+    align-items: center;
   }
 
   .header__profile-photo {
     display: block;
+    cursor: pointer;
   }
 }
 
