@@ -20,7 +20,6 @@ function CardContainer({ categoryName }) {
           profession,
           _id,
         }) => {
-          console.log(rating);
           return (
             <TutorsCard
               key={_id}
