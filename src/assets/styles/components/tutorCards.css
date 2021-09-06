@@ -11,16 +11,16 @@
   width: 300px;
   height: 150px;
   display: flex;
-  margin: 25px auto;
+  margin-bottom: 25px;
   padding: 20px;
   font-family: "Open Sans";
   cursor: pointer;
   user-select: none;
+  color: #112031;
 }
 
 .card:hover {
   border: 3px #0de26f solid;
-  transform: translateY(-3px);
   box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -34,21 +34,13 @@
   height: 150px;
 }
 .card-visual-info img {
-  max-width: 150px;
-  height: auto;
-  margin-top: 5px;
-  clip-path: circle(40% at 50% 50%);
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 .card-visual-info h1 {
   font-size: 15px;
-  margin: 0;
-}
-.card-visual-info p {
-  font-size: 10px;
-  margin: 0;
-}
-.card-visual-info h2 {
-  font-size: 13px;
   margin: 0;
 }
 
@@ -60,10 +52,16 @@
   justify-content: space-around;
   align-items: center;
 }
+.card-tutor-info h2 {
+  font-size: 20px;
+  margin: 0;
+  text-align: center;
+}
 .card-tutor-info h3 {
-  font-size: 13px;
+  font-size: 15px;
   font-style: italic;
   margin: 0;
+  text-align: center;
 }
 .card-tutor-info p {
   font-size: 10px;
@@ -75,6 +73,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: #FFB319;
 }
 
 /* Tablets */
@@ -89,8 +88,10 @@
     height: 200px;
   }
   .card-visual-info img {
-    max-width: 125px;
-    height: auto;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
   }
   .card-visual-info h1 {
     font-size: 1.4rem;
@@ -125,6 +126,7 @@
   .card {
     width: 350px;
     height: 220px;
+    padding: 5px;
   }
 
   .card-visual-info {
@@ -132,8 +134,8 @@
     height: 220px;
   }
   .card-visual-info img {
-    max-width: 150px;
-    height: auto;
+    width: 130px;
+    height: 130px;
   }
   .card-visual-info h1 {
     font-size: 1.5rem;

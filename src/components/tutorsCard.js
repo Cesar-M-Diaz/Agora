@@ -4,7 +4,7 @@ import '../assets/styles/components/tutorCards.css'
 
 function TutorsCard (props) {
   
-  const tutors = props.tutors;
+  const tutors = props;
   const starNodes = []
 
   for (let i = 1; i <= tutors.rating; i++){
