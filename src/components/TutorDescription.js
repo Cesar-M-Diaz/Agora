@@ -1,9 +1,11 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-function TutorDescription() {
+function TutorDescription({ tutor }) {
   const starNodes = [];
 
-  for (let i = 1; i <= tutors.rating; i++) {
+  for (let i = 1; i <= tutor.rating; i++) {
     starNodes.push(<FontAwesomeIcon icon={faStar} />);
   }
 
@@ -21,4 +23,4 @@ function TutorDescription() {
   );
 }
 
-export default TutorDescription;
+export { TutorDescription };
