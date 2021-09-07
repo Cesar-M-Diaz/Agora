@@ -61,7 +61,7 @@ function LoginPage(props) {
       setState((prevState) => ({
         ...prevState,
         errors: { ...prevState.errors, password: undefined },
-        isValid: !(state.errors.email && state.errors.password),
+        isValid: !(state.errors.email && prevState.errors.password),
       }));
       return;
     }

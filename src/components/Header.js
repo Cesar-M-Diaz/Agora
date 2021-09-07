@@ -40,18 +40,18 @@ function Header() {
     if (!state.isSearchCollapsed)
       setState((prevState) => ({
         ...prevState,
-        isSearchCollapsed: !state.isSearchCollapsed,
+        isSearchCollapsed: !prevState.isSearchCollapsed,
       }));
     setState((prevState) => ({
       ...prevState,
-      isMenuCollapsed: !state.isMenuCollapsed,
+      isMenuCollapsed: !prevState.isMenuCollapsed,
     }));
   };
 
   const SignOut = () => {
     setState((prevState) => ({
       ...prevState,
-      isAuth: !state.isAuth,
+      isAuth: !prevState.isAuth,
       isMenuCollapsed: true,
       isProfileTooltipCollapsed: true,
     }));
@@ -149,7 +149,7 @@ function Header() {
             onClick={() =>
               setState((prevState) => ({
                 ...prevState,
-                isProfileTooltipCollapsed: !state.isProfileTooltipCollapsed,
+                isProfileTooltipCollapsed: !prevState.isProfileTooltipCollapsed,
               }))
             }
             className="header__profile-photo"
