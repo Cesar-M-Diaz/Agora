@@ -64,7 +64,13 @@ $color-gray: #aaa;
   padding: 15px;
   font-size: 0.8rem;
   color: #fff;
+  cursor: pointer;
 }
+.register-form__button.disabled {
+  background-color: $color-gray;
+  cursor: default;
+}
+
 .register-form__choose-role {
   display: flex;
   flex-direction: column;
