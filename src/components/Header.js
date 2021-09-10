@@ -59,9 +59,9 @@ function Header() {
 
   return (
     <header className="header">
-      <a href="/">
+      <Link to="/">
         <img className="header__logo" src={Logo} alt="Logo" />
-      </a>
+      </Link>
       <div className="header__search-container">
         <input
           onChange={handleChange}
