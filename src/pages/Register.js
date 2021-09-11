@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import FormTutor from '../components/FormTutor';
+import axios from 'axios';
 
 import '../assets/styles/pages/register.scss';
 
 function Register() {
   const [state, setState] = useState({
+    type: 'student',
     inputs: {
-      type: 'student',
       name: '',
       email: '',
       password: '',
@@ -45,7 +46,7 @@ function Register() {
           ...prevState,
           errors: { ...prevState.errors, name: '' },
           isValid:
-            prevState.inputs.type === 'student'
+            prevState.type === 'student'
               ? !(state.errors.email || state.errors.password)
               : !(
                   state.errors.email ||
@@ -72,7 +73,7 @@ function Register() {
           ...prevState,
           errors: { ...prevState.errors, email: '' },
           isValid:
-            prevState.inputs.type === 'student'
+            prevState.type === 'student'
               ? !(state.errors.password || state.errors.name)
               : !(
                   state.errors.password ||
@@ -109,7 +110,7 @@ function Register() {
           ...prevState,
           errors: { ...prevState.errors, password: '' },
           isValid:
-            prevState.inputs.type === 'student'
+            prevState.type === 'student'
               ? !(state.errors.email || state.errors.name)
               : !(
                   state.errors.email ||
@@ -173,24 +174,45 @@ function Register() {
     }
   }
 
-  function handleSubmit() {}
+  const handleSubmit = async () => {
+    // destructure the state, less variables declared
+    const { type, inputs } = state;
+    try {
+      await axios.post('http://localhost:3001/register', { type, inputs });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleChange = (e) => {
+    // changes the inputs values
     setState((state) => ({
       ...state,
-      inputs: { ...state.inputs, [e.target.name]: e.target.value },
+      inputs: {
+        ...state.inputs,
+        [e.target.name]: e.target.value,
+      },
+    }));
+  };
+
+  const handleType = (e) => {
+    // change type student or tutor
+    setState((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
     }));
   };
 
   return (
     <>
-      <form className="register-form" onSubmit={handleSubmit}>
+      <form className="register-form">
         <h2 className="register-form__title">Register</h2>
 
         <div className="register-form__choose-role">
           <h5 className="register-form__t-s">Are you a student or a tutor?</h5>
           <select
             name="type"
-            onChange={handleChange}
+            onChange={handleType}
             className="register-form__dropdown"
           >
             <option>student</option>
@@ -233,7 +255,7 @@ function Register() {
           />
         </div>
         <span>{state.errors.password}</span>
-        {state.inputs.type === 'tutor' && (
+        {state.type === 'tutor' && (
           <FormTutor
             handleChange={handleChange}
             validateInputs={validateInputs}
@@ -247,6 +269,7 @@ function Register() {
           type="submit"
           className={`register-form__button ${!state.isValid && 'disabled'}`}
           disabled={!state.isValid}
+          onClick={handleSubmit}
         >
           Register
         </button>
