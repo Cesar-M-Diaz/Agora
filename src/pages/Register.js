@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState /* useEffect */ } from 'react';
 import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+
 import FormTutor from '../components/FormTutor';
 import axios from 'axios';
 
-import '../assets/styles/pages/register.scss';
+// import '../assets/styles/pages/register.scss';
 
-function Register() {
+function Register(props) {
   const [state, setState] = useState({
     type: 'student',
     inputs: {
@@ -25,6 +26,12 @@ function Register() {
     },
     isValid: false,
   });
+
+  // useEffect(() => {
+  //   if (localStorage.getItem('token')) {
+  //     props.history.replace('/');
+  //   }
+  // });
 
   function validateInputs(e) {
     const inputName = e.target.name;
@@ -174,11 +181,20 @@ function Register() {
     }
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     // destructure the state, less variables declared
     const { type, inputs } = state;
+    e.preventDefault();
     try {
-      await axios.post('http://localhost:3001/register', { type, inputs });
+      await axios
+        .post('http://localhost:3001/register', { type, inputs })
+        .then((response) => {
+          if (response.data.token) {
+            alert('Successful login');
+            props.history.replace('/');
+            return localStorage.setItem('token', response.data.token);
+          }
+        });
     } catch (err) {
       console.log(err);
     }
@@ -195,7 +211,7 @@ function Register() {
     }));
   };
 
-  const handleType = (e) => {
+  const handleTypeChange = (e) => {
     // change type student or tutor
     setState((state) => ({
       ...state,
@@ -212,7 +228,7 @@ function Register() {
           <h5 className="register-form__t-s">Are you a student or a tutor?</h5>
           <select
             name="type"
-            onChange={handleType}
+            onChange={handleTypeChange}
             className="register-form__dropdown"
           >
             <option>student</option>
