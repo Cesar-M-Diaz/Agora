@@ -1,7 +1,7 @@
 import React from 'react';
 import { LandingPageDescription } from '../components/LandingPageDescription';
 import { TutorsContainer } from '../components/TutorsContainer';
-import '../assets/styles/pages/landing-page.css';
+import '../assets/styles/pages/landing-page.scss';
 
 function LandingPage() {
   return (

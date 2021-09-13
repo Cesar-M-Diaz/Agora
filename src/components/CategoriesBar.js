@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/styles/components/CategoriesBar.css';
+import '../assets/styles/components/CategoriesBar.scss';
 import { categories } from './mock/categories';
 
 function CategoriesBar({ onClick }) {

@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import Logo from "../assets/images/Logo.png";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import Logo from '../assets/images/Logo.png';
+import { Link } from 'react-router-dom';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 
-import "../assets/styles/components/Header.css";
+import '../assets/styles/components/Header.scss';
 
-import { student } from "./mock/student";
+import { student } from './mock/student';
 
 function Header() {
   const [state, setState] = useState({
     isAuth: true,
-    searchInput: "",
+    searchInput: '',
     isSearchCollapsed: true,
     isMenuCollapsed: true,
     currentStudent: student[0],
@@ -59,9 +59,9 @@ function Header() {
 
   return (
     <header className="header">
-      <a href="/">
+      <Link to="/">
         <img className="header__logo" src={Logo} alt="Logo" />
-      </a>
+      </Link>
       <div className="header__search-container">
         <input
           onChange={handleChange}
@@ -81,7 +81,7 @@ function Header() {
 
       <div
         className={`mobile-search-input ${
-          !state.isSearchCollapsed && "active"
+          !state.isSearchCollapsed && 'active'
         }`}
       >
         <input
@@ -95,7 +95,7 @@ function Header() {
         </div>
       </div>
 
-      <div className={`mobile-menu ${!state.isMenuCollapsed && "active"}`}>
+      <div className={`mobile-menu ${!state.isMenuCollapsed && 'active'}`}>
         {state.isAuth ? (
           <>
             <div className="mobile-menu__profile-photo-container">
@@ -158,7 +158,7 @@ function Header() {
           />
           <div
             className={`header__profile-tooltip ${
-              !state.isProfileTooltipCollapsed && "active"
+              !state.isProfileTooltipCollapsed && 'active'
             }`}
           >
             <h3 className="profile-tooltip__name">
