@@ -4,13 +4,14 @@ import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import "../assets/styles/pages/LoginPage.css";
+
+import '../assets/styles/pages/LoginPage.scss';
 
 function LoginPage(props) {
   const [state, setState] = useState({
     values: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     errors: {},
     isValid: false,
@@ -24,7 +25,7 @@ function LoginPage(props) {
 
   const validateInputs = (e) => {
     const inputName = e.target.name;
-    if (inputName === "email") {
+    if (inputName === 'email') {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (re.test(String(e.target.value).toLowerCase())) {
@@ -38,7 +39,7 @@ function LoginPage(props) {
           ...prevState,
           errors: {
             ...prevState.errors,
-            email: { message: "Invalid email, please enter a valid email" },
+            email: { message: 'Invalid email, please enter a valid email' },
           },
           isValid: false,
         }));
@@ -51,14 +52,14 @@ function LoginPage(props) {
       }));
       return;
     }
-    if (inputName === "password") {
+    if (inputName === 'password') {
       if (e.target.value.length < 4) {
         setState((prevState) => ({
           ...prevState,
           errors: {
             ...prevState.errors,
             password: {
-              message: "Invalid password, the password is too short",
+              message: 'Invalid password, the password is too short',
             },
           },
           isValid: false,
@@ -119,7 +120,7 @@ function LoginPage(props) {
               </span>
               <input
                 onBlur={validateInputs}
-                onChange={(e) => handleChange(e, "email")}
+                onChange={(e) => handleChange(e, 'email')}
                 className="login-input__input"
                 type="email"
                 name="email"
@@ -131,14 +132,14 @@ function LoginPage(props) {
             <div className="input-container__error-message">
               <span
                 style={{
-                  color: "red",
-                  visibility: state.errors.email ? "visible" : "hidden",
+                  color: 'red',
+                  visibility: state.errors.email ? 'visible' : 'hidden',
                 }}
                 className="email-error-span"
               >
                 {state.errors.email
                   ? state.errors.email.message
-                  : "No hay errores"}
+                  : 'No hay errores'}
               </span>
             </div>
           </div>
@@ -149,7 +150,7 @@ function LoginPage(props) {
               </span>
               <input
                 onBlur={validateInputs}
-                onChange={(e) => handleChange(e, "password")}
+                onChange={(e) => handleChange(e, 'password')}
                 className="login-input__input"
                 type="password"
                 name="password"
@@ -161,21 +162,21 @@ function LoginPage(props) {
             <div className="input-container__error-message">
               <span
                 style={{
-                  color: "red",
-                  visibility: state.errors.password ? "visible" : "hidden",
+                  color: 'red',
+                  visibility: state.errors.password ? 'visible' : 'hidden',
                 }}
                 className="password-error-span"
               >
                 {state.errors.password
                   ? state.errors.password.message
-                  : "No hay errores"}
+                  : 'No hay errores'}
               </span>
             </div>
           </div>
           <button
             onClick={handleSubmit}
             disabled={!state.isValid}
-            className={`login-form__submit ${!state.isValid && "disabled"}`}
+            className={`login-form__submit ${!state.isValid && 'disabled'}`}
             type="submit"
           >
             Sign In

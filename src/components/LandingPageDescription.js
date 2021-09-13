@@ -1,7 +1,7 @@
 import React from 'react';
 import illustration__main from '../assets/images/study.svg';
 import illustration__secondary from '../assets/images/tutors.svg';
-import '../assets/styles/components/LandingPageDescription.css';
+import '../assets/styles/components/LandigPageDescription.scss';
 
 function LandingPageDescription() {
   return (
