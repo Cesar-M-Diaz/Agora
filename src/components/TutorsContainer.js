@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CategoriesBar } from '../components/CategoriesBar';
-import '../assets/styles/components/TutorsContainer.css';
+import '../assets/styles/components/TutorsContainer.scss';
 import { CardContainer } from './CardContainer';
 
 function TutorsContainer() {

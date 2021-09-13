@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/styles/components/CardContainer.css';
+import '../assets/styles/components/CardCointainer.scss';
 import { tutor } from './mock/tutor';
 import TutorsCard from './tutorsCard';
 

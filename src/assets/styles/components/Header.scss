@@ -39,7 +39,7 @@ body {
 }
 
 .search-container__input {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   width: 25vw;
   height: 41px;
   border-radius: 10px;
@@ -84,7 +84,7 @@ body {
   width: 171px;
   height: 43px;
   border-radius: 10px;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-size: 1.2em;
   letter-spacing: 3px;
   cursor: pointer;
@@ -127,7 +127,7 @@ body {
   object-position: center;
 }
 
-.mobile-menu__buttons{
+.mobile-menu__buttons {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
@@ -135,7 +135,8 @@ body {
   gap: 20px;
 }
 
-.mobile-menu__profile-button, .mobile-menu__signout-button{
+.mobile-menu__profile-button,
+.mobile-menu__signout-button {
   display: flex;
   background-color: #22b8d9;
   width: 60vw;
@@ -147,12 +148,12 @@ body {
   font-family: sans-serif;
 }
 
-.header__profile-name{
+.header__profile-name {
   text-transform: capitalize;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
-.header__profile-tooltip{
+.header__profile-tooltip {
   visibility: visible;
   position: absolute;
   display: flex;
@@ -168,12 +169,13 @@ body {
   z-index: -1;
 }
 
-.header__profile-tooltip.active{
+.header__profile-tooltip.active {
   visibility: visible;
   top: 141px;
 }
 
-.profile-tooltip__profile, .profile-tooltip__signout{
+.profile-tooltip__profile,
+.profile-tooltip__signout {
   width: 80%;
   padding: 7px;
   text-align: center;
@@ -186,11 +188,13 @@ body {
   transition: color 200ms;
 }
 
-.profile-tooltip__profile:hover, .profile-tooltip__signout:hover{
+.profile-tooltip__profile:hover,
+.profile-tooltip__signout:hover {
   color: $secondary-color-dark;
 }
 
-.profile-tooltip__name{
+.profile-tooltip__name {
+  font-family: 'Open Sans';
   margin: 0;
   align-self: flex-start;
   margin-left: 15px;
@@ -306,6 +310,7 @@ $transition-time: 0.5s;
 @media (min-width: 1200px) {
   .header__buttons-container {
     display: flex;
+    align-items: center;
   }
 
   .header {
