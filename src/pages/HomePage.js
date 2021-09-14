@@ -3,8 +3,10 @@ import { TutorsContainer } from '../components/TutorsContainer';
 
 function HomePage(){
     return(
-        <main className="homepage-main">
-            <TutorsContainer />
+        <main className="homepage-container">
+            <div className="homepage-content">
+                <TutorsContainer subtitle=" " title="Find a tutorship" />
+            </div>
         </main>
     )
 }

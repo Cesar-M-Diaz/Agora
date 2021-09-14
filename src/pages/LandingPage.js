@@ -8,7 +8,7 @@ function LandingPage() {
     <div className="page">
       <main className="page__inner">
         <LandingPageDescription />
-        <TutorsContainer />
+        <TutorsContainer title="Meet some of our best tutors" />
       </main>
     </div>
   );
