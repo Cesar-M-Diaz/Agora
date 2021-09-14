@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import axios from "axios";
-
+import login from '../actions/login';
 
 import '../assets/styles/pages/LoginPage.scss';
+import { useDispatch, useSelector } from "react-redux";
 
 function LoginPage(props) {
+  const globalState = useSelector(state => state);
   const [state, setState] = useState({
     values: {
       email: '',
@@ -17,11 +18,13 @@ function LoginPage(props) {
     isValid: false,
   });
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if(localStorage.getItem("token")){
+    if(globalState.token !== null){
       props.history.replace("/");
     }
-  })
+  }, [globalState.token, props.history])
 
   const validateInputs = (e) => {
     const inputName = e.target.name;
@@ -77,28 +80,11 @@ function LoginPage(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validCredentials = await validateCredentials(state.values);
-    if(validCredentials){
-      alert('Successful login');
-      props.history.replace("/");
-    } else {
-      alert('Incorrect email or password')
-    }
+    await validateCredentials(state.values);
   };
 
-  const validateCredentials = async ({ email, password }) => {
-    console.log(email, password)
-    let isValid = false;
-    await axios.post('http://localhost:3001/login', { email, password } )
-      .then(response => {
-        console.log(response);
-        localStorage.setItem("token", response.data.token);
-        isValid = true;
-      })
-      .catch(() => {
-        isValid = false;
-      })
-    return isValid;
+  const validateCredentials = ({ email, password }) => {
+    dispatch(login({email, password}));
   };
 
   const handleChange = (e, current) => {
@@ -171,6 +157,7 @@ function LoginPage(props) {
                   ? state.errors.password.message
                   : 'No hay errores'}
               </span>
+              {globalState.login_failed && <span style={{color: 'red'}}>Incorrect email or password, please try again.</span>}
             </div>
           </div>
           <button
