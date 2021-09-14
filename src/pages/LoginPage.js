@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import axios from "axios";
+
 
 import '../assets/styles/pages/LoginPage.scss';
 
@@ -14,6 +16,12 @@ function LoginPage(props) {
     errors: {},
     isValid: false,
   });
+
+  useEffect(() => {
+    if(localStorage.getItem("token")){
+      props.history.replace("/");
+    }
+  })
 
   const validateInputs = (e) => {
     const inputName = e.target.name;
@@ -67,15 +75,30 @@ function LoginPage(props) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    validateCredentials(state.values);
+    const validCredentials = await validateCredentials(state.values);
+    if(validCredentials){
+      alert('Successful login');
+      props.history.replace("/");
+    } else {
+      alert('Incorrect email or password')
+    }
   };
 
-  const validateCredentials = ({ email, password }) => {
-    //Send data to backend to validate credentials
-    props.history.replace('/');
-    return false;
+  const validateCredentials = async ({ email, password }) => {
+    console.log(email, password)
+    let isValid = false;
+    await axios.post('http://localhost:3001/login', { email, password } )
+      .then(response => {
+        console.log(response);
+        localStorage.setItem("token", response.data.token);
+        isValid = true;
+      })
+      .catch(() => {
+        isValid = false;
+      })
+    return isValid;
   };
 
   const handleChange = (e, current) => {
