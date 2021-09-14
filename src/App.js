@@ -3,11 +3,13 @@ import Layout from './components/Layout'
 import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import { LandingPage } from './pages/LandingPage';
+
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import getUserData from './actions/getUserData';
 import { useEffect } from 'react';
+import { errorPage } from './pages/errorPage'
 
 function App() {
   const state = useSelector(state => state)
@@ -24,6 +26,8 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/error" component={errorPage} />
+          <Route path="*" component={errorPage} />
         </Switch>
       </Layout>
     </Router>
