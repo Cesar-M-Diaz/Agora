@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import FormTutor from '../components/FormTutor';
 import axios from 'axios';
 
-// import '../assets/styles/pages/register.scss';
+import '../assets/styles/pages/register.scss';
 
 function Register(props) {
   const [state, setState] = useState({
