@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
 
@@ -8,8 +8,11 @@ import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/components/Header.scss';
 
 import { student } from './mock/student';
+import { useSelector } from 'react-redux';
 
 function Header() {
+  const globalState = useSelector(state => state)
+
   const [state, setState] = useState({
     isAuth: true,
     searchInput: '',
@@ -59,7 +62,7 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/">
+      <Link to={globalState.token !== null ? '/home' : '/'}>
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
       <div className="header__search-container">
