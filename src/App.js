@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import { LandingPage } from './pages/LandingPage';
 import { errorPage } from './pages/errorPage'
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/error" component={errorPage} />
+          <Route exact path="/home" component={HomePage} />
           <Route path="*" component={errorPage} />
         </Switch>
       </Layout>
