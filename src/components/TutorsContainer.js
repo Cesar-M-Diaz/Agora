@@ -12,8 +12,6 @@ function TutorsContainer({title, subtitle}) {
     setFilterKeyword(e.target.innerText);
   };
 
-  console.log(subtitle);
-
   return (
     <>
       <section className="tutors__container">
