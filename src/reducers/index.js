@@ -1,14 +1,26 @@
+import { REGISTER, TOKEN } from '../actions/constants';
+
 const initialState = {
-    // Global state keys here
+  token: localStorage.getItem(TOKEN) || null,
+  currentUser: {
+    name: null,
+    type: null,
+    profile_photo: null,
+    email: null,
+    focus: null,
+  },
+  login_failed: false,
+};
 
-}
-
-// Modify the reducer in order to receive the actions
-const reducer = function(state = initialState, action){
-    if(action.type === 'INCREMENT') {
-        return { ...state, count: state.count + 1 }
-    }
-    return state;
-}
+const reducer = function (state = initialState, action) {
+  if (action.type === REGISTER) {
+    return {
+      ...state,
+      token: action.payload.token,
+      currentUser: action.payload.userData,
+    };
+  }
+  return state;
+};
 
 export default reducer;
