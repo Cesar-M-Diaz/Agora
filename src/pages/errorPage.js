@@ -1,6 +1,5 @@
 import React from "react"
-import { Router, Link } from 'react-router-dom'
-import '../assets/styles/pages/errorPage.css'
+import '../assets/styles/pages/errorPage.scss'
 import error from '../assets/images/error.svg'
 
 function errorPage (){

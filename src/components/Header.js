@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -8,20 +9,21 @@ import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/components/Header.scss';
 
 import { student } from './mock/student';
+import { useDispatch, useSelector } from 'react-redux';
+import logout from '../actions/logout';
 
 function Header() {
+  const globalState = useSelector(state => state);
+  const dispatch = useDispatch();
   const [state, setState] = useState({
-    isAuth: true,
     searchInput: '',
     isSearchCollapsed: true,
     isMenuCollapsed: true,
-    currentStudent: student[0],
     isProfileTooltipCollapsed: true,
   });
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, searchInput: e.target.value }));
-    console.log(state.currentStudent.profilePhoto);
   };
 
   const toggleSearchCollapse = () => {
@@ -51,15 +53,15 @@ function Header() {
   const SignOut = () => {
     setState((prevState) => ({
       ...prevState,
-      isAuth: !prevState.isAuth,
       isMenuCollapsed: true,
       isProfileTooltipCollapsed: true,
     }));
+    dispatch(logout());
   };
 
   return (
     <header className="header">
-      <Link to="/">
+      <Link to={globalState.token !== null ? '/home' : '/'}>
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
       <div className="header__search-container">
@@ -96,16 +98,16 @@ function Header() {
       </div>
 
       <div className={`mobile-menu ${!state.isMenuCollapsed && 'active'}`}>
-        {state.isAuth ? (
+        {!!globalState.token ? (
           <>
             <div className="mobile-menu__profile-photo-container">
               <img
                 className="header__profile-photo"
-                src={state.currentStudent.profilePhoto}
+                src={globalState.currentUser.profile_photo}
                 alt="Profile"
               />
               <span className="header__profile-name">
-                {state.currentStudent.name}
+                {globalState.currentUser.name}
               </span>
             </div>
             <div className="mobile-menu__buttons">
@@ -143,8 +145,8 @@ function Header() {
         )}
       </div>
 
-      {state.isAuth ? (
-        <div className="header__profile-photo-container" href="/">
+      {!!globalState.token ? (
+        <div className="header__profile-photo-container">
           <img
             onClick={() =>
               setState((prevState) => ({
@@ -153,7 +155,7 @@ function Header() {
               }))
             }
             className="header__profile-photo"
-            src={state.currentStudent.profilePhoto}
+            src={globalState.currentUser.profile_photo}
             alt="Profile"
           />
           <div
@@ -162,7 +164,7 @@ function Header() {
             }`}
           >
             <h3 className="profile-tooltip__name">
-              {state.currentStudent.name}
+              {globalState.currentUser.name}
             </h3>
             <Link to="/" className="profile-tooltip__profile">
               Profile
