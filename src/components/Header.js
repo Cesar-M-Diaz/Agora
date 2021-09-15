@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 
 import '../assets/styles/components/Header.scss';
-import { useDispatch } from 'react-redux';
+
+import { student } from './mock/student';
+import { useDispatch, useSelector } from 'react-redux';
 import logout from '../actions/logout';
 
 function Header() {
@@ -59,7 +61,7 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/">
+      <Link to={globalState.token !== null ? '/home' : '/'}>
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
       <div className="header__search-container">
