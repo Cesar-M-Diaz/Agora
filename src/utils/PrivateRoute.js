@@ -1,8 +1,11 @@
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
+import { LOADING } from '../actions/constants';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const authUser = useSelector((state) => state.auth_status);
+  console.log(authUser);
+  if (authUser === LOADING) return <p>Loading ....</p>;
   return (
     <Route
       {...rest}

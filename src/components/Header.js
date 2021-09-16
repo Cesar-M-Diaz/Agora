@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Logo from '../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
 
@@ -59,7 +59,7 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to={globalState.auth_status ? '/home' : '/'}>
+      <Link to={globalState.auth_status === true ? '/home' : '/'}>
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
       <div className="header__search-container">

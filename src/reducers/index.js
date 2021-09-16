@@ -5,9 +5,8 @@ import {
   LOGIN,
   LOGIN_FAILED,
   TOKEN,
+  LOADING,
 } from '../actions/constants';
-
-const status = localStorage.getItem(TOKEN) ? true : false;
 
 const initialState = {
   token: localStorage.getItem(TOKEN) || null,
@@ -19,7 +18,7 @@ const initialState = {
     focus: null,
   },
   login_failed: false,
-  auth_status: status,
+  auth_status: LOADING,
 };
 
 // Modify the reducer in order to receive the actions
