@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { register as registerAction } from '../actions/register';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import FormTutor from '../components/FormTutor';
 
 import '../assets/styles/pages/register.scss';
 
-function Register(props) {
-  const globalState = useSelector((state) => state);
+function Register() {
   const dispatch = useDispatch();
   const [state, setState] = useState({
     type: 'student',
@@ -30,12 +29,6 @@ function Register(props) {
     },
     isValid: false,
   });
-
-  useEffect(() => {
-    if (globalState.token !== null) {
-      props.history.replace('/');
-    }
-  }, [globalState.token]);
 
   function validateInputs(e) {
     const inputName = e.target.name;

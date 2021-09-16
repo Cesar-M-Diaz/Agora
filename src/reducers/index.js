@@ -1,10 +1,16 @@
-import { LOGIN, LOGIN_FAILED } from '../actions/login';
-import { LOGOUT } from '../actions/logout';
-import { GET_USER_DATA } from '../actions/getUserData';
-import { REGISTER, TOKEN } from '../actions/constants';
+import {
+  LOGOUT,
+  GET_USER_DATA,
+  REGISTER,
+  LOGIN,
+  LOGIN_FAILED,
+  TOKEN,
+} from '../actions/constants';
+
+const status = localStorage.getItem(TOKEN) ? true : false;
 
 const initialState = {
-  token: localStorage.getItem('token') || null,
+  token: localStorage.getItem(TOKEN) || null,
   currentUser: {
     name: null,
     type: null,
@@ -13,6 +19,7 @@ const initialState = {
     focus: null,
   },
   login_failed: false,
+  auth_status: status,
 };
 
 // Modify the reducer in order to receive the actions
@@ -21,11 +28,17 @@ const reducer = function (state = initialState, action) {
     return {
       ...state,
       token: action.payload.token,
-      currentUser: action.payload.userData,
+      auth_status: true,
     };
   } else if (action.type === LOGOUT) {
-    localStorage.removeItem('token');
-    return { ...state, token: null, currentUser: {}, login_failed: false };
+    localStorage.removeItem(TOKEN);
+    return {
+      ...state,
+      token: null,
+      currentUser: {},
+      login_failed: false,
+      auth_status: false,
+    };
   } else if (action.type === LOGIN_FAILED) {
     return { ...state, login_failed: true };
   } else if (action.type === GET_USER_DATA) {
@@ -38,12 +51,13 @@ const reducer = function (state = initialState, action) {
         email: action.payload.email,
         focus: action.payload.focus || null,
       },
+      auth_status: true,
     };
   } else if (action.type === REGISTER) {
     return {
       ...state,
       token: action.payload.token,
-      currentUser: action.payload.userData,
+      auth_status: true,
     };
   }
   return state;

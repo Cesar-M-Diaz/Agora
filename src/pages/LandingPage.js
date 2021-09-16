@@ -1,18 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { LandingPageDescription } from '../components/LandingPageDescription';
 import { TutorsContainer } from '../components/TutorsContainer';
 import '../assets/styles/pages/landing-page.scss';
-import { useSelector } from 'react-redux';
 
-function LandingPage(props) {
-  const state = useSelector(state => state)
-
-  useEffect(() => {
-    if(state.token !== null){
-      props.history.replace("/home");
-    }
-  }, [state.token, props.history])
-
+function LandingPage() {
   return (
     <div className="page">
       <main className="page__inner">

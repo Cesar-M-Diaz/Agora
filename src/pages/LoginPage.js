@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import login from '../actions/login';
 
 import '../assets/styles/pages/LoginPage.scss';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-function LoginPage(props) {
-  const globalState = useSelector(state => state);
+function LoginPage() {
+  const globalState = useSelector((state) => state);
   const [state, setState] = useState({
     values: {
       email: '',
@@ -19,12 +19,6 @@ function LoginPage(props) {
   });
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if(globalState.token !== null){
-      props.history.replace("/");
-    }
-  }, [globalState.token, props.history])
 
   const validateInputs = (e) => {
     const inputName = e.target.name;
@@ -84,7 +78,7 @@ function LoginPage(props) {
   };
 
   const validateCredentials = ({ email, password }) => {
-    dispatch(login({email, password}));
+    dispatch(login({ email, password }));
   };
 
   const handleChange = (e, current) => {
@@ -157,7 +151,11 @@ function LoginPage(props) {
                   ? state.errors.password.message
                   : 'No hay errores'}
               </span>
-              {globalState.login_failed && <span style={{color: 'red'}}>Incorrect email or password, please try again.</span>}
+              {globalState.login_failed && (
+                <span style={{ color: 'red' }}>
+                  Incorrect email or password, please try again.
+                </span>
+              )}
             </div>
           </div>
           <button

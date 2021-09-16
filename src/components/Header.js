@@ -59,7 +59,7 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to={globalState.token !== null ? '/home' : '/'}>
+      <Link to={globalState.auth_status ? '/home' : '/'}>
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
       <div className="header__search-container">

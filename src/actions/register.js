@@ -1,5 +1,5 @@
 import axios from '../utils/axios';
-import { TOKEN, REGISTER } from '../actions/constants';
+import { REGISTER, TOKEN } from '../actions/constants';
 import history from '../utils/history';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -20,7 +20,7 @@ export function register(type, inputs) {
         text: 'go ahead and start learning',
         confirmButtonColor: '#0de26f',
       });
-      history.push('/');
+      history.push('/home');
     } catch (err) {
       MySwal.fire({
         icon: 'error',
