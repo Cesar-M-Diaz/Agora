@@ -26,7 +26,7 @@ export function register(type, inputs) {
         icon: 'error',
         title: <p className="swal__tittle">Oops...</p>,
         text: 'Registration failed',
-        confirmButtonColor: '#0de26f',
+        confirmButtonColor: '#ce4c4c',
       });
     }
   };

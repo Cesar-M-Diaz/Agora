@@ -31,11 +31,11 @@ function Register(props) {
     isValid: false,
   });
 
-  // useEffect(() => {
-  //   if (globalState.token !== null) {
-  //     props.history.replace('/');
-  //   }
-  // }, [globalState.token]);
+  useEffect(() => {
+    if (globalState.token !== null) {
+      props.history.replace('/');
+    }
+  }, [globalState.token]);
 
   function validateInputs(e) {
     const inputName = e.target.name;
