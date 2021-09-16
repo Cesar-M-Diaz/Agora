@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Logo from '../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 
 import '../assets/styles/components/Header.scss';
 
-import { student } from './mock/student';
 import { useDispatch, useSelector } from 'react-redux';
 import logout from '../actions/logout';
 
 function Header() {
-  const globalState = useSelector(state => state);
+  const globalState = useSelector((state) => state);
   const dispatch = useDispatch();
   const [state, setState] = useState({
     searchInput: '',
