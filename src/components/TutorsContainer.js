@@ -3,7 +3,7 @@ import { CategoriesBar } from '../components/CategoriesBar';
 import '../assets/styles/components/TutorsContainer.scss';
 import { CardContainer } from './CardContainer';
 
-function TutorsContainer() {
+function TutorsContainer({title, subtitle}) {
   /* change the category filter word */
   const [filterKeyword, setFilterKeyword] = useState('math');
 
@@ -16,14 +16,14 @@ function TutorsContainer() {
     <>
       <section className="tutors__container">
         <p className="tutors__subtitle">
-          From Math to Philosophy, take a look at some of the most common
-          subjects asked by thousands of students
+          {subtitle || <>From Math to Philosophy, take a look at some of the most common
+          subjects asked by thousands of students</>}
         </p>
         <div className="categories__container">
           <CategoriesBar onClick={onClick} />
         </div>
         <div className="tutors__title-container">
-          <p>Meet some of our best tutors</p>
+          <p>{title}</p>
         </div>
         <CardContainer categoryName={filterKeyword} />
       </section>

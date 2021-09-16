@@ -1,13 +1,15 @@
-import { useState /* useEffect */ } from 'react';
+import { useState, useEffect } from 'react';
 import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
+import { register as registerAction } from '../actions/register';
+import { useDispatch, useSelector } from 'react-redux';
 import FormTutor from '../components/FormTutor';
-import axios from 'axios';
 
 import '../assets/styles/pages/register.scss';
 
 function Register(props) {
+  const globalState = useSelector((state) => state);
+  const dispatch = useDispatch();
   const [state, setState] = useState({
     type: 'student',
     inputs: {
@@ -16,6 +18,8 @@ function Register(props) {
       password: '',
       profession: '',
       focus: '',
+      profile_photo:
+        'https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar-300x300.jpg',
     },
     errors: {
       name: true,
@@ -27,11 +31,11 @@ function Register(props) {
     isValid: false,
   });
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('token')) {
-  //     props.history.replace('/');
-  //   }
-  // });
+  useEffect(() => {
+    if (globalState.token !== null) {
+      props.history.replace('/');
+    }
+  }, [globalState.token]);
 
   function validateInputs(e) {
     const inputName = e.target.name;
@@ -181,23 +185,11 @@ function Register(props) {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     // destructure the state, less variables declared
-    const { type, inputs } = state;
     e.preventDefault();
-    try {
-      await axios
-        .post('http://localhost:3001/register', { type, inputs })
-        .then((response) => {
-          if (response.data.token) {
-            alert('Successful login');
-            props.history.replace('/');
-            return localStorage.setItem('token', response.data.token);
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
+    const { type, inputs } = state;
+    dispatch(registerAction(type, inputs));
   };
 
   const handleChange = (e) => {
