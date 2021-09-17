@@ -1,5 +1,5 @@
 import axios from '../utils/axios';
-import { GET_USER_DATA } from './constants';
+import { GET_USER_DATA, AUTH_FAILED } from './constants';
 
 function getUserData(token) {
   return async function (dispatch) {
@@ -12,7 +12,9 @@ function getUserData(token) {
         payload: { name, type, profile_photo, email, focus },
       });
     } catch (err) {
-      console.log(err);
+      dispatch({
+        type: AUTH_FAILED,
+      });
     }
   };
 }

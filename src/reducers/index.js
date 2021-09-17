@@ -6,6 +6,7 @@ import {
   LOGIN_FAILED,
   TOKEN,
   LOADING,
+  AUTH_FAILED,
 } from '../actions/constants';
 
 const initialState = {
@@ -57,6 +58,11 @@ const reducer = function (state = initialState, action) {
       ...state,
       token: action.payload.token,
       auth_status: true,
+    };
+  } else if (action.type === AUTH_FAILED) {
+    return {
+      ...state,
+      auth_status: false,
     };
   }
   return state;
