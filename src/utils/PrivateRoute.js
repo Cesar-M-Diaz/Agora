@@ -5,7 +5,6 @@ import '../assets/styles/components/PrivateRoute.scss';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const authUser = useSelector((state) => state.auth_status);
-  console.log(authUser);
   if (authUser === LOADING)
     return <p className="app-loading__message">Loading ....</p>;
   return (
