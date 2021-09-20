@@ -9,6 +9,7 @@ import '../assets/styles/components/Header.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import logout from '../actions/logout';
+import { AUTHORIZED } from '../actions/constants';
 
 function Header() {
   const globalState = useSelector((state) => state);
@@ -59,7 +60,7 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to={globalState.auth_status === true ? '/home' : '/'}>
+      <Link to={globalState.auth_status === AUTHORIZED ? '/home' : '/'}>
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
       <div className="header__search-container">

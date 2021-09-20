@@ -10,7 +10,8 @@ const FormTutor = ({ handleChange, validateInputs, errors }) => {
           onChange={handleChange}
         />
       </div>
-      <span>{errors.profession}</span>
+      <span className="register-form__errors">{errors.profession}</span>
+
       <div className="register-form__inputs">
         <select
           onBlur={validateInputs}
@@ -30,7 +31,7 @@ const FormTutor = ({ handleChange, validateInputs, errors }) => {
           <option value={5}>Test option 5</option>
         </select>
       </div>
-      <span>{errors.focus}</span>
+      <span className="register-form__errors">{errors.focus}</span>
     </>
   );
 };

@@ -7,6 +7,7 @@ import {
   TOKEN,
   LOADING,
   AUTH_FAILED,
+  AUTHORIZED,
 } from '../actions/constants';
 
 const initialState = {
@@ -28,7 +29,6 @@ const reducer = function (state = initialState, action) {
     return {
       ...state,
       token: action.payload.token,
-      auth_status: true,
     };
   } else if (action.type === LOGOUT) {
     localStorage.removeItem(TOKEN);
@@ -37,7 +37,7 @@ const reducer = function (state = initialState, action) {
       token: null,
       currentUser: {},
       login_failed: false,
-      auth_status: false,
+      auth_status: LOADING,
     };
   } else if (action.type === LOGIN_FAILED) {
     return { ...state, login_failed: true };
@@ -51,18 +51,17 @@ const reducer = function (state = initialState, action) {
         email: action.payload.email,
         focus: action.payload.focus || null,
       },
-      auth_status: true,
+      auth_status: AUTHORIZED,
     };
   } else if (action.type === REGISTER) {
     return {
       ...state,
       token: action.payload.token,
-      auth_status: true,
     };
   } else if (action.type === AUTH_FAILED) {
     return {
       ...state,
-      auth_status: false,
+      auth_status: LOADING,
     };
   }
   return state;

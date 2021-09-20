@@ -232,7 +232,7 @@ function Register() {
             required
           />
         </div>
-        <span>{state.errors.name}</span>
+        <span className="register-form__errors">{state.errors.name}</span>
 
         <div className="register-form__inputs">
           <FaEnvelope className="register-form__icon" />
@@ -244,7 +244,8 @@ function Register() {
             onChange={handleChange}
           />
         </div>
-        <span>{state.errors.email}</span>
+        <span className="register-form__errors">{state.errors.email}</span>
+
         <div className="register-form__inputs">
           <FaKey className="register-form__icon" />
           <input
@@ -255,7 +256,8 @@ function Register() {
             onChange={handleChange}
           />
         </div>
-        <span>{state.errors.password}</span>
+        <span className="register-form__errors">{state.errors.password}</span>
+
         {state.type === 'tutor' && (
           <FormTutor
             handleChange={handleChange}

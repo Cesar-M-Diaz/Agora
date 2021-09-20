@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { LOADING } from '../actions/constants';
+import { AUTHORIZED, LOADING } from '../actions/constants';
 import '../assets/styles/components/PrivateRoute.scss';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -11,7 +11,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        authUser ? <Component {...props} /> : <Redirect to="/login" />
+        authUser === AUTHORIZED ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/login" />
+        )
       }
     />
   );
