@@ -13,15 +13,15 @@ import HomePage from './pages/HomePage';
 import history from './utils/history';
 
 function App() {
-  const token = useSelector((state) => state.token);
+  const token = useSelector(state => state.token)
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (token !== null) {
+    if(token !== null) {
       dispatch(getUserData(token));
     }
-  }, [dispatch, token]);
-
+  }, [dispatch, token])
+  
   return (
     <Router history={history}>
       <Layout>
