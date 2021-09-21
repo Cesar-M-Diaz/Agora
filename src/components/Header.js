@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Logo from '../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ import '../assets/styles/components/Header.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import logout from '../actions/logout';
+import { AUTHORIZED } from '../actions/constants';
 
 function Header() {
   const globalState = useSelector((state) => state);
@@ -59,7 +60,7 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to={globalState.token !== null ? '/home' : '/'}>
+      <Link to={globalState.auth_status === AUTHORIZED ? '/home' : '/'}>
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
       <div className="header__search-container">

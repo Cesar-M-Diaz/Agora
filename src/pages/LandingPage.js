@@ -5,13 +5,13 @@ import '../assets/styles/pages/landing-page.scss';
 import { useSelector } from 'react-redux';
 
 function LandingPage(props) {
-  const state = useSelector(state => state)
+  const state = useSelector((state) => state);
 
   useEffect(() => {
-    if(state.token !== null){
-      props.history.replace("/home");
+    if (state.token !== null) {
+      props.history.replace('/home');
     }
-  }, [state.token, props.history])
+  }, [state.token, props.history]);
 
   return (
     <div className="page">
