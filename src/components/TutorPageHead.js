@@ -9,9 +9,14 @@ function TutorPageHead({ tutor }) {
     starNodes.push(<FontAwesomeIcon icon={faStar} />);
   }
 
+  function onClick(e) {
+    e.preventDefault();
+    console.log('click');
+  }
+
   return (
     <main>
-      <img src={tutor.profilePhoto} alt="" />
+      <img src={tutor.profile_photo} alt="" />
       <div>
         <h1>{tutor.name}</h1>
         <h2>{tutor.profession}</h2>
@@ -21,7 +26,7 @@ function TutorPageHead({ tutor }) {
       <div>
         <h2>Availability</h2>
         <h3>{tutor.schedule}</h3>
-        <button>Schedule Appointment</button>
+        <button onClick={onClick}>Schedule Appointment</button>
       </div>
     </main>
   );
