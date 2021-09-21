@@ -92,7 +92,9 @@ function LoginPage() {
     <div className="login-form-container">
       <form className="login-form">
         <fieldset className="login-login-fieldset">
-          <h1 className="login-form__legend">Sign In</h1>
+          <h1 className="login-form__legend" data-testid="login-title">
+            Sign In
+          </h1>
           <div className="login-input-container">
             <div className="input-container__input">
               <span className="login-input__icon">
@@ -106,6 +108,7 @@ function LoginPage() {
                 name="email"
                 id="login-email"
                 placeholder="Email"
+                data-testid="email"
                 required
               />
             </div>
@@ -136,6 +139,7 @@ function LoginPage() {
                 name="password"
                 id="login-password"
                 placeholder="Password"
+                data-testid="password"
                 required
               />
             </div>
@@ -163,6 +167,7 @@ function LoginPage() {
             disabled={!state.isValid}
             className={`login-form__submit ${!state.isValid && 'disabled'}`}
             type="submit"
+            data-testid="login-send"
           >
             Sign In
           </button>

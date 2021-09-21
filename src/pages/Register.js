@@ -207,7 +207,9 @@ function Register() {
   return (
     <>
       <form className="register-form">
-        <h2 className="register-form__title">Register</h2>
+        <h2 className="register-form__title" data-testid="register-title">
+          Register
+        </h2>
 
         <div className="register-form__choose-role">
           <h5 className="register-form__t-s">Are you a student or a tutor?</h5>
