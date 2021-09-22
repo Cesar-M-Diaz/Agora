@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { TutorPageHead } from '../components/TutorPageHead';
 import { TutorDescription } from '../components/TutorDescription';
-// import { tutor as tutors } from '../components/mock/tutor';
 import { ReviewsContainer } from '../components/ReviewsContainer';
-// import { reviews } from '../components/mock/reviews';
-import '../assets/styles/pages/TutorProfile.css';
+import '../assets/styles/pages/TutorViewProfile.scss';
 import axios from '../utils/axios';
 
 function TutorProfile(props) {
   const [tutor, setTutor] = useState({});
   const [reviews, setReviews] = useState([]);
-  const id = '613fc9e12204249f386c9e4b';
+  const id = '614a1da44db3efc62ac1f5ea';
 
   useEffect(() => {
     axios
@@ -30,11 +28,13 @@ function TutorProfile(props) {
   }, []);
 
   return (
-    <div className="tutor-profile__body">
-      <TutorPageHead tutor={tutor} />
-      <TutorDescription tutor={tutor} />
-      <ReviewsContainer reviews={reviews} />
-    </div>
+    <>
+      <div className="tutor-profile__body">
+        <TutorPageHead tutor={tutor} />
+        <TutorDescription tutor={tutor} />
+        <ReviewsContainer reviews={reviews} />
+      </div>
+    </>
   );
 }
 

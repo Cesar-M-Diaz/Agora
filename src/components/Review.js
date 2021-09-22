@@ -12,7 +12,7 @@ function Review({ comment, rating }) {
   return (
     <div>
       <div>{starNodes}</div>
-      <p>{comment}</p>
+      <p className="tutor-profile__text">{comment}</p>
     </div>
   );
 }

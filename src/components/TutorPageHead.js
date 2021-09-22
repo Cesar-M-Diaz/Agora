@@ -15,18 +15,20 @@ function TutorPageHead({ tutor }) {
   }
 
   return (
-    <main>
-      <img src={tutor.profile_photo} alt="" />
-      <div>
-        <h1>{tutor.name}</h1>
-        <h2>{tutor.profession}</h2>
-        <h2>{tutor.focus}</h2>
-        <div className="profile-stars">{starNodes}</div>
+    <main className="tutor-profile__profile-container">
+      <img src={tutor.profile_photo} alt="" className="tutor-profile__photo" />
+      <div className="tutor-profile__profile-container-text">
+        <h1 className="tutor-profile__title">{tutor.name}</h1>
+        <h2 className="tutor-profile__subtitle">{tutor.profession}</h2>
+        <h2 className="tutor-profile__subtitle">Area: {tutor.focus}</h2>
+        <div className="tutor-profile__stars">{starNodes}</div>
       </div>
-      <div>
-        <h2>Availability</h2>
-        <h3>{tutor.schedule}</h3>
-        <button onClick={onClick}>Schedule Appointment</button>
+      <div className="tutor-profile__schedule-container">
+        <h2 className="tutor-profile__subtitle">Availability</h2>
+        <h3 className="tutor-profile__availability">{tutor.schedule}</h3>
+        <button onClick={onClick} className="tutor-profile__schedule-button">
+          Schedule Appointment
+        </button>
       </div>
     </main>
   );
