@@ -11,17 +11,20 @@ import { useEffect } from 'react';
 import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
+import { AUTH_FAILED } from './actions/constants';
 
 function App() {
-  const token = useSelector(state => state.token)
+  const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(token !== null) {
+    if (token !== null) {
       dispatch(getUserData(token));
+    } else {
+      dispatch({ type: AUTH_FAILED });
     }
-  }, [dispatch, token])
-  
+  }, [dispatch, token]);
+
   return (
     <Router history={history}>
       <Layout>
