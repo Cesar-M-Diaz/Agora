@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { register as registerAction } from '../actions/register';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import FormTutor from '../components/FormTutor';
 
 import '../assets/styles/pages/register.scss';
 
-function Register(props) {
-  const globalState = useSelector((state) => state);
+function Register() {
   const dispatch = useDispatch();
   const [state, setState] = useState({
     type: 'student',
@@ -30,12 +29,6 @@ function Register(props) {
     },
     isValid: false,
   });
-
-  useEffect(() => {
-    if (globalState.token !== null) {
-      props.history.replace('/');
-    }
-  }, [globalState.token]);
 
   function validateInputs(e) {
     const inputName = e.target.name;
@@ -214,7 +207,9 @@ function Register(props) {
   return (
     <>
       <form className="register-form">
-        <h2 className="register-form__title">Register</h2>
+        <h2 className="register-form__title" data-testid="register-title">
+          Register
+        </h2>
 
         <div className="register-form__choose-role">
           <h5 className="register-form__t-s">Are you a student or a tutor?</h5>
@@ -239,7 +234,7 @@ function Register(props) {
             required
           />
         </div>
-        <span>{state.errors.name}</span>
+        <span className="register-form__errors">{state.errors.name}</span>
 
         <div className="register-form__inputs">
           <FaEnvelope className="register-form__icon" />
@@ -251,7 +246,8 @@ function Register(props) {
             onChange={handleChange}
           />
         </div>
-        <span>{state.errors.email}</span>
+        <span className="register-form__errors">{state.errors.email}</span>
+
         <div className="register-form__inputs">
           <FaKey className="register-form__icon" />
           <input
@@ -262,7 +258,8 @@ function Register(props) {
             onChange={handleChange}
           />
         </div>
-        <span>{state.errors.password}</span>
+        <span className="register-form__errors">{state.errors.password}</span>
+
         {state.type === 'tutor' && (
           <FormTutor
             handleChange={handleChange}
