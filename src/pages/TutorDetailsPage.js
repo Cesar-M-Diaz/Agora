@@ -5,7 +5,7 @@ import { ReviewsContainer } from '../components/ReviewsContainer';
 import '../assets/styles/pages/TutorViewProfile.scss';
 import axios from '../utils/axios';
 
-function TutorProfile(props) {
+function TutorDetailsPage(props) {
   const [tutor, setTutor] = useState({});
   const [reviews, setReviews] = useState([]);
   const id = '614a1d924db3efc62ac1f530';
@@ -38,4 +38,4 @@ function TutorProfile(props) {
   );
 }
 
-export { TutorProfile };
+export default TutorDetailsPage;
