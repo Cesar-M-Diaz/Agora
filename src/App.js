@@ -11,17 +11,18 @@ import { useEffect } from 'react';
 import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
+import TutorProfilePage from './pages/TutorProfilePage';
 
 function App() {
-  const token = useSelector(state => state.token)
+  const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(token !== null) {
+    if (token !== null) {
       dispatch(getUserData(token));
     }
-  }, [dispatch, token])
-  
+  }, [dispatch, token]);
+
   return (
     <Router history={history}>
       <Layout>
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/error" component={errorPage} />
+          <Route exact path="/tutor-profile" component={TutorProfilePage} />
           <Route path="*" component={errorPage} />
         </Switch>
       </Layout>

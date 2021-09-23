@@ -1,11 +1,15 @@
 import React from 'react';
+// import
 
 function TutorDashboard() {
   return (
     <div>
-      <button></button>
-      <button></button>
-      <button></button>
+      <select name="" id="">
+        <option value=""></option>
+      </select>
+      <button>Edit profile</button>
+      <button>Tutorships</button>
+      <button>Tutorships History</button>
     </div>
   );
 }
