@@ -20,7 +20,9 @@ const FormTutor = ({ handleChange, validateInputs, errors, categories }) => {
             Choose your area of expertise
           </option>
           {categories.map((category) => (
-            <option key={category._id}>{category.subject}</option>
+            <option key={category._id} value={category.subject}>
+              {category.subject}
+            </option>
           ))}
         </select>
       </div>
