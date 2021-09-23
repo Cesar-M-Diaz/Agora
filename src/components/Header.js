@@ -110,7 +110,7 @@ function Header() {
               </span>
             </div>
             <div className="mobile-menu__buttons">
-              <Link to="/" className="mobile-menu__profile-button">
+              <Link to="/profile" className="mobile-menu__profile-button">
                 Profile
               </Link>
               <Link
@@ -165,7 +165,7 @@ function Header() {
             <h3 className="profile-tooltip__name">
               {globalState.currentUser.name}
             </h3>
-            <Link to="/" className="profile-tooltip__profile">
+            <Link to="/profile" className="profile-tooltip__profile">
               Profile
             </Link>
             <Link onClick={SignOut} to="/" className="profile-tooltip__signout">

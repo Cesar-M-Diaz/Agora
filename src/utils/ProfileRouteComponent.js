@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import StudentProfile from "../pages/StudentProfile";
 
 function ProfileRouteComponent(){
-  const isTutor = useSelector(state => state.currentUser.focus)
-  if(isTutor) return <StudentProfile />;
+  const role = useSelector(state => state.currentUser.type)
+  if(role === "tutor") return <StudentProfile />; // We must change this to return the TutorProfile page once it's created
   return <StudentProfile />;
 }
 

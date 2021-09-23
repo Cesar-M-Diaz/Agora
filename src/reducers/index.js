@@ -9,6 +9,7 @@ import {
   AUTH_FAILED,
   AUTHORIZED,
   UNAUTHORIZED,
+  UPDATE_STUDENT_PROFILE
 } from '../actions/constants';
 
 const initialState = {
@@ -21,7 +22,7 @@ const initialState = {
     focus: null,
   },
   login_failed: false,
-  auth_status: UNAUTHORIZED,
+  auth_status: LOADING,
 };
 
 // Modify the reducer in order to receive the actions
@@ -66,6 +67,15 @@ const reducer = function (state = initialState, action) {
       ...state,
       auth_status: UNAUTHORIZED,
     };
+  } else if (action.type === UPDATE_STUDENT_PROFILE){
+    return {
+      ...state,
+      currentUser: {
+        ...state.currentUser,
+        email: action.payload.email,
+        password: action.payload.password || state.currentUser.password
+      }
+    }
   }
   return state;
 };

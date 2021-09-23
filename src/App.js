@@ -7,6 +7,7 @@ import { LandingPage } from './pages/LandingPage';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import getUserData from './actions/getUserData';
+import {AUTH_FAILED} from './actions/constants';
 import { useEffect } from 'react';
 import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
@@ -20,6 +21,8 @@ function App() {
   useEffect(() => {
     if(token !== null) {
       dispatch(getUserData(token));
+    } else {
+      dispatch({ type: AUTH_FAILED })
     }
   }, [dispatch, token])
   
