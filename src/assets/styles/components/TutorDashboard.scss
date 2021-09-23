@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+
+$subtitle-color: #5b5b5b;
+$title-color: #3f3f3f;
+$color-a: #22b8d9;
+$color-b: #0de26f;
+$font-weight: 400;
+$font-selected-weight: 800;
+$border-width: 1px;
+$spacing: 30px;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.tutor-dashboard__body {
+  width: 100%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutor-dashboard__selector {
+  font-family: 'Source Code Pro', monospace;
+  background-color: white;
+  color: $color-b;
+  border: $border-width solid $color-b;
+  text-align: center;
+  height: 45px;
+  margin-bottom: $spacing;
+  font-size: 1rem;
+  font-weight: $font-selected-weight;
+  letter-spacing: 3px;
+  width: 100%;
+}
+
+.tutor-dashboard__selector-element {
+  color: $title-color;
+}
+
+// .tutor-dashboard__selector:hover {
+//   font-weight: $font-selected-weight;
+//   border: $border-width solid $color-b;
+//   background-color: white;
+//   color: $color-b;
+//   cursor: pointer;
+// }
+
+.tutor-dashboard__button {
+  display: none;
+  font-family: 'Source Code Pro', monospace;
+  background-color: white;
+  color: $subtitle-color;
+  border: $border-width solid $subtitle-color;
+  text-align: center;
+  height: 45px;
+  margin-bottom: $spacing;
+  font-size: 1rem;
+  font-weight: $font-weight;
+  letter-spacing: 3px;
+  width: 100%;
+}
+
+.tutor-dashboard__button:hover {
+  border: $border-width solid $color-b;
+  background-color: white;
+  color: $color-b;
+  cursor: pointer;
+  font-weight: $font-selected-weight;
+}
+
+.tutor-dashboard__button:focus {
+  transform: translateY(-3px);
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
+  border: $border-width solid $color-b;
+  background-color: $color-b;
+  color: white;
+  cursor: pointer;
+  font-weight: $font-selected-weight;
+}
+
+@media (min-width: 992px) {
+  .tutor-dashboard__body {
+    width: 90%;
+  }
+
+  .tutor-dashboard__button {
+    display: initial;
+  }
+
+  .tutor-dashboard__selector {
+    display: none;
+  }
+}

@@ -14,11 +14,13 @@ import {
 const initialState = {
   token: localStorage.getItem(TOKEN) || null,
   currentUser: {
+    _id: null,
     name: null,
     type: null,
     profile_photo: null,
     email: null,
     focus: null,
+    description: null,
   },
   login_failed: false,
   auth_status: UNAUTHORIZED,
@@ -47,11 +49,13 @@ const reducer = function (state = initialState, action) {
     return {
       ...state,
       currentUser: {
+        _id: action.payload._id,
         name: action.payload.name,
         type: action.payload.type,
         profile_photo: action.payload.profile_photo,
         email: action.payload.email,
         focus: action.payload.focus || null,
+        description: action.payload.description || null,
       },
       auth_status: AUTHORIZED,
     };
