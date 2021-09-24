@@ -1,4 +1,5 @@
 import React from 'react';
+import history from '../utils/history';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +12,7 @@ function TutorPageHead({ tutor }) {
 
   function onClick(e) {
     e.preventDefault();
-    console.log('click');
+    history.push('/pay');
   }
 
   return (

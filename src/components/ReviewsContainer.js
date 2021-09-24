@@ -8,7 +8,12 @@ function ReviewsContainer({ reviews }) {
       <div>
         {reviews.map((props) => {
           return (
-            <Review id={props._id} comment={props.comment} rating={props.rating} studentName={props.student_id.name} />
+            <Review
+              key={props._id}
+              comment={props.comment}
+              rating={props.rating}
+              studentName={props.student_id.name}
+            />
           );
         })}
       </div>
