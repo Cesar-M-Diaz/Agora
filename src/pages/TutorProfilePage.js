@@ -39,10 +39,10 @@ function TutorProfilePage() {
       <TutorDashboard />
       <div className="tutor-edit__profile-body">
         <div className="tutor-edit__photo-container">
-          <img src={globalUser.profile_photo} />
-          <button>upload photo</button>
+          <img src={globalUser.profile_photo} className="tutor-edit__photo" />
+          <button className="tutor-edit__button-photo">upload photo</button>
         </div>
-        <form action="" className="" onSubmit={onSubmit}>
+        <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
           <div className="tutor-edit__form-slot">
             <label>Email</label>
             <input
@@ -65,18 +65,19 @@ function TutorProfilePage() {
           </div>
           <div className="tutor-edit__form-slot">
             <label>Description</label>
-            <input
-              type="text"
+            <textarea
               name="description"
               defaultValue={globalUser.description}
               onChange={handleChange}
+              id=""
+              cols="30"
+              rows="10"
               className="tutor-edit__form-description"
-              s
-            />
+            ></textarea>
           </div>
           <input
             type="submit"
-            value="edit profile"
+            value="save changes"
             className="tutor-edit__button-submit"
           />
         </form>

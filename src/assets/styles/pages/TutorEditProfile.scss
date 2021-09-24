@@ -7,7 +7,7 @@ $color-a: #22b8d9;
 $color-b: #0de26f;
 $font-weight: 400;
 $font-selected-weight: 800;
-$border-width: 1px;
+$border-width: 2px;
 $spacing: 30px;
 
 * {
@@ -23,5 +23,138 @@ $spacing: 30px;
 }
 
 .tutor-edit__profile-body {
-  margin-top: 30px;
+  font-family: 'Open Sans';
+  box-sizing: border-box;
+  padding: 30px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
+  margin-bottom: 50px;
+}
+
+.tutor-edit__photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tutor-edit__photo {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 20px;
+}
+
+.tutor-edit__button-photo {
+  font-family: 'Open Sans';
+  font-weight: 700;
+  background-color: white;
+  color: $color-a;
+  border: $border-width solid $color-a;
+  text-align: center;
+  height: 30px;
+  margin-bottom: 55px;
+  font-size: 0.75rem;
+  font-weight: $font-weight;
+  width: 110px;
+  &:hover {
+    background-color: $color-a;
+    color: white;
+    border: $border-width solid $color-a;
+    cursor: pointer;
+  }
+}
+
+.tutor-edit__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tutor-edit__form-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  input {
+    box-sizing: border-box;
+    padding: 0px 10px;
+    padding-left: 10px;
+    width: 100%;
+    height: 54px;
+    border: 1px solid $subtitle-color;
+    text-align: left;
+    margin: 20px 0;
+    color: $subtitle-color;
+    font-family: 1rem;
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
+  label {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    color: $subtitle-color;
+  }
+  .tutor-edit__form-description {
+    font-family: 'Open Sans';
+    font-weight: 600;
+    color: $subtitle-color;
+    box-sizing: border-box;
+    height: 200px;
+    width: 100%;
+    padding: 10px 10px;
+    margin: 20px 0px;
+  }
+}
+
+.tutor-edit__button-submit {
+  font-family: 'Source Code Pro', monospace;
+  letter-spacing: 1px;
+  background-color: white;
+  color: $color-b;
+  border: $border-width solid $color-b;
+  text-align: center;
+  height: 40px;
+  margin: 35px 0px;
+  font-size: 1rem;
+  font-weight: $font-selected-weight;
+  width: 100%;
+  &:hover {
+    background-color: $color-b;
+    color: white;
+    border: $border-width solid $color-b;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 992px) {
+  .tutor-dashboard__body {
+    width: 30%;
+    margin-right: 30px;
+  }
+
+  .tutor-dashboard__button {
+    display: initial;
+  }
+
+  .tutor-dashboard__selector {
+    display: none;
+  }
+  .tutor-edit__body {
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 80px 30px 30px 30px;
+  }
+
+  .tutor-edit__profile-body {
+    font-family: 'Open Sans';
+    box-sizing: border-box;
+    padding: 30px;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
+    margin-bottom: 50px;
+  }
 }
