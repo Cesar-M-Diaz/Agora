@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { Router, Switch, Route } from 'react-router-dom';
+import PrivateRoute from './utils/PrivateRoute';
+import Layout from './components/Layout';
+import LoginPage from './pages/LoginPage';
+import Register from './pages/Register';
+import { LandingPage } from './pages/LandingPage';
+import TutorDetailsPage from './pages/TutorDetailsPage';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import getUserData from './actions/getUserData';
+import { useEffect } from 'react';
+import { errorPage } from './pages/errorPage';
+import HomePage from './pages/HomePage';
+import history from './utils/history';
+import { AUTH_FAILED } from './actions/constants';
 
 function App() {
+  const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token !== null) {
+      dispatch(getUserData(token));
+    } else {
+      dispatch({ type: AUTH_FAILED });
+    }
+  }, [dispatch, token]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Layout>
+        <Switch>
+          <PrivateRoute exact path="/home" component={HomePage} />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/error" component={errorPage} />
+          <Route exact path="/tutor" component={TutorDetailsPage} />
+          <Route path="*" component={errorPage} />
+        </Switch>
+      </Layout>
+    </Router>
   );
 }
 

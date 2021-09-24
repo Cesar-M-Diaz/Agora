@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
+$select-color: #0de26f;
+
+.tray {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  border: 3px gray solid;
+  width: 300px;
+  height: 150px;
+  display: flex;
+  margin-bottom: 25px;
+  padding: 20px;
+  font-family: 'Open Sans';
+  cursor: pointer;
+  user-select: none;
+  color: #112031;
+}
+
+.card:hover {
+  border: 3px $select-color solid;
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.card-visual-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 150px;
+  height: 150px;
+  img {
+    width: 100px;
+    height: 100px;
+    // margin-top: 5px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  h1 {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+.card-tutor-info {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  h2 {
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+  }
+  h3 {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+    text-align: center;
+  }
+  p {
+    font-size: 0.7rem;
+  }
+}
+
+.card-stars {
+  width: 100px;
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #ffb319;
+}
+
+/* Tablets */
+
+@media (min-width: 768px) {
+  .card {
+    width: 300px;
+    height: 200px;
+  }
+
+  .card-visual-info {
+    width: 100px;
+    height: 200px;
+    text-align: center;
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    h1 {
+      font-size: 1.3rem;
+    }
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .card-tutor-info {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    h2 {
+      font-size: 1.3rem;
+    }
+    h3 {
+      font-size: 1.1rem;
+    }
+    p {
+      font-size: 0.7rem;
+      margin: 5px;
+    }
+  }
+
+  .card-stars {
+    width: 80px;
+    height: 30px;
+  }
+}
+
+/* Monitores */
+@media (min-width: 992px) {
+  .card {
+    width: 350px;
+    height: 220px;
+    padding: 5px;
+  }
+
+  .card-visual-info {
+    width: 150px;
+    height: 220px;
+    img {
+      width: 130px;
+      height: 130px;
+    }
+    h1 {
+      font-size: 1.3rem;
+    }
+    p {
+      font-size: 1.1rem;
+    }
+  }
+
+  .card-tutor-info {
+    width: 200px;
+    height: 220px;
+    h2 {
+      font-size: 1.3rem;
+    }
+    h3 {
+      font-size: 1.1rem;
+    }
+    p {
+      font-size: 0.8rem;
+      margin: 5px;
+    }
+  }
+
+  .card-stars {
+    width: 100px;
+  }
+}
