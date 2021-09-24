@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import { LandingPage } from './pages/LandingPage';
+import TutorDetailsPage from './pages/TutorDetailsPage';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import getUserData from './actions/getUserData';
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/error" component={errorPage} />
+          <Route exact path="/tutor" component={TutorDetailsPage} />
           <Route path="*" component={errorPage} />
         </Switch>
       </Layout>
