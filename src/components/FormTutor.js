@@ -1,14 +1,8 @@
-const FormTutor = ({ handleChange, validateInputs, errors }) => {
+const FormTutor = ({ handleChange, validateInputs, errors, categories }) => {
   return (
     <>
       <div className="register-form__inputs">
-        <input
-          onBlur={validateInputs}
-          type="text"
-          placeholder="Profession"
-          name="profession"
-          onChange={handleChange}
-        />
+        <input onBlur={validateInputs} type="text" placeholder="Profession" name="profession" onChange={handleChange} />
       </div>
       <span className="register-form__errors">{errors.profession}</span>
 
@@ -20,15 +14,16 @@ const FormTutor = ({ handleChange, validateInputs, errors }) => {
           name="focus"
           onChange={handleChange}
           defaultValue={0}
+          className="register-form__select-focus"
         >
           <option value={0} hidden disabled>
-            Choose a focus
+            Choose your area of expertise
           </option>
-          <option value={1}>Test option 1</option>
-          <option value={2}>Test option 2</option>
-          <option value={3}>Test option 3</option>
-          <option value={4}>Test option 4</option>
-          <option value={5}>Test option 5</option>
+          {categories.map((category) => (
+            <option key={category._id} value={category.subject}>
+              {category.subject}
+            </option>
+          ))}
         </select>
       </div>
       <span className="register-form__errors">{errors.focus}</span>

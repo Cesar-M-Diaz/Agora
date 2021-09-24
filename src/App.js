@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
+import { AUTH_FAILED } from './actions/constants';
 
 function App() {
   const token = useSelector((state) => state.token);
@@ -20,6 +21,8 @@ function App() {
   useEffect(() => {
     if (token !== null) {
       dispatch(getUserData(token));
+    } else {
+      dispatch({ type: AUTH_FAILED });
     }
   }, [dispatch, token]);
 
