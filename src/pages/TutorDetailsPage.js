@@ -8,7 +8,9 @@ import axios from '../utils/axios';
 function TutorDetailsPage(props) {
   const [tutor, setTutor] = useState({});
   const [reviews, setReviews] = useState([]);
-  const id = '614a1d924db3efc62ac1f530';
+  const id = props.location.state;
+
+  console.log(id);
 
   async function tutorDetailsData() {
     try {
@@ -25,7 +27,7 @@ function TutorDetailsPage(props) {
 
   useEffect(() => {
     tutorDetailsData();
-  }, []);
+  }, [id]);
 
   return (
     <>
