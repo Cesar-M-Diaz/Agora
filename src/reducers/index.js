@@ -23,7 +23,7 @@ const initialState = {
     description: null,
   },
   login_failed: false,
-  auth_status: UNAUTHORIZED,
+  auth_status: LOADING,
 };
 
 // Modify the reducer in order to receive the actions

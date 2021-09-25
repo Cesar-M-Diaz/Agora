@@ -1,17 +1,15 @@
-import React from 'react';
+import {React} from 'react';
 import '../assets/styles/components/CategoriesBar.scss';
-import { categories } from './mock/categories';
 
-function CategoriesBar({ onClick }) {
+function CategoriesBar({ Categories , setFilter}) {
   return (
     <main className="categories__container">
-      {/* get the first n elements of the categories mock data */}
-      {categories.slice(0, 8).map(({ subject, _id }) => {
+      {Categories.map((e) => {
         return (
-          <button key={_id} className="category__button" onClick={onClick}>
-            {subject}
+          <button key={e._id} className="category__button" onClick={()=>setFilter(e.subject)}>
+            {e.subject}
           </button>
-        );
+        )
       })}
     </main>
   );

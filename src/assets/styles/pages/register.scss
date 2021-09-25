@@ -35,6 +35,15 @@ $color-gray: #aaa;
   width: 100px;
 }
 
+.register-form__select-focus {
+  text-align: center;
+  color: gray;
+  border: 0;
+  cursor: pointer;
+  height: 38px;
+  width: 100%;
+}
+
 .register-form__inputs input {
   width: 80%;
   transition: 0.3s ease all;
