@@ -10,23 +10,20 @@ function TutorDetailsPage(props) {
   const [reviews, setReviews] = useState([]);
   const id = props.location.state;
 
-  console.log(id);
-
-  async function tutorDetailsData() {
-    try {
-      const tutorData = await axios.get(`/tutor/${id}`);
-      const data = tutorData.data;
-      setTutor(data);
-      const reviewsData = await axios.get(`/tutor/reviews/${id}`);
-      const reviews = reviewsData.data;
-      setReviews(reviews);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   useEffect(() => {
-    tutorDetailsData();
+    async function tutorDetailsData(id) {
+      try {
+        const tutorData = await axios.get(`/tutor/${id}`);
+        const data = tutorData.data;
+        setTutor(data);
+        const reviewsData = await axios.get(`/tutor/reviews/${id}`);
+        const reviews = reviewsData.data;
+        setReviews(reviews);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    tutorDetailsData(id);
   }, [id]);
 
   return (
