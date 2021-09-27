@@ -68,6 +68,12 @@ $select-color: #0de26f;
   }
   p {
     font-size: 0.7rem;
+    text-align: justify;
+    margin-top: 5px;
+    width: 130px;
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -117,8 +123,8 @@ $select-color: #0de26f;
       font-size: 1.1rem;
     }
     p {
-      font-size: 0.7rem;
-      margin: 5px;
+      width: 150px;
+      height: 90px;
     }
   }
 
@@ -131,7 +137,7 @@ $select-color: #0de26f;
 /* Monitores */
 @media (min-width: 992px) {
   .card {
-    width: 350px;
+    width: 320px;
     height: 220px;
     padding: 5px;
   }

@@ -8,24 +8,23 @@ import axios from '../utils/axios';
 function TutorDetailsPage(props) {
   const [tutor, setTutor] = useState({});
   const [reviews, setReviews] = useState([]);
-  const id = '614a1d924db3efc62ac1f530';
-
-  async function tutorDetailsData() {
-    try {
-      const tutorData = await axios.get(`/tutor/${id}`);
-      const data = tutorData.data;
-      setTutor(data);
-      const reviewsData = await axios.get(`/tutor/reviews/${id}`);
-      const reviews = reviewsData.data;
-      setReviews(reviews);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  const id = props.location.state;
 
   useEffect(() => {
-    tutorDetailsData();
-  }, []);
+    async function tutorDetailsData(id) {
+      try {
+        const tutorData = await axios.get(`/tutor/${id}`);
+        const data = tutorData.data;
+        setTutor(data);
+        const reviewsData = await axios.get(`/tutor/reviews/${id}`);
+        const reviews = reviewsData.data;
+        setReviews(reviews);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    tutorDetailsData(id);
+  }, [id]);
 
   return (
     <>
