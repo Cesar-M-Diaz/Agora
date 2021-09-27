@@ -68,6 +68,12 @@ $select-color: #0de26f;
   }
   p {
     font-size: 0.7rem;
+    text-align: justify;
+    margin-top: 5px;
+    width: 130px;
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -91,6 +97,7 @@ $select-color: #0de26f;
   .card-visual-info {
     width: 100px;
     height: 200px;
+    text-align: center;
     img {
       width: 100px;
       height: 100px;
@@ -98,7 +105,7 @@ $select-color: #0de26f;
       border-radius: 50%;
     }
     h1 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
     p {
       font-size: 0.9rem;
@@ -110,14 +117,14 @@ $select-color: #0de26f;
     height: 200px;
     text-align: center;
     h2 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
     h3 {
       font-size: 1.1rem;
     }
     p {
-      font-size: 0.7rem;
-      margin: 5px;
+      width: 150px;
+      height: 90px;
     }
   }
 
@@ -130,7 +137,7 @@ $select-color: #0de26f;
 /* Monitores */
 @media (min-width: 992px) {
   .card {
-    width: 350px;
+    width: 320px;
     height: 220px;
     padding: 5px;
   }
@@ -143,10 +150,10 @@ $select-color: #0de26f;
       height: 130px;
     }
     h1 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
     p {
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
 
@@ -154,10 +161,10 @@ $select-color: #0de26f;
     width: 200px;
     height: 220px;
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
     h3 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
     p {
       font-size: 0.8rem;
