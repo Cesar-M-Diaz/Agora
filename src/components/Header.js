@@ -10,6 +10,7 @@ import '../assets/styles/components/Header.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import logout from '../actions/logout';
 import { AUTHORIZED } from '../actions/constants';
+import history from '../utils/history';
 
 function Header() {
   const globalState = useSelector((state) => state);
@@ -23,6 +24,7 @@ function Header() {
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, searchInput: e.target.value }));
+    // console.log(state.searchInput)
   };
 
   const toggleSearchCollapse = () => {
@@ -58,6 +60,15 @@ function Header() {
     dispatch(logout());
   };
 
+  const search = () => {
+    history.push({
+      pathname: '/search',
+      state: state.searchInput,
+    })
+  
+
+  }
+
   return (
     <header className="header">
       <Link to={globalState.auth_status === AUTHORIZED ? '/home' : '/'}>
@@ -70,8 +81,8 @@ function Header() {
           type="text"
           placeholder="Search"
         />
-        <div className="search-container__icon-container">
-          <FontAwesomeIcon icon={faSearch} />
+        <div className="search-container__icon-container" onClick={search}>
+          <FontAwesomeIcon icon={faSearch}  />
         </div>
       </div>
 
@@ -90,8 +101,9 @@ function Header() {
           className="search-container__input"
           type="text"
           placeholder="Search"
+          
         />
-        <div className="search-container__icon-container">
+        <div className="search-container__icon-container" onClick={search}>
           <FontAwesomeIcon icon={faSearch} />
         </div>
       </div>

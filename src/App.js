@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
+import { SearchPage } from './pages/searchPage';
 
 function App() {
   const token = useSelector(state => state.token)
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
           <Route path="*" component={errorPage} />
         </Switch>
