@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import { LandingPage } from './pages/LandingPage';
+import TutorDetailsPage from './pages/TutorDetailsPage';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import getUserData from './actions/getUserData';
@@ -12,17 +13,21 @@ import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
 import { SearchPage } from './pages/searchPage';
+import { AUTH_FAILED } from './actions/constants';
+
 
 function App() {
-  const token = useSelector(state => state.token)
+  const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(token !== null) {
+    if (token !== null) {
       dispatch(getUserData(token));
+    } else {
+      dispatch({ type: AUTH_FAILED });
     }
-  }, [dispatch, token])
-  
+  }, [dispatch, token]);
+
   return (
     <Router history={history}>
       <Layout>
@@ -33,6 +38,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
+          <Route exact path="/tutor" component={TutorDetailsPage} />
           <Route path="*" component={errorPage} />
         </Switch>
       </Layout>
