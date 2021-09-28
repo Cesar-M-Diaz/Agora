@@ -1,34 +1,41 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import StudentProfileMenu from '../components/StudentProfileMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import updateStudentProfile from '../actions/updateStudentProfile';
-
+import history from '../utils/history';
+import axios from '../utils/axios';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 import '../assets/styles/pages/StudentProfile.scss';
 
 function StudentProfile(props){
-    const dispatch = useDispatch();
+    const MySwal = withReactContent(Swal);
     const state = useSelector(state => state.currentUser)
+    const token = useSelector(state => state.token)
     const [isDisabled, setIsDisabled] = useState({
+        name: true,
         email: true,
         password: true,
         submit: true
     })
     const [inputs, setInputs] = useState({
-        email: state.email,
+        name: '',
+        email: '',
         password: ''
     })
     const [errors, setErrors] = useState({
+        name: null,
         email: null,
         password: null,
         visible: false
     })
+    const [image, setImage] = useState(null);
 
 
     useEffect(() => {
-        if(inputs.email !== state.email || inputs.password !== null){
+        if(inputs.name !== '' || inputs.email !== '' || inputs.password !== ''){
             setIsDisabled(prevState => ({...prevState, submit: false}))
         } else {
             setIsDisabled(prevState => ({...prevState, submit: true}))
@@ -41,12 +48,28 @@ function StudentProfile(props){
             setIsDisabled(prevState => ({...prevState, email: !prevState.email}))
         } else if(buttonClass.match(/password/)){
             setIsDisabled(prevState => ({...prevState, password: !prevState.password}))
+        } else if(buttonClass.match(/name/)){
+            setIsDisabled(prevState => ({...prevState, name: !prevState.name}))
         }
     }
 
-    const validateInputs = (email, password) => {
+    const validateInputs = (name, email, password) => {
+        console.log(name);
+        if(name && (name.length < 4 || name.match(/[0-9]/))) {
+            setErrors((prevState) => ({
+                ...prevState,
+                name: "Invalid name, the name must be at least 4 characters in length and contain only letters"
+            }));
+            return false;
+            
+        } else {
+            setErrors((prevState) => ({
+                ...prevState,
+                name: undefined
+            }));
+        }
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (re.test(String(email).toLowerCase())) {
+        if (!email || re.test(String(email).toLowerCase())) {
         setErrors((prevState) => ({
             ...prevState,
             email: undefined
@@ -74,10 +97,14 @@ function StudentProfile(props){
         return true;
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        if(validateInputs(inputs.email, inputs.password)){
-            dispatch(updateStudentProfile(inputs));
+        const formData = new FormData();
+        if(image){
+            formData.append("image", image);
+        }
+        if(validateInputs(inputs.name, inputs.email, inputs.password)){
+            updateStudentProfile(inputs, formData, token);
         }
     }
 
@@ -85,21 +112,53 @@ function StudentProfile(props){
         setInputs(prevState => ({...prevState, [e.target.name]: e.target.value}))
     }
 
+    const handleUpload = async e => {
+        setImage(e.target.files[0]);
+        setIsDisabled(prevState => ({ ...prevState, submit: false }))
+    }
+
+    const updateStudentProfile = async (inputs, formData, token) => {
+        try {
+            const { data: url } = await axios.patch('/uploadProfileImage', formData);
+            const response = await axios.patch('/update', {formData, inputs, url, token, type: "student"});
+            localStorage.setItem("token", response.data);
+            MySwal.fire({
+                icon: 'success',
+                title: <p className="swal__tittle">Your data was updated successfully!</p>,
+                confirmButtonColor: '#0de26f',
+            })
+            .then(() => {
+                history.go(0);
+            })
+        } catch (error) {
+            setErrors(prevState => ({...prevState, email: "Email is taken, please use a different email"}))
+        }
+    }
+
     return(
-        <>
+        <div className="student-profile-container">
             <section className="student-profile__menu-container">
                     <StudentProfileMenu />
             </section>
             <main className="student-profile-main">
-                
                 <section className="student-profile__photo-container">
-                    <img className="student-profile__photo" src={state.profile_photo} alt={state.name} />
+                    <img className="student-profile__photo" src={image ? URL.createObjectURL(image) : state.profile_photo} alt={state.name} />
                     <label htmlFor="student-profile__photo__input" className="student-profile__photo__button">
                         Upload photo
                     </label>
-                    <input id="student-profile__photo__input" className="student-profile__photo__input" type="file" accept="image/png, image/jpeg" />
+                    <input onChange={handleUpload} id="student-profile__photo__input" className="student-profile__photo__input" type="file" accept="image/png, image/jpeg" />
                 </section>
                 <section className="student-profile__credentials">
+
+                    <div className="student-profile__credentials__name-container">
+                        <label className="student-profile__credentials__name-label" htmlFor="student-profile__credentials__name-input">Name</label>
+                        <div className="student-profile__credentials__name-input-container">
+                            <input onChange={handleChange} name="name" disabled={isDisabled.name} placeholder="name" id="student-profile__credentials__name-input" className="student-profile__credentials__name-input" defaultValue={state.name} type="name" />
+                            <button onClick={handleClick} className="student-profile__credentials__name-input-button" type="button"><FontAwesomeIcon icon={faPencilAlt} /></button>
+                        </div>
+                        <span className="student-profile__error-message">{errors.name}</span>
+                    </div>
+
                     <div className="student-profile__credentials__email-container">
                         <label className="student-profile__credentials__email-label" htmlFor="student-profile__credentials__email-input">Email</label>
                         <div className="student-profile__credentials__email-input-container">
@@ -117,12 +176,13 @@ function StudentProfile(props){
                         </div>
                         <span className="student-profile__error-message">{errors.password}</span>
                     </div>
+                    <div className="student-profile__credentials__submit-button-container">
+                        <button disabled={isDisabled.submit} onClick={handleSubmit} className={`student-profile__submit-button ${isDisabled.submit && "disabled"}`} type="submit">Submit changes</button>
+                    </div>
                 </section>
-                <div className="student-profile__credentials__submit-button-container">
-                    <button disabled={isDisabled.submit} onClick={handleSubmit} className={`student-profile__submit-button ${isDisabled.submit && "disabled"}`} type="submit">Submit changes</button>
-                </div>
+                
             </main>
-        </>
+        </div>
     )
 }
 

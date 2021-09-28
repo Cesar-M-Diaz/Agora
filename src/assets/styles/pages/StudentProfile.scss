@@ -28,6 +28,10 @@ $color-b-dark: #0b753d;
     box-shadow: 0 0 0 1px black;
     border-radius: 20px;
     margin: 20px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+
 }
 
 .student-profile__photo__input{
@@ -77,22 +81,23 @@ $color-b-dark: #0b753d;
     flex-direction: column;
 }
 
-.student-profile__credentials__email-container, .student-profile__credentials__password-container{
+.student-profile__credentials__name-container, .student-profile__credentials__email-container, .student-profile__credentials__password-container{
     display: flex;
     flex-direction: column;
     margin: 20px;
 }
 
-.student-profile__credentials__email-label, .student-profile__credentials__password-label{
+.student-profile__credentials__name-label, .student-profile__credentials__email-label, .student-profile__credentials__password-label{
     font-size: 1.4rem;
     margin-bottom: 10px;
+    font-family: open sans;
 }
 
-.student-profile__credentials__email-input-container, .student-profile__credentials__password-input-container{
+.student-profile__credentials__name-input-container, .student-profile__credentials__email-input-container, .student-profile__credentials__password-input-container{
     display: flex;
 }
 
-.student-profile__credentials__email-input, .student-profile__credentials__password-input{
+.student-profile__credentials__name-input, .student-profile__credentials__email-input, .student-profile__credentials__password-input{
     height: 40px;
     font-size: 1.2rem;
     padding: 0 2px;
@@ -100,21 +105,21 @@ $color-b-dark: #0b753d;
     width: 90%;
 }
 
-.student-profile__credentials__email-input-button, .student-profile__credentials__password-input-button{
+.student-profile__credentials__name-input-button, .student-profile__credentials__email-input-button, .student-profile__credentials__password-input-button{
     width: 10%;
     background: none;
     border: none;
 }
 
-.student-profile__credentials__email-input-button:hover, .student-profile__credentials__password-input-button:hover{
+.student-profile__credentials__name-input-button:hover, .student-profile__credentials__email-input-button:hover, .student-profile__credentials__password-input-button:hover{
     cursor: pointer;
 }
 
-.student-profile__credentials__email-input-button:focus, .student-profile__credentials__password-input-button:focus{
+.student-profile__credentials__name-input-button:focus, .student-profile__credentials__email-input-button:focus, .student-profile__credentials__password-input-button:focus{
     outline: none;
 }
 
-.student-profile__credentials__email-input-button > svg, .student-profile__credentials__password-input-button > svg {
+.student-profile__credentials__name-input-button > svg, .student-profile__credentials__email-input-button > svg, .student-profile__credentials__password-input-button > svg {
     font-size: 1.5rem;
     margin-left: 5px;
 }
@@ -154,4 +159,59 @@ $color-b-dark: #0b753d;
 .student-profile__error-message{
     color: red;
     margin-top: 5px;
+}
+
+.student-profile-menu.md{
+    display: none;
+}
+
+.student-profile-menu-list{
+    list-style: none;
+}
+
+.student-profile-menu-item{
+    width: 15vw;
+    padding: 12px 10px;
+    border: 1px solid $color-b;
+    font-size: 1.5rem;
+    color: $color-b;
+    font-family: Source Code Pro;
+    margin-top: 15px;
+    user-select: none;
+    cursor: pointer
+}
+
+.student-profile-menu-item:hover{
+    color: $secondary-color;
+    background-color: $color-b;
+}
+
+.student-profile-menu-item.selected{
+    color: $secondary-color;
+    background-color: $color-b-dark;
+    border-color: $color-b-dark;
+}
+
+@media screen and(min-width: 992px) {
+    .student-profile-container{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .student-profile-main{
+        width: 50vw;
+        margin: 10px auto;
+        flex-direction: row-reverse;
+    }
+
+    .student-profile__credentials{
+        width: 50%;
+    }
+
+    .student-profile-menu-select.sm{
+        display: none;
+    }
+    .student-profile-menu.md{
+        display: block;
+    }
 }

@@ -9,6 +9,5 @@ export const AUTHORIZED = 'authorized';
 export const UNAUTHORIZED = 'unauthorized';
 export const TOKEN = 'token';
 export const LOADING = 'loading';
-export const UPDATE_STUDENT_PROFILE = 'UPDATE_STUDENT_PROFILE';
 
 // export const ERROR = 'ERROR';
