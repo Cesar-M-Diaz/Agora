@@ -14,6 +14,8 @@ import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
 import ProfileRouteComponent from './utils/ProfileRouteComponent';
+import ScrollToTop from './utils/ScrollToTop';
+
 
 function App() {
   const token = useSelector((state) => state.token);
@@ -29,6 +31,7 @@ function App() {
 
   return (
     <Router history={history}>
+      <ScrollToTop />
       <Layout>
         <Switch>
           <PrivateRoute exact path="/home" component={HomePage} />
