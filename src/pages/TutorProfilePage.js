@@ -14,6 +14,14 @@ function TutorProfilePage() {
   const [previewPhoto, setPreviewPhoto] = useState('');
   const [image, setImage] = useState('');
   const [profileMode, setProfileMode] = useState('view');
+  const [previewDAta, setPreviewData] = useState({
+    inputs: {
+      name: '',
+      email: '',
+      password: '',
+      description: '',
+    },
+  });
   const [userData, setUserData] = useState({
     inputs: {
       name: '',
@@ -31,7 +39,7 @@ function TutorProfilePage() {
   });
 
   useEffect(() => {
-    setUserData((state) => ({
+    setPreviewData((state) => ({
       ...state,
       inputs: {
         ...state.inputs,
@@ -61,8 +69,15 @@ function TutorProfilePage() {
   function cancelEdit(e) {
     e.preventDefault();
     setProfileMode('view');
+    setPreviewPhoto(globalUser.profile_photo);
     setUserData((state) => ({
       ...state,
+      inputs: {
+        name: '',
+        email: '',
+        password: '',
+        description: '',
+      },
       errors: { name: '', email: '', password: '' },
     }));
   }
@@ -224,7 +239,8 @@ function TutorProfilePage() {
               onBlur={validateInput}
               type="text"
               name="name"
-              defaultValue={userData.inputs.name}
+              value={userData.inputs.name}
+              placeholder={previewDAta.inputs.name}
               onChange={handleChange}
               disabled={profileMode === 'view'}
             />
@@ -234,9 +250,10 @@ function TutorProfilePage() {
             <label>Email</label>
             <input
               onBlur={validateInput}
+              value={userData.inputs.email}
               type="text"
               name="email"
-              defaultValue={userData.inputs.email}
+              placeholder={previewDAta.inputs.email}
               onChange={handleChange}
               disabled={profileMode === 'view'}
             />
@@ -246,6 +263,7 @@ function TutorProfilePage() {
             <label>Password</label>
             <input
               onBlur={validateInput}
+              value={userData.inputs.password}
               type="password"
               name="password"
               placeholder="type new password"
@@ -259,9 +277,11 @@ function TutorProfilePage() {
           <div className="tutor-edit__form-slot">
             <label>Description</label>
             <textarea
+              id="form"
               name="description"
-              defaultValue={userData.inputs.description}
+              placeholder={previewDAta.inputs.description}
               onChange={handleChange}
+              value={userData.inputs.description}
               cols="30"
               rows="10"
               className="tutor-edit__form-description"
