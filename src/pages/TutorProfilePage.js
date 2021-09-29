@@ -221,7 +221,14 @@ function TutorProfilePage() {
       <div className="tutor-edit__profile-body">
         <div className="tutor-edit__photo-container">
           <img src={previewPhoto} className="tutor-edit__photo" alt="user" />
-          <label htmlFor="upload" className="tutor-edit__button-photo">
+          <label
+            htmlFor="upload"
+            className={
+              profileMode === 'edit'
+                ? 'tutor-edit__button-photo'
+                : 'tutor-edit__button-photo-disabled'
+            }
+          >
             upload photo
           </label>
           <input

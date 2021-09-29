@@ -72,6 +72,21 @@ $warning-color: rgb(235, 99, 99);
   }
 }
 
+.tutor-edit__button-photo-disabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans';
+  background-color: white;
+  color: $subtitle-color;
+  border: $border-width solid $subtitle-color;
+  height: 40px;
+  margin-bottom: 55px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  width: 130px;
+}
+
 .tutor-edit__form {
   width: 100%;
   display: flex;
@@ -243,6 +258,15 @@ $warning-color: rgb(235, 99, 99);
   }
 
   .tutor-edit__button-photo {
+    margin-left: 30px;
+    font-weight: 700;
+    height: 40px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    width: 180px;
+  }
+
+  .tutor-edit__button-photo-disabled {
     margin-left: 30px;
     font-weight: 700;
     height: 40px;
