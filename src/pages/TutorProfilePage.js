@@ -1,85 +1,293 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import axios from '../utils/axios';
+import { useSelector } from 'react-redux';
 import TutorDashboard from '../components/TutorDashboard';
 import '../assets/styles/pages/TutorEditProfile.scss';
+import history from '../utils/history';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 function TutorProfilePage() {
+  const MySwal = withReactContent(Swal);
   const globalUser = useSelector((state) => state.currentUser);
-  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token);
+  const [previewPhoto, setPreviewPhoto] = useState('');
+  const [image, setImage] = useState('');
+  const [profileMode, setProfileMode] = useState('view');
   const [userData, setUserData] = useState({
-    tutor: {
+    inputs: {
+      name: '',
       email: '',
       password: '',
       description: '',
     },
+    errors: {
+      name: '',
+      email: '',
+      password: '',
+    },
+    isValid: { name: true, password: true, email: true },
+    enableUpload: true,
   });
 
   useEffect(() => {
-    console.log('render');
-  }, [globalUser, dispatch]);
-
-  function onSubmit(e) {
-    e.preventDefault();
-    const { tutor } = userData;
-    console.log(tutor);
-    // dispatch();
-  }
+    setUserData((state) => ({
+      ...state,
+      inputs: {
+        ...state.inputs,
+        name: globalUser.name,
+        email: globalUser.email,
+        description: globalUser.description,
+      },
+    }));
+    setPreviewPhoto(globalUser.profile_photo);
+  }, [globalUser]);
 
   function handleChange(e) {
-    setUserData((userData) => ({
-      tutor: {
-        ...userData.tutor,
+    setUserData((state) => ({
+      ...state,
+      inputs: {
+        ...state.inputs,
         [e.target.name]: e.target.value,
       },
     }));
   }
+
+  function enableEditMode(e) {
+    e.preventDefault();
+    setProfileMode('edit');
+  }
+
+  function cancelEdit(e) {
+    e.preventDefault();
+    setProfileMode('view');
+    setUserData((state) => ({
+      ...state,
+      errors: { name: '', email: '', password: '' },
+    }));
+  }
+
+  function validateInput(e) {
+    const input = e.target.name;
+    const value = e.target.value;
+    if (input === 'name') {
+      const re = /^[a-zA-Z\s]*$/;
+      if (value.length < 4) {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            name: 'Name is too short',
+          },
+          isValid: { ...state.isValid, name: false },
+          enableUpload: false,
+        }));
+      } else if (!re.test(String(e.target.value).toLowerCase())) {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            name: 'Name must only contain letters',
+          },
+          isValid: { ...state.isValid, name: false },
+          enableUpload: false,
+        }));
+      } else {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            name: '',
+          },
+          isValid: { ...state.isValid, name: true },
+          enableUpload: state.isValid.password && state.isValid.email,
+        }));
+      }
+    }
+    if (input === 'email') {
+      const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(String(value).toLowerCase())) {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            email: 'Invalid email, please enter a valid email',
+          },
+          isValid: { ...state.isValid, email: false },
+          enableUpload: false,
+        }));
+      } else {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            email: '',
+          },
+          isValid: { ...state.isValid, email: true },
+          enableUpload: state.isValid.name && state.isValid.password,
+        }));
+      }
+    }
+    if (input === 'password') {
+      if (value.length < 4 || value.length === null) {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            password: 'Password is too short',
+          },
+          isValid: { ...state.isValid, password: false },
+          enableUpload: false,
+        }));
+      } else {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            password: '',
+          },
+          isValid: { ...state.isValid, password: true },
+          enableUpload: state.isValid.name && state.isValid.email,
+        }));
+      }
+    }
+  }
+
+  function onChangeFile(e) {
+    setPreviewPhoto(URL.createObjectURL(e.target.files[0]));
+    setImage(e.target.files[0]);
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    if (image) {
+      console.log(image);
+      formData.append('image', image);
+    }
+    updateStudentProfile(userData.inputs, formData, token);
+  };
+
+  const updateStudentProfile = async (inputs, formData, token) => {
+    try {
+      const { data: url } = await axios.patch('/uploadProfileImage', formData);
+      const response = await axios.patch('/update', {
+        formData,
+        inputs,
+        url,
+        token,
+        type: 'tutor',
+      });
+      localStorage.setItem('token', response.data);
+      MySwal.fire({
+        icon: 'success',
+        title: (
+          <p className="swal__tittle">Your data was updated successfully!</p>
+        ),
+        confirmButtonColor: '#0de26f',
+      }).then(() => {
+        history.go(0);
+      });
+    } catch (error) {
+      userData((state) => ({
+        ...state,
+        errors: {
+          ...state.errors,
+          email: 'Email is taken, please use a different email',
+        },
+      }));
+    }
+  };
 
   return (
     <div className="tutor-edit__body">
       <TutorDashboard />
       <div className="tutor-edit__profile-body">
         <div className="tutor-edit__photo-container">
-          <img src={globalUser.profile_photo} className="tutor-edit__photo" />
-          <button className="tutor-edit__button-photo">upload photo</button>
+          <img src={previewPhoto} className="tutor-edit__photo" alt="user" />
+          <label htmlFor="upload" className="tutor-edit__button-photo">
+            upload photo
+          </label>
+          <input type="file" id="upload" onChange={onChangeFile} hidden />
         </div>
         <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
           <div className="tutor-edit__form-slot">
+            <label>Name</label>
+            <input
+              onBlur={validateInput}
+              type="text"
+              name="name"
+              defaultValue={userData.inputs.name}
+              onChange={handleChange}
+              disabled={profileMode === 'view'}
+            />
+            <span className="tutor-edit__errors">{userData.errors.name}</span>
+          </div>
+          <div className="tutor-edit__form-slot">
             <label>Email</label>
             <input
+              onBlur={validateInput}
               type="text"
               name="email"
-              className=""
-              defaultValue={globalUser.email}
+              defaultValue={userData.inputs.email}
               onChange={handleChange}
+              disabled={profileMode === 'view'}
             />
+            <span className="tutor-edit__errors">{userData.errors.email}</span>
           </div>
           <div className="tutor-edit__form-slot">
             <label>Password</label>
             <input
-              type="text"
+              onBlur={validateInput}
+              type="password"
               name="password"
-              className=""
               placeholder="type new password"
               onChange={handleChange}
+              disabled={profileMode === 'view'}
             />
+            <span className="tutor-edit__errors">
+              {userData.errors.password}
+            </span>
           </div>
           <div className="tutor-edit__form-slot">
             <label>Description</label>
             <textarea
               name="description"
-              defaultValue={globalUser.description}
+              defaultValue={userData.inputs.description}
               onChange={handleChange}
-              id=""
               cols="30"
               rows="10"
               className="tutor-edit__form-description"
+              disabled={profileMode === 'view'}
             ></textarea>
           </div>
-          <input
-            type="submit"
-            value="save changes"
-            className="tutor-edit__button-submit"
-          />
+          {profileMode !== 'edit' && (
+            <button
+              className="tutor-edit__button-edit"
+              onClick={enableEditMode}
+            >
+              Edit Profile
+            </button>
+          )}
+          {profileMode !== 'view' && (
+            <div className="tutor-edit__button-container">
+              <input
+                type="submit"
+                value="save changes"
+                className={`tutor-edit__button-submit ${
+                  !userData.enableUpload && 'disabled'
+                }`}
+                disabled={!userData.enableUpload}
+              />
+              <button
+                className="tutor-edit__button-cancel"
+                onClick={cancelEdit}
+              >
+                cancel
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </div>

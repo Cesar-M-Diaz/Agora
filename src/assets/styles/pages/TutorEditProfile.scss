@@ -9,6 +9,7 @@ $font-weight: 400;
 $font-selected-weight: 800;
 $border-width: 2px;
 $spacing: 30px;
+$warning-color: rgb(235, 99, 99);
 
 * {
   margin: 0;
@@ -47,17 +48,18 @@ $spacing: 30px;
 }
 
 .tutor-edit__button-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Open Sans';
-  font-weight: 700;
   background-color: white;
   color: $color-a;
   border: $border-width solid $color-a;
-  text-align: center;
-  height: 30px;
+  height: 40px;
   margin-bottom: 55px;
-  font-size: 0.75rem;
-  font-weight: $font-weight;
-  width: 110px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  width: 130px;
   &:hover {
     background-color: $color-a;
     color: white;
@@ -107,24 +109,76 @@ $spacing: 30px;
     padding: 10px 10px;
     margin: 20px 0px;
   }
+  .tutor-edit__errors {
+    color: $warning-color;
+    margin-bottom: 20px;
+  }
+}
+
+.tutor-edit__button-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: 'Source Code Pro', monospace;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .tutor-edit__button-submit {
-  font-family: 'Source Code Pro', monospace;
-  letter-spacing: 1px;
   background-color: white;
   color: $color-b;
   border: $border-width solid $color-b;
-  text-align: center;
   height: 40px;
-  margin: 35px 0px;
+  margin: 35px 0px 15px 0px;
+  width: 100%;
   font-size: 1rem;
   font-weight: $font-selected-weight;
-  width: 100%;
-  &:hover {
+  letter-spacing: 1px;
+  &:hover:enabled {
     background-color: $color-b;
     color: white;
     border: $border-width solid $color-b;
+    cursor: pointer;
+  }
+  &:disabled {
+    color: $subtitle-color;
+    border: $border-width solid $subtitle-color;
+  }
+}
+
+.tutor-edit__button-edit {
+  background-color: white;
+  color: $color-b;
+  border: $border-width solid $color-b;
+  height: 40px;
+  margin: 35px 0px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: $font-selected-weight;
+  letter-spacing: 1px;
+  &:hover:enabled {
+    background-color: $color-b;
+    color: white;
+    border: $border-width solid $color-b;
+    cursor: pointer;
+  }
+}
+
+.tutor-edit__button-cancel {
+  font-family: 'Source Code Pro', monospace;
+  letter-spacing: 1px;
+  background-color: white;
+  color: $warning-color;
+  border: $border-width solid $warning-color;
+  text-align: center;
+  height: 40px;
+  font-size: 1rem;
+  font-weight: $font-selected-weight;
+  width: 100%;
+  &:hover:enabled {
+    background-color: $warning-color;
+    color: white;
+    border: $border-width solid $warning-color;
     cursor: pointer;
   }
 }
@@ -133,28 +187,100 @@ $spacing: 30px;
   .tutor-dashboard__body {
     width: 30%;
     margin-right: 30px;
+    margin-bottom: 50px;
+    position: sticky;
+    top: 150px;
   }
 
   .tutor-dashboard__button {
     display: initial;
+    font-size: 0.9rem;
   }
 
   .tutor-dashboard__selector {
     display: none;
   }
+
   .tutor-edit__body {
+    width: 930px;
     flex-direction: row;
     align-items: flex-start;
-    margin: 80px 30px 30px 30px;
+    justify-content: center;
+    margin: 50px auto 30px auto;
   }
 
   .tutor-edit__profile-body {
     font-family: 'Open Sans';
     box-sizing: border-box;
+    display: flex;
+    flex-direction: row-reverse;
     padding: 30px;
     width: 100%;
     background-color: white;
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
     margin-bottom: 50px;
+  }
+
+  .tutor-edit__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tutor-edit__photo-container {
+    width: 50%;
+  }
+
+  .tutor-edit__photo {
+    width: 200px;
+    height: 200px;
+    margin: 20px 0px 20px 30px;
+  }
+
+  .tutor-edit__button-photo {
+    margin-left: 30px;
+    font-weight: 700;
+    height: 40px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    width: 180px;
+  }
+
+  .tutor-edit__button-container {
+    flex-direction: row;
+    margin-bottom: 0px;
+  }
+
+  .tutor-edit__button-submit {
+    margin: 35px 0px;
+    width: 80%;
+  }
+
+  .tutor-edit__button-cancel {
+    margin: 35px 0px 10px 10px;
+    width: 20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tutor-edit__body {
+    width: 1130px;
+  }
+
+  .tutor-dashboard__body {
+    width: 27%;
+    position: sticky;
+    top: 191px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .tutor-edit__body {
+    width: 1330px;
+  }
+
+  .tutor-dashboard__body {
+    width: 25%;
   }
 }
