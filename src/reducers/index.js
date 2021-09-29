@@ -21,6 +21,7 @@ const initialState = {
     email: null,
     focus: null,
     description: null,
+    availability: null,
   },
   login_failed: false,
   auth_status: LOADING,

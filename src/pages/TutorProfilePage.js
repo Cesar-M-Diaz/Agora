@@ -20,6 +20,7 @@ function TutorProfilePage() {
       email: '',
       password: '',
       description: '',
+      availability: '',
     },
   });
   const [userData, setUserData] = useState({
@@ -28,13 +29,15 @@ function TutorProfilePage() {
       email: '',
       password: '',
       description: '',
+      availability: '',
     },
     errors: {
       name: '',
       email: '',
       password: '',
+      availability: '',
     },
-    isValid: { name: true, password: true, email: true },
+    isValid: { name: true, password: true, email: true, availability: true },
     enableUpload: true,
   });
 
@@ -46,6 +49,7 @@ function TutorProfilePage() {
         name: globalUser.name,
         email: globalUser.email,
         description: globalUser.description,
+        availability: globalUser.availability,
       },
     }));
     setPreviewPhoto(globalUser.profile_photo);
@@ -70,16 +74,18 @@ function TutorProfilePage() {
     e.preventDefault();
     setProfileMode('view');
     setPreviewPhoto(globalUser.profile_photo);
-    setUserData((state) => ({
-      ...state,
+    setUserData({
       inputs: {
         name: '',
         email: '',
         password: '',
         description: '',
+        availability: '',
       },
-      errors: { name: '', email: '', password: '' },
-    }));
+      errors: { name: '', email: '', password: '', availability: '' },
+      isValid: { name: true, password: true, email: true, availability: true },
+      enableUpload: true,
+    });
   }
 
   function validateInput(e) {
@@ -115,7 +121,10 @@ function TutorProfilePage() {
             name: '',
           },
           isValid: { ...state.isValid, name: true },
-          enableUpload: state.isValid.password && state.isValid.email,
+          enableUpload:
+            state.isValid.password &&
+            state.isValid.email &&
+            state.isValid.availability,
         }));
       }
     }
@@ -140,7 +149,10 @@ function TutorProfilePage() {
             email: '',
           },
           isValid: { ...state.isValid, email: true },
-          enableUpload: state.isValid.name && state.isValid.password,
+          enableUpload:
+            state.isValid.name &&
+            state.isValid.password &&
+            state.isValid.availability,
         }));
       }
     }
@@ -163,7 +175,35 @@ function TutorProfilePage() {
             password: '',
           },
           isValid: { ...state.isValid, password: true },
-          enableUpload: state.isValid.name && state.isValid.email,
+          enableUpload:
+            state.isValid.name &&
+            state.isValid.email &&
+            state.isValid.availability,
+        }));
+      }
+    }
+    if (input === 'availability') {
+      if (!value.includes('from:') && !value.includes('to:')) {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            availability:
+              'Invalid format, please type from: (day) and to: (day), from: (hour) and to: (hour)',
+          },
+          isValid: { ...state.isValid, availability: false },
+          enableUpload: false,
+        }));
+      } else {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            availability: '',
+          },
+          isValid: { ...state.isValid, availability: true },
+          enableUpload:
+            state.isValid.name && state.isValid.password && state.isValid.email,
         }));
       }
     }
@@ -280,6 +320,21 @@ function TutorProfilePage() {
             <span className="tutor-edit__errors">
               {userData.errors.password}
             </span>
+            <div className="tutor-edit__form-slot">
+              <label>Schedule</label>
+              <input
+                onBlur={validateInput}
+                value={userData.inputs.availability}
+                type="text"
+                name="availability"
+                placeholder="example / from: mondays to: fridays, from: 10am to: 4pm "
+                onChange={handleChange}
+                disabled={profileMode === 'view'}
+              />
+              <span className="tutor-edit__errors">
+                {userData.errors.availability}
+              </span>
+            </div>
           </div>
           <div className="tutor-edit__form-slot">
             <label>Description</label>
