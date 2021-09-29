@@ -51,7 +51,15 @@ function Header() {
     }));
   };
 
+  const profileTooltipCollapse = () => {
+    setState((prevState) => ({
+      ...prevState,
+      isProfileTooltipCollapsed: !prevState.isProfileTooltipCollapsed,
+    }))
+  }
+
   const SignOut = () => {
+    profileTooltipCollapse()
     setState((prevState) => ({
       ...prevState,
       isMenuCollapsed: true,
@@ -122,7 +130,7 @@ function Header() {
               </span>
             </div>
             <div className="mobile-menu__buttons">
-              <Link to="/" className="mobile-menu__profile-button">
+              <Link to="/" className="mobile-menu__profile-button" onClick={toggleMenuCollapse} >
                 Profile
               </Link>
               <Link
@@ -159,15 +167,14 @@ function Header() {
       {!!globalState.token ? (
         <div className="header__profile-photo-container">
           <img
-            onClick={() =>
-              setState((prevState) => ({
-                ...prevState,
-                isProfileTooltipCollapsed: !prevState.isProfileTooltipCollapsed,
-              }))
-            }
+            onClick={profileTooltipCollapse}
+            onBlur={() => { setTimeout(() => {
+              !state.isProfileTooltipCollapsed && profileTooltipCollapse()
+            }, 100)}}
             className="header__profile-photo"
             src={globalState.currentUser.profile_photo}
             alt="Profile"
+            tabIndex="1"
           />
           <div
             className={`header__profile-tooltip ${
