@@ -166,10 +166,10 @@ function TutorProfilePage() {
       console.log(image);
       formData.append('image', image);
     }
-    updateStudentProfile(userData.inputs, formData, token);
+    updateTutorProfile(userData.inputs, formData, token);
   };
 
-  const updateStudentProfile = async (inputs, formData, token) => {
+  const updateTutorProfile = async (inputs, formData, token) => {
     try {
       const { data: url } = await axios.patch('/uploadProfileImage', formData);
       const response = await axios.patch('/update', {
