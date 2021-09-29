@@ -12,8 +12,10 @@ import { useEffect } from 'react';
 import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
+import { SearchPage } from './pages/searchPage';
 import { AUTH_FAILED } from './actions/constants';
 import ScrollToTop from './utils/ScrollToTop';
+
 
 function App() {
   const token = useSelector((state) => state.token);
@@ -36,6 +38,7 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
           <Route exact path="/tutor" component={TutorDetailsPage} />
           <Route path="*" component={errorPage} />
