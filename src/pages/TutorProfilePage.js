@@ -190,7 +190,7 @@ function TutorProfilePage() {
         history.go(0);
       });
     } catch (error) {
-      userData((state) => ({
+      setUserData((state) => ({
         ...state,
         errors: {
           ...state.errors,
@@ -209,7 +209,13 @@ function TutorProfilePage() {
           <label htmlFor="upload" className="tutor-edit__button-photo">
             upload photo
           </label>
-          <input type="file" id="upload" onChange={onChangeFile} hidden />
+          <input
+            type="file"
+            id="upload"
+            onChange={onChangeFile}
+            hidden
+            disabled={profileMode === 'view'}
+          />
         </div>
         <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
           <div className="tutor-edit__form-slot">

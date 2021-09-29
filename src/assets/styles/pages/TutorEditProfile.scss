@@ -66,6 +66,10 @@ $warning-color: rgb(235, 99, 99);
     border: $border-width solid $color-a;
     cursor: pointer;
   }
+  &:disabled {
+    color: $subtitle-color;
+    border: $border-width solid $subtitle-color;
+  }
 }
 
 .tutor-edit__form {
