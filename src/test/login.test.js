@@ -48,7 +48,6 @@ test('allows user to login', async () => {
     target: { name: 'password', value: 'example' },
   });
 
-  // fireEvent.blur(screen.getByTestId('email'))
   fireEvent.blur(screen.getByTestId('password'));
 
   const spy = jest.spyOn(history, 'push');
