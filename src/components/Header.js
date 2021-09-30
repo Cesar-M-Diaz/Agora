@@ -179,6 +179,7 @@ function Header() {
             to="/login"
             className="button-container__signin-button"
             type="button"
+            data-testid="sign-in-button"
           >
             Sign in
           </Link>
@@ -186,6 +187,7 @@ function Header() {
             to="/register"
             className="button-container__register-button"
             type="button"
+            data-testid="register-button"
           >
             Register
           </Link>

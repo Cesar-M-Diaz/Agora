@@ -16,7 +16,7 @@ import { AUTH_FAILED } from './actions/constants';
 import ScrollToTop from './utils/ScrollToTop';
 
 function App() {
-  const token = useSelector((state) => state.token);
+  const token = useSelector(state => state.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Router history={history}>
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <Layout>
         <Switch>
           <PrivateRoute exact path="/home" component={HomePage} />

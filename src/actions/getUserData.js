@@ -6,10 +6,11 @@ function getUserData(token) {
     try {
       const response = await axios.get('/login', { params: { token } });
       const { name, profile_photo, email, focus } = response.data.userData;
+      console.log('getUserData ANTES DEL DISPATCH')
       const { type } = response.data;
       dispatch({
         type: GET_USER_DATA,
-        payload: { name, type, profile_photo, email, focus },
+        payload: { name, type, profile_photo, email, focus, token },
       });
     } catch (err) {
       dispatch({
