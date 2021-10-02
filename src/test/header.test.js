@@ -4,8 +4,6 @@ import { MemoryRouter } from 'react-router';
 import { Router } from 'react-router';
 import Header from '../components/Header';
 import history from '../utils/history';
-import App from '../App';
-import axios from '../utils/axios';
 import createStore from '../store';
 
 jest.mock('../utils/axios');
