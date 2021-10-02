@@ -9,6 +9,7 @@ import axios from '../utils/axios';
 import createStore from '../store';
 
 jest.mock('../utils/axios');
+window.scrollTo = jest.fn();
 
 let store;
 beforeEach(() => {
@@ -67,9 +68,65 @@ describe('Header', () => {
         )
 
         const spy = jest.spyOn(history, 'push')
-        await waitFor(() => screen.getByTestId(/sign-in-button/i));
+        // await waitFor(() => screen.getByTestId(/sign-in-button/i));
         fireEvent.click(screen.getByTestId(/sign-in-button/i))
         await waitFor(() => expect(spy).toHaveBeenCalledWith("/login"))
         
+    })
+    test('Clicking Register button redirects to Register page', async () => {
+        render(
+            <Provider store={store}>
+                <Router history={history}>
+                    <Header />
+                </Router>
+            </Provider>
+        )
+
+        const spy = jest.spyOn(history, 'push')
+        // await waitFor(() => screen.getByTestId(/register-button/i));
+        fireEvent.click(screen.getByTestId(/register-button/i))
+        await waitFor(() => expect(spy).toHaveBeenCalledWith("/register"))
+        
+    })
+    test('Sign out button signs out', async () => {
+        localStorage.setItem("token", "fake token")
+        store.dispatch({ type: "GET_USER_DATA", payload: {token: localStorage.getItem('token')}})
+        await history.push('/home');
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                    <Header />
+                </MemoryRouter>
+            </Provider>
+        )
+        fireEvent.click(screen.getByTestId(/sign-out-button/i));
+        await waitFor(() => expect(localStorage.getItem("token")).toBeNull());
+    })
+    test('Logo image redirects to homepage if the user is logged in', async () => {
+        localStorage.setItem("token", "fake token")
+        store.dispatch({ type: "GET_USER_DATA", payload: {token: localStorage.getItem('token')}})
+        await history.push('/home');
+        render(
+            <Provider store={store}>
+                <Router history={history}>
+                    <Header />
+                </Router>
+            </Provider>
+        )
+        const spy = jest.spyOn(history, 'push')
+        fireEvent.click(screen.getByTestId(/logo-image/i))
+        await waitFor(() => expect(spy).toHaveBeenCalledWith("/home"))
+    })
+    test('Logo image redirects to landing page if the user is not logged in', async () => {
+        render(
+            <Provider store={store}>
+                <Router history={history}>
+                    <Header />
+                </Router>
+            </Provider>
+        )
+        const spy = jest.spyOn(history, 'push')
+        fireEvent.click(screen.getByTestId(/logo-image/i))
+        await waitFor(() => expect(spy).toHaveBeenCalledWith("/"))  
     })
 });

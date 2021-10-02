@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Router history={history}>
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
       <Layout>
         <Switch>
           <PrivateRoute exact path="/home" component={HomePage} />
