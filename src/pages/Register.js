@@ -3,12 +3,15 @@ import axios from '../utils/axios';
 import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { register as registerAction } from '../actions/register';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FormTutor from '../components/FormTutor';
+import { AUTHORIZED } from '../actions/constants';
+import history from '../utils/history';
 
 import '../assets/styles/pages/register.scss';
 
 function Register() {
+  const auth_status = useSelector((state) => state.auth_status);
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const [state, setState] = useState({
@@ -19,7 +22,8 @@ function Register() {
       password: '',
       profession: '',
       focus: '',
-      profile_photo: 'https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar-300x300.jpg',
+      profile_photo:
+        'https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar-300x300.jpg',
     },
     errors: {
       name: true,
@@ -32,6 +36,9 @@ function Register() {
   });
 
   useEffect(() => {
+    if (auth_status === AUTHORIZED) {
+      history.push('/home');
+    }
     axios
       .get('/categories')
       .then((response) => {
@@ -39,7 +46,7 @@ function Register() {
         setCategories(categories);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [auth_status]);
 
   function validateInputs(e) {
     const inputName = e.target.name;
@@ -63,7 +70,12 @@ function Register() {
           isValid:
             prevState.type === 'student'
               ? !(state.errors.email || state.errors.password)
-              : !(state.errors.email || state.errors.password || state.errors.profession || state.errors.focus),
+              : !(
+                  state.errors.email ||
+                  state.errors.password ||
+                  state.errors.profession ||
+                  state.errors.focus
+                ),
         }));
       } else {
         setState((prevState) => ({
@@ -85,7 +97,12 @@ function Register() {
           isValid:
             prevState.type === 'student'
               ? !(state.errors.password || state.errors.name)
-              : !(state.errors.password || state.errors.name || state.errors.profession || state.errors.focus),
+              : !(
+                  state.errors.password ||
+                  state.errors.name ||
+                  state.errors.profession ||
+                  state.errors.focus
+                ),
         }));
       } else {
         setState((prevState) => ({
@@ -117,7 +134,12 @@ function Register() {
           isValid:
             prevState.type === 'student'
               ? !(state.errors.email || state.errors.name)
-              : !(state.errors.email || state.errors.name || state.errors.profession || state.errors.focus),
+              : !(
+                  state.errors.email ||
+                  state.errors.name ||
+                  state.errors.profession ||
+                  state.errors.focus
+                ),
         }));
       }
     }
@@ -138,7 +160,12 @@ function Register() {
         setState((prevState) => ({
           ...prevState,
           errors: { ...prevState.errors, profession: '' },
-          isValid: !(state.errors.email || state.errors.password || state.errors.name || state.errors.focus),
+          isValid: !(
+            state.errors.email ||
+            state.errors.password ||
+            state.errors.name ||
+            state.errors.focus
+          ),
         }));
       } else {
         setState((prevState) => ({
@@ -158,7 +185,12 @@ function Register() {
             ...prevState.errors,
             focus: '',
           },
-          isValid: !(state.errors.email || state.errors.password || state.errors.name || state.errors.profession),
+          isValid: !(
+            state.errors.email ||
+            state.errors.password ||
+            state.errors.name ||
+            state.errors.profession
+          ),
         }));
       }
     }
@@ -199,7 +231,11 @@ function Register() {
 
         <div className="register-form__choose-role">
           <h5 className="register-form__t-s">Are you a student or a tutor?</h5>
-          <select name="type" onChange={handleTypeChange} className="register-form__dropdown">
+          <select
+            name="type"
+            onChange={handleTypeChange}
+            className="register-form__dropdown"
+          >
             <option>student</option>
             <option>tutor</option>
           </select>
@@ -207,13 +243,26 @@ function Register() {
 
         <div className="register-form__inputs">
           <FaUserAlt className="register-form__icon" />
-          <input onBlur={validateInputs} onChange={handleChange} type="text" placeholder="Name" name="name" required />
+          <input
+            onBlur={validateInputs}
+            onChange={handleChange}
+            type="text"
+            placeholder="Name"
+            name="name"
+            required
+          />
         </div>
         <span className="register-form__errors">{state.errors.name}</span>
 
         <div className="register-form__inputs">
           <FaEnvelope className="register-form__icon" />
-          <input onBlur={validateInputs} type="text" placeholder="Email" name="email" onChange={handleChange} />
+          <input
+            onBlur={validateInputs}
+            type="text"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+          />
         </div>
         <span className="register-form__errors">{state.errors.email}</span>
 

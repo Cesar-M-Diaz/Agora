@@ -10,6 +10,7 @@ import '../assets/styles/components/Header.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import logout from '../actions/logout';
 import { AUTHORIZED } from '../actions/constants';
+import history from '../utils/history';
 
 function Header() {
   const globalState = useSelector((state) => state);
@@ -23,6 +24,7 @@ function Header() {
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, searchInput: e.target.value }));
+    // console.log(state.searchInput)
   };
 
   const toggleSearchCollapse = () => {
@@ -49,7 +51,15 @@ function Header() {
     }));
   };
 
+  const profileTooltipCollapse = () => {
+    setState((prevState) => ({
+      ...prevState,
+      isProfileTooltipCollapsed: !prevState.isProfileTooltipCollapsed,
+    }))
+  }
+
   const SignOut = () => {
+    profileTooltipCollapse()
     setState((prevState) => ({
       ...prevState,
       isMenuCollapsed: true,
@@ -57,6 +67,15 @@ function Header() {
     }));
     dispatch(logout());
   };
+
+  const search = () => {
+    history.push({
+      pathname: '/search',
+      state: state.searchInput,
+    })
+  
+
+  }
 
   return (
     <header className="header">
@@ -70,8 +89,8 @@ function Header() {
           type="text"
           placeholder="Search"
         />
-        <div className="search-container__icon-container">
-          <FontAwesomeIcon icon={faSearch} />
+        <div className="search-container__icon-container" onClick={search}>
+          <FontAwesomeIcon icon={faSearch}  />
         </div>
       </div>
 
@@ -90,8 +109,9 @@ function Header() {
           className="search-container__input"
           type="text"
           placeholder="Search"
+          
         />
-        <div className="search-container__icon-container">
+        <div className="search-container__icon-container" onClick={search}>
           <FontAwesomeIcon icon={faSearch} />
         </div>
       </div>
@@ -110,7 +130,7 @@ function Header() {
               </span>
             </div>
             <div className="mobile-menu__buttons">
-              <Link to="/profile" className="mobile-menu__profile-button">
+              <Link to="/profile" className="mobile-menu__profile-button" onClick={toggleMenuCollapse}>
                 Profile
               </Link>
               <Link
@@ -147,15 +167,14 @@ function Header() {
       {!!globalState.token ? (
         <div className="header__profile-photo-container">
           <img
-            onClick={() =>
-              setState((prevState) => ({
-                ...prevState,
-                isProfileTooltipCollapsed: !prevState.isProfileTooltipCollapsed,
-              }))
-            }
+            onClick={profileTooltipCollapse}
+            onBlur={() => { setTimeout(() => {
+              !state.isProfileTooltipCollapsed && profileTooltipCollapse()
+            }, 100)}}
             className="header__profile-photo"
             src={globalState.currentUser.profile_photo}
             alt="Profile"
+            tabIndex="1"
           />
           <div
             className={`header__profile-tooltip ${

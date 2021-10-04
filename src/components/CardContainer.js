@@ -5,8 +5,8 @@ import TutorsCard from './tutorsCard';
 function CardContainer({ Tutors }) {
   return (
     <main className="cards__container">
-      {Tutors.map((tutor) => {
-        return <TutorsCard props={tutor} />;
+      {Tutors.map((tutor, i) => {
+        return <TutorsCard props={tutor} key={i} />;
       })}
     </main>
   );
