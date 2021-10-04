@@ -50,7 +50,7 @@ const reducer = function (state = initialState, action) {
   } else if (action.type === GET_USER_DATA) {
     return {
       ...state,
-      token: action.payload.token,
+      token: localStorage.getItem(TOKEN),
       currentUser: {
         _id: action.payload._id,
         name: action.payload.name,
