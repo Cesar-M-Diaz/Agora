@@ -5,12 +5,11 @@ function getUserData(token) {
   return async function (dispatch) {
     try {
       const response = await axios.get('/login', { params: { token } });
-      const { name, profile_photo, email, focus } = response.data.userData;
-      console.log('getUserData ANTES DEL DISPATCH')
+      const { _id, name, profile_photo, email, focus, description } = response.data.userData;
       const { type } = response.data;
       dispatch({
         type: GET_USER_DATA,
-        payload: { name, type, profile_photo, email, focus, token },
+        payload: { _id, name, type, profile_photo, email, focus, description },
       });
     } catch (err) {
       dispatch({

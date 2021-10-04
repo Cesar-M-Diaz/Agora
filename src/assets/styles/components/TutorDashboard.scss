@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+
+$subtitle-color: #5b5b5b;
+$title-color: #3f3f3f;
+$color-a: #22b8d9;
+$color-b: #0de26f;
+$font-weight: 400;
+$font-selected-weight: 800;
+$spacing: 20px;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.tutor-dashboard__body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutor-dashboard__selector {
+  font-family: 'Source Code Pro', monospace;
+  letter-spacing: 1px;
+  background-color: white;
+  color: $color-b;
+  border: 2px solid $color-b;
+  text-align: left;
+  padding-left: 10px;
+  height: 54px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: $font-selected-weight;
+  width: 100%;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
+  &:hover {
+    background-color: $color-b;
+    color: white;
+    border: 2px solid $color-b;
+    cursor: pointer;
+  }
+}
+
+.tutor-dashboard__selector-element {
+  color: $title-color;
+}
+
+.tutor-dashboard__button {
+  display: none;
+  font-family: 'Source Code Pro', monospace;
+  background-color: white;
+  color: $subtitle-color;
+  border: 1px solid $subtitle-color;
+  text-align: left;
+  padding-left: 20px;
+  height: 54px;
+  margin-bottom: $spacing;
+  font-size: 1rem;
+  font-weight: $font-weight;
+  width: 100%;
+  &:hover {
+    border: 1px solid $color-b;
+    background-color: white;
+    color: $color-b;
+    cursor: pointer;
+    font-weight: $font-selected-weight;
+  }
+}
+
+.tutor-dashboard__button:focus {
+  transform: translateY(-3px);
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-b;
+  background-color: $color-b;
+  color: white;
+  cursor: pointer;
+  font-weight: $font-selected-weight;
+}

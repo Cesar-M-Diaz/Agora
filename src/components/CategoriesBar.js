@@ -4,9 +4,9 @@ import '../assets/styles/components/CategoriesBar.scss';
 function CategoriesBar({ Categories , setFilter}) {
   return (
     <main className="categories__container">
-      {Categories.map((e) => {
+      {Categories.map((e, i) => {
         return (
-          <button key={e._id} className="category__button" onClick={()=>setFilter(e.subject)}>
+          <button className="category__button" key={i} onClick={()=>setFilter(e.subject)}>
             {e.subject}
           </button>
         )

@@ -15,10 +15,9 @@ function TutorDetailsPage(props) {
       try {
         const tutorData = await axios.get(`/tutor/${id}`);
         const data = tutorData.data;
+        const reviewData = tutorData.data.reviews;
         setTutor(data);
-        const reviewsData = await axios.get(`/tutor/reviews/${id}`);
-        const reviews = reviewsData.data;
-        setReviews(reviews);
+        setReviews(reviewData);
       } catch (err) {
         console.log(err);
       }
