@@ -12,10 +12,10 @@ import { useEffect } from 'react';
 import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
+import TutorProfilePage from './pages/TutorProfilePage';
 import { SearchPage } from './pages/searchPage';
 import { AUTH_FAILED } from './actions/constants';
 import ScrollToTop from './utils/ScrollToTop';
-
 
 function App() {
   const token = useSelector((state) => state.token);
@@ -40,6 +40,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
+          <Route exact path="/tutor-profile" component={TutorProfilePage} />
           <Route exact path="/tutor" component={TutorDetailsPage} />
           <Route path="*" component={errorPage} />
         </Switch>
