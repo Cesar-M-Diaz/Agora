@@ -25,6 +25,7 @@ const initialState = {
   },
   login_failed: false,
   auth_status: LOADING,
+  emailIsTaken: false
 };
 
 // Modify the reducer in order to receive the actions
