@@ -6,7 +6,9 @@ function Review({ comment, rating, studentName }) {
   const starNodes = [];
 
   for (let i = 1; i <= rating; i++) {
-    starNodes.push(<FontAwesomeIcon icon={faStar} />);
+    starNodes.push(
+      <FontAwesomeIcon icon={faStar} key={i} title="review-rating-star" />,
+    );
   }
 
   return (
