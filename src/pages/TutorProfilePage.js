@@ -280,6 +280,32 @@ function TutorProfilePage() {
           />
         </div>
         <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
+          {profileMode !== 'edit' && (
+            <button
+              className="tutor-edit__button-edit"
+              onClick={enableEditMode}
+            >
+              Edit Profile
+            </button>
+          )}
+          {profileMode !== 'view' && (
+            <div className="tutor-edit__button-container">
+              <input
+                type="submit"
+                value="save changes"
+                className={`tutor-edit__button-submit ${
+                  !userData.enableUpload && 'disabled'
+                }`}
+                disabled={!userData.enableUpload}
+              />
+              <button
+                className="tutor-edit__button-cancel"
+                onClick={cancelEdit}
+              >
+                cancel
+              </button>
+            </div>
+          )}
           <div className="tutor-edit__form-slot">
             <label>Name</label>
             <input
@@ -350,32 +376,6 @@ function TutorProfilePage() {
               disabled={profileMode === 'view'}
             ></textarea>
           </div>
-          {profileMode !== 'edit' && (
-            <button
-              className="tutor-edit__button-edit"
-              onClick={enableEditMode}
-            >
-              Edit Profile
-            </button>
-          )}
-          {profileMode !== 'view' && (
-            <div className="tutor-edit__button-container">
-              <input
-                type="submit"
-                value="save changes"
-                className={`tutor-edit__button-submit ${
-                  !userData.enableUpload && 'disabled'
-                }`}
-                disabled={!userData.enableUpload}
-              />
-              <button
-                className="tutor-edit__button-cancel"
-                onClick={cancelEdit}
-              >
-                cancel
-              </button>
-            </div>
-          )}
         </form>
       </div>
     </div>
