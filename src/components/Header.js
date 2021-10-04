@@ -79,7 +79,7 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to={globalState.auth_status === AUTHORIZED ? '/home' : '/'}>
+      <Link data-testid="logo-image" to={globalState.auth_status === AUTHORIZED ? '/home' : '/'}>
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
       <div className="header__search-container">
@@ -187,7 +187,7 @@ function Header() {
             <Link to="/profile" className="profile-tooltip__profile">
               Profile
             </Link>
-            <Link onClick={SignOut} to="/" className="profile-tooltip__signout">
+            <Link data-testid="sign-out-button" onClick={SignOut} to="/" className="profile-tooltip__signout">
               Sign out
             </Link>
           </div>
@@ -198,6 +198,7 @@ function Header() {
             to="/login"
             className="button-container__signin-button"
             type="button"
+            data-testid="sign-in-button"
           >
             Sign in
           </Link>
@@ -205,6 +206,7 @@ function Header() {
             to="/register"
             className="button-container__register-button"
             type="button"
+            data-testid="register-button"
           >
             Register
           </Link>

@@ -16,12 +16,11 @@ import history from './utils/history';
 import ProfileRouteComponent from './utils/ProfileRouteComponent';
 import TutorProfilePage from './pages/TutorProfilePage';
 import { SearchPage } from './pages/searchPage';
-import { AUTH_FAILED } from './actions/constants';
 import ScrollToTop from './utils/ScrollToTop';
 
 
 function App() {
-  const token = useSelector((state) => state.token);
+  const token = useSelector(state => state.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
