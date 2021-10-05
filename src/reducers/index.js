@@ -14,14 +14,18 @@ import {
 const initialState = {
   token: localStorage.getItem(TOKEN) || null,
   currentUser: {
+    _id: null,
     name: null,
     type: null,
     profile_photo: null,
     email: null,
     focus: null,
+    description: null,
+    availability: null,
   },
   login_failed: false,
   auth_status: LOADING,
+  emailIsTaken: false
 };
 
 // Modify the reducer in order to receive the actions
@@ -46,12 +50,15 @@ const reducer = function (state = initialState, action) {
   } else if (action.type === GET_USER_DATA) {
     return {
       ...state,
+      token: localStorage.getItem(TOKEN),
       currentUser: {
+        _id: action.payload._id,
         name: action.payload.name,
         type: action.payload.type,
         profile_photo: action.payload.profile_photo,
         email: action.payload.email,
         focus: action.payload.focus || null,
+        description: action.payload.description || null,
       },
       auth_status: AUTHORIZED,
     };
