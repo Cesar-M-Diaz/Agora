@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/components/TutorDashboard.scss';
 import history from '../utils/history';
 
 function TutorDashboard() {
+  const location = history.location.pathname;
   function handleClick(e) {
     e.preventDefault();
     history.push(`/${e.target.name}`);
@@ -24,13 +25,25 @@ function TutorDashboard() {
           Tutorships History
         </option>
       </select>
-      <button className="tutor-dashboard__button" onClick={handleClick} name="profile">
+      <button
+        className={location === '/profile' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
+        onClick={handleClick}
+        name="profile"
+      >
         Profile
       </button>
-      <button className="tutor-dashboard__button" onClick={handleClick} name="tutorship">
-        Tutorships
+      <button
+        className={location === '/create tutorship' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
+        onClick={handleClick}
+        name="create tutorship"
+      >
+        Create Tutorship
       </button>
-      <button className="tutor-dashboard__button" onClick={handleClick} name="tutorship history">
+      <button
+        className={location === '/tutorship history' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
+        onClick={handleClick}
+        name="tutorship history"
+      >
         Tutorships History
       </button>
     </main>
