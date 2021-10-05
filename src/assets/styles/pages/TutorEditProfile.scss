@@ -217,6 +217,11 @@ $warning-color: rgb(235, 99, 99);
     font-size: 0.9rem;
   }
 
+  .tutor-dashboard__button-selected {
+    display: initial;
+    font-size: 0.9rem;
+  }
+
   .tutor-dashboard__selector {
     display: none;
   }
