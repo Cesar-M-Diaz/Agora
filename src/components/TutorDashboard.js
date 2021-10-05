@@ -4,6 +4,8 @@ import history from '../utils/history';
 
 function TutorDashboard() {
   const location = history.location.pathname;
+  console.log(location);
+
   function handleClick(e) {
     e.preventDefault();
     history.push(`/${e.target.name}`);
@@ -15,15 +17,28 @@ function TutorDashboard() {
   return (
     <main className="tutor-dashboard__body">
       <select name="page selector" className="tutor-dashboard__selector" onChange={handleChange}>
-        <option className="tutor-dashboard__selector-element" value="profile">
-          Profile
+        <option>
+          {location === '/profile'
+            ? 'Profile'
+            : location === '/create tutorship'
+            ? 'Create Tutorship'
+            : 'Choose a category'}
         </option>
-        <option className="tutor-dashboard__selector-element" value="tutorship">
-          Tutorships
-        </option>
-        <option className="tutor-dashboard__selector-element" value="tutorship history">
-          Tutorships History
-        </option>
+        {location !== '/profile' && (
+          <option className="tutor-dashboard__selector-element" value="profile">
+            Profile
+          </option>
+        )}
+        {location !== '/create tutorship' && (
+          <option className="tutor-dashboard__selector-element" value="create tutorship">
+            Create Tutorship
+          </option>
+        )}
+        {location !== '/tutorship history' && (
+          <option className="tutor-dashboard__selector-element" value="tutorship history">
+            Tutorships History
+          </option>
+        )}
       </select>
       <button
         className={location === '/profile' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
