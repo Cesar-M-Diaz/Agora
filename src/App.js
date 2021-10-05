@@ -44,7 +44,7 @@ function App() {
           <Route exact path="/error" component={errorPage} />
           <PrivateRoute exact path="/profile" component={ProfileRouteComponent} />
           <Route exact path="/tutor-profile" component={TutorProfilePage} />
-          <Route exact path="/tutor" component={TutorDetailsPage} />
+          <Route exact path="/tutor/:id" component={TutorDetailsPage} />
           <Route path="*" component={errorPage} />
         </Switch>
       </Layout>

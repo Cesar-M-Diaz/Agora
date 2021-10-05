@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { TutorPageHead } from '../components/TutorPageHead';
-import { TutorDescription } from '../components/TutorDescription';
-import { ReviewsContainer } from '../components/ReviewsContainer';
-import '../assets/styles/pages/TutorViewProfile.scss';
-import axios from '../utils/axios';
+import React, { useEffect, useState } from "react";
+import { TutorPageHead } from "../components/TutorPageHead";
+import { TutorDescription } from "../components/TutorDescription";
+import { ReviewsContainer } from "../components/ReviewsContainer";
+import "../assets/styles/pages/TutorViewProfile.scss";
+import axios from "../utils/axios";
+import Loader from "../components/Loader";
 
 function TutorDetailsPage(props) {
   const [tutor, setTutor] = useState({});
   const [reviews, setReviews] = useState([]);
-  const id = props.location.state;
+  const [loading, setLoading] = useState(true);
+  const id = props.match.params.id;
 
   useEffect(() => {
     async function tutorDetailsData(id) {
@@ -18,6 +20,7 @@ function TutorDetailsPage(props) {
         const reviewData = tutorData.data.reviews;
         setTutor(data);
         setReviews(reviewData);
+        setLoading(false);
       } catch (err) {
         console.log(err);
       }
@@ -28,9 +31,15 @@ function TutorDetailsPage(props) {
   return (
     <>
       <div className="tutor-profile__body">
-        <TutorPageHead tutor={tutor} />
-        <TutorDescription tutor={tutor} />
-        <ReviewsContainer reviews={reviews} />
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <TutorPageHead tutor={tutor} tutorId={id} />
+            <TutorDescription tutor={tutor} />
+            <ReviewsContainer reviews={reviews} />
+          </>
+        )}
       </div>
     </>
   );
