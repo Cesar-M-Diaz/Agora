@@ -8,19 +8,18 @@ import TutorDetailsPage from './pages/TutorDetailsPage';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import getUserData from './actions/getUserData';
-import {AUTH_FAILED} from './actions/constants';
+import { AUTH_FAILED } from './actions/constants';
 import { useEffect } from 'react';
 import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
 import ProfileRouteComponent from './utils/ProfileRouteComponent';
-import TutorProfilePage from './pages/TutorProfilePage';
 import { SearchPage } from './pages/searchPage';
 import ScrollToTop from './utils/ScrollToTop';
 import TutorsSchedule from './pages/TutorsSchedule';
 
 function App() {
-  const token = useSelector(state => state.token);
+  const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
 
   useEffect(() => {

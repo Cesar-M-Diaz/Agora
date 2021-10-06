@@ -127,6 +127,7 @@ $warning-color: rgb(235, 99, 99);
     width: 100%;
     padding: 10px 10px;
     margin: 20px 0px;
+    resize: none;
   }
   .tutor-edit__errors {
     color: $warning-color;

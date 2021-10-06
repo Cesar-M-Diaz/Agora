@@ -16,33 +16,6 @@ beforeEach(() => {
 });
 
 describe('General Navigation Test', () => {
-  test('renders register component', async () => {
-    axios.get.mockResolvedValueOnce({
-      data: {
-        categories: [
-          { _id: 1, subject: 'Math' },
-          { _id: 2, subject: 'Chemistry' },
-          { _id: 3, subject: 'Biology' },
-          { _id: 4, subject: 'Physics' },
-          { _id: 5, subject: 'Development' },
-          { _id: 6, subject: 'Psychology' },
-        ],
-      },
-    });
-
-    history.push('/register');
-
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </Provider>,
-    );
-
-    await waitFor(() => screen.getByText('Are you a student or a tutor?'));
-  });
-
   test('renders login component', () => {
     history.push('/login');
     render(
