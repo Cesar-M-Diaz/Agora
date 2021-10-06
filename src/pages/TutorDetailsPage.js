@@ -5,6 +5,7 @@ import { ReviewsContainer } from "../components/ReviewsContainer";
 import "../assets/styles/pages/TutorViewProfile.scss";
 import axios from "../utils/axios";
 import Loader from "../components/Loader";
+import history from "../utils/history";
 
 function TutorDetailsPage(props) {
   const [tutor, setTutor] = useState({});
@@ -22,7 +23,7 @@ function TutorDetailsPage(props) {
         setReviews(reviewData);
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        history.replace('/home');
       }
     }
     tutorDetailsData(id);
