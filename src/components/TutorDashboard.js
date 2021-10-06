@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../assets/styles/components/TutorDashboard.scss';
 import history from '../utils/history';
 
 function TutorDashboard() {
   const location = history.location.pathname;
-  console.log(location);
 
   function handleClick(e) {
     e.preventDefault();
