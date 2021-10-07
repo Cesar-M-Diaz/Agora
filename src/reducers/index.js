@@ -21,11 +21,11 @@ const initialState = {
     email: null,
     focus: null,
     description: null,
-    availability: null,
+    schedule: null,
   },
   login_failed: false,
   auth_status: LOADING,
-  emailIsTaken: false
+  emailIsTaken: false,
 };
 
 // Modify the reducer in order to receive the actions
@@ -59,6 +59,7 @@ const reducer = function (state = initialState, action) {
         email: action.payload.email,
         focus: action.payload.focus || null,
         description: action.payload.description || null,
+        schedule: action.payload.schedule || null,
       },
       auth_status: AUTHORIZED,
     };
