@@ -14,16 +14,18 @@ function TutorshipPage() {
   const [tutorshipData, setTutorshipData] = useState({
     name: '',
     email: '',
-    description: '',
+    date: '',
+    time: '',
     tutor_id: '',
   });
   const [errors, setErrors] = useState({
     errors: {
       name: '',
       email: '',
-      description: '',
+      date: '',
+      time: '',
     },
-    isValid: { name: false, email: false, description: false },
+    isValid: { name: false, email: false, date: false, time: true },
     enableUpload: false,
   });
 
@@ -74,7 +76,7 @@ function TutorshipPage() {
             name: '',
           },
           isValid: { ...state.isValid, name: true },
-          enableUpload: state.isValid.email && state.isValid.description,
+          enableUpload: state.isValid.email && state.isValid.date && state.isValid.time,
         }));
       }
     }
@@ -99,19 +101,19 @@ function TutorshipPage() {
             email: '',
           },
           isValid: { ...state.isValid, email: true },
-          enableUpload: state.isValid.name && state.isValid.description,
+          enableUpload: state.isValid.name && state.isValid.date && state.isValid.time,
         }));
       }
     }
-    if (input === 'description') {
-      if (value.length < 30) {
+    if (input === 'date') {
+      if (value.length === 0) {
         setErrors((state) => ({
           ...state,
           errors: {
             ...state.errors,
-            description: 'Description is to short',
+            date: 'Please set the date for the tutorship',
           },
-          isValid: { ...state.isValid, description: false },
+          isValid: { ...state.isValid, date: false },
           enableUpload: false,
         }));
       } else {
@@ -119,10 +121,33 @@ function TutorshipPage() {
           ...state,
           errors: {
             ...state.errors,
-            description: '',
+            date: '',
           },
-          isValid: { ...state.isValid, description: true },
-          enableUpload: state.isValid.name && state.isValid.email,
+          isValid: { ...state.isValid, date: true },
+          enableUpload: state.isValid.name && state.isValid.email && state.isValid.time,
+        }));
+      }
+    }
+    if (input === 'time') {
+      if (value.length === 0) {
+        setErrors((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            time: 'Please set the time for the tutorship',
+          },
+          isValid: { ...state.isValid, time: false },
+          enableUpload: false,
+        }));
+      } else {
+        setErrors((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            time: '',
+          },
+          isValid: { ...state.isValid, time: true },
+          enableUpload: state.isValid.name && state.isValid.email && state.isValid.date,
         }));
       }
     }
@@ -152,7 +177,8 @@ function TutorshipPage() {
       ...state,
       name: '',
       email: '',
-      description: '',
+      date: '',
+      time: '',
     }));
   }
 
@@ -186,19 +212,11 @@ function TutorshipPage() {
             <span className="tutorship__errors">{errors.errors.email}</span>
           </div>
           <div className="tutorship__form-slot">
-            <label>Description</label>
-            <textarea
-              id="form"
-              name="description"
-              placeholder="Tutorship description"
-              onChange={handleChange}
-              onBlur={validateInput}
-              value={tutorshipData.description}
-              cols="30"
-              rows="10"
-              className="tutorship__form-description"
-            ></textarea>
-            <span className="tutorship__errors">{errors.errors.description}</span>
+            <label>Date and time for the tutorship</label>
+            <input type="date" onChange={handleChange} onBlur={validateInput} name="date" value={tutorshipData.date} />
+            <span className="tutorship__errors">{errors.errors.date}</span>
+            <input type="time" onChange={handleChange} onBlur={validateInput} name="time" value={tutorshipData.time} />
+            <span className="tutorship__errors">{errors.errors.time}</span>
           </div>
           <div className="tutorship__button-container">
             <input
