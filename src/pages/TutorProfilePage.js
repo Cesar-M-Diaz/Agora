@@ -169,12 +169,12 @@ function TutorProfilePage() {
       }
     }
     if (input === 'schedule') {
-      if (!value.includes('from:') && !value.includes('to:')) {
+      if (!value.includes('from') && !value.includes('to')) {
         setUserData((state) => ({
           ...state,
           errors: {
             ...state.errors,
-            schedule: 'Invalid format, please type from: (day) and to: (day), from: (hour) and to: (hour)',
+            schedule: 'Invalid format, please type from (day) to (day), from (hour) to (hour)',
           },
           isValid: { ...state.isValid, schedule: false },
           enableUpload: false,
@@ -309,6 +309,7 @@ function TutorProfilePage() {
               <input
                 onBlur={validateInput}
                 defaultValue={previewData.schedule}
+                placeholder="please type your schedule, example from mondays to fridays, from 8:30am to 5:00pm"
                 type="text"
                 name="schedule"
                 onChange={handleChange}
@@ -324,6 +325,7 @@ function TutorProfilePage() {
               name="description"
               onChange={handleChange}
               defaultValue={previewData.description}
+              placeholder="Let our students know something about you"
               cols="30"
               rows="10"
               className="tutor-edit__form-description"
