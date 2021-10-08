@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function StudentProfileMenu() {
+function StudentProfileMenu({ page }) {
     const [selected, setSelected] = useState('Edit Profile')
 
     const handleSelect = e => {
-        setSelected(e.target.outerText);
+        setSelected(e.target.id);
     }
+
+    useEffect(() => {
+        setSelected(page);
+    }, [page])
 
     return (
         <>
@@ -16,9 +21,9 @@ function StudentProfileMenu() {
             </select>
             <section className="student-profile-menu md">
                 <ul className="student-profile-menu-list">
-                    <li onClick={handleSelect} className={`student-profile-menu-item ${selected === 'Edit Profile' && 'selected'}`}>Edit Profile</li>
-                    <li onClick={handleSelect} className={`student-profile-menu-item ${selected === 'Payment methods' && 'selected'}`}>Payment methods</li>
-                    <li onClick={handleSelect} className={`student-profile-menu-item ${selected === 'My tutorships' && 'selected'}`}>My tutorships</li>
+                    <Link to="edit"><li onClick={handleSelect} id="edit" className={`student-profile-menu-item ${selected === 'edit' && 'selected'}`}>Edit Profile</li></Link>
+                    <Link to="payment"><li onClick={handleSelect} id="payment" className={`student-profile-menu-item ${selected === 'payment' && 'selected'}`}>Payment methods</li></Link>
+                    <Link to="tutorships"><li onClick={handleSelect} id="tutorships" className={`student-profile-menu-item ${selected === 'tutorships' && 'selected'}`}>My tutorships</li></Link>
                 </ul>
             </section>
         </>

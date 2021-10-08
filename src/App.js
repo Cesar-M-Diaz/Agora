@@ -40,7 +40,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
-          <PrivateRoute exact path="/profile" component={ProfileRouteComponent} />
+          <PrivateRoute exact path="/profile/:section" component={ProfileRouteComponent} />
           <Route exact path="/tutor" component={TutorDetailsPage} />
           <Route path="*" component={errorPage} />
         </Switch>
