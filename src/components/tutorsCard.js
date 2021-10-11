@@ -13,10 +13,7 @@ function TutorsCard(tutor) {
   }
 
   function handleClick() {
-    history.push({
-      pathname: '/tutor',
-      state: _id,
-    });
+    history.push(`/tutor/${_id}`);
   }
 
   return (

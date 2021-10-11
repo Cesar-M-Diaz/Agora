@@ -1,0 +1,81 @@
+$primary-color: #22b8d9;
+$secondary-color: #ffffff;
+$primary-color-dark: #1a90aa;
+
+.tutorsschedule-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+    font-family: open sans;
+    font-size: 16px;
+}
+
+.tutorsschedule-main > h1 {
+    text-align: center;
+}
+
+.tutorsschedule-form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    font-size: 1.4rem;
+    gap: 10px;
+}
+
+.tutorsschedule-form > input{
+    height: 40px;
+    font-size: 1.4rem;
+
+    padding: 0 2px;
+    flex: 1 1;
+}
+
+.tutorsschedule-form > input:focus{
+    outline: none;
+}
+
+.tutorsschedule-form > textarea{
+    padding: 0 2px;
+    font-size: 1.4rem;
+    height: 200px;
+    resize: none;
+}
+
+.tutorsschedule-form > textarea:focus{
+    outline: none;
+}
+
+.tutorsschedule-form > button {
+    padding: 10px 0;
+    font-size: 1.2rem;
+    background-color: $secondary-color;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    cursor: pointer;
+    font-family: sans-serif;
+}
+
+.tutorsschedule-form > button:hover{
+    color: $secondary-color;
+    background-color: $primary-color-dark;
+}
+
+.tutorsschedule-main > img {
+    border-radius: 50%;
+}
+
+.tutorsschedule-form > span {
+    color: red;
+}
+
+@media screen and(min-width: 992px) {
+    .tutorsschedule-main{
+        box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 15%);
+        width: 50vw;
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+}
