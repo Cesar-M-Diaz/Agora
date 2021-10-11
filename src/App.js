@@ -16,6 +16,7 @@ import history from './utils/history';
 import ProfileRouteComponent from './utils/ProfileRouteComponent';
 import { SearchPage } from './pages/searchPage';
 import ScrollToTop from './utils/ScrollToTop';
+import TutorshipPage from './pages/TutorshipPage';
 
 function App() {
   const token = useSelector((state) => state.token);
@@ -41,6 +42,7 @@ function App() {
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
           <PrivateRoute exact path="/profile" component={ProfileRouteComponent} />
+          <PrivateRoute exact path="/create tutorship" component={TutorshipPage} />
           <Route exact path="/tutor" component={TutorDetailsPage} />
           <Route path="*" component={errorPage} />
         </Switch>
