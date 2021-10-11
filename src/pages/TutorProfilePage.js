@@ -14,14 +14,11 @@ function TutorProfilePage() {
   const [previewPhoto, setPreviewPhoto] = useState('');
   const [image, setImage] = useState('');
   const [profileMode, setProfileMode] = useState('view');
-  const [previewDAta, setPreviewData] = useState({
-    inputs: {
-      name: '',
-      email: '',
-      password: '',
-      description: '',
-      availability: '',
-    },
+  const [previewData, setPreviewData] = useState({
+    name: '',
+    email: '',
+    description: '',
+    schedule: '',
   });
   const [userData, setUserData] = useState({
     inputs: {
@@ -29,28 +26,25 @@ function TutorProfilePage() {
       email: '',
       password: '',
       description: '',
-      availability: '',
+      schedule: '',
     },
     errors: {
       name: '',
       email: '',
       password: '',
-      availability: '',
+      schedule: '',
     },
-    isValid: { name: true, password: true, email: true, availability: true },
+    isValid: { name: true, password: true, email: true, schedule: true },
     enableUpload: true,
   });
 
   useEffect(() => {
     setPreviewData((state) => ({
       ...state,
-      inputs: {
-        ...state.inputs,
-        name: globalUser.name,
-        email: globalUser.email,
-        description: globalUser.description,
-        availability: globalUser.availability,
-      },
+      name: globalUser.name,
+      email: globalUser.email,
+      description: globalUser.description,
+      schedule: globalUser.schedule,
     }));
     setPreviewPhoto(globalUser.profile_photo);
   }, [globalUser]);
@@ -74,18 +68,19 @@ function TutorProfilePage() {
     e.preventDefault();
     setProfileMode('view');
     setPreviewPhoto(globalUser.profile_photo);
-    setUserData({
+    setUserData((state) => ({
+      ...state,
       inputs: {
-        name: '',
-        email: '',
+        name: globalUser.name,
+        email: globalUser.email,
+        description: globalUser.description,
+        schedule: globalUser.schedule,
         password: '',
-        description: '',
-        availability: '',
       },
-      errors: { name: '', email: '', password: '', availability: '' },
-      isValid: { name: true, password: true, email: true, availability: true },
+      errors: { name: '', email: '', password: '', schedule: '' },
+      isValid: { name: true, password: true, email: true, schedule: true },
       enableUpload: true,
-    });
+    }));
   }
 
   function validateInput(e) {
@@ -121,10 +116,7 @@ function TutorProfilePage() {
             name: '',
           },
           isValid: { ...state.isValid, name: true },
-          enableUpload:
-            state.isValid.password &&
-            state.isValid.email &&
-            state.isValid.availability,
+          enableUpload: state.isValid.password && state.isValid.email && state.isValid.schedule,
         }));
       }
     }
@@ -149,10 +141,7 @@ function TutorProfilePage() {
             email: '',
           },
           isValid: { ...state.isValid, email: true },
-          enableUpload:
-            state.isValid.name &&
-            state.isValid.password &&
-            state.isValid.availability,
+          enableUpload: state.isValid.name && state.isValid.password && state.isValid.schedule,
         }));
       }
     }
@@ -175,23 +164,19 @@ function TutorProfilePage() {
             password: '',
           },
           isValid: { ...state.isValid, password: true },
-          enableUpload:
-            state.isValid.name &&
-            state.isValid.email &&
-            state.isValid.availability,
+          enableUpload: state.isValid.name && state.isValid.email && state.isValid.schedule,
         }));
       }
     }
-    if (input === 'availability') {
-      if (!value.includes('from:') && !value.includes('to:')) {
+    if (input === 'schedule') {
+      if (!value.includes('from') && !value.includes('to')) {
         setUserData((state) => ({
           ...state,
           errors: {
             ...state.errors,
-            availability:
-              'Invalid format, please type from: (day) and to: (day), from: (hour) and to: (hour)',
+            schedule: 'Invalid format, please type from (day) to (day), from (hour) to (hour)',
           },
-          isValid: { ...state.isValid, availability: false },
+          isValid: { ...state.isValid, schedule: false },
           enableUpload: false,
         }));
       } else {
@@ -199,26 +184,24 @@ function TutorProfilePage() {
           ...state,
           errors: {
             ...state.errors,
-            availability: '',
+            schedule: '',
           },
-          isValid: { ...state.isValid, availability: true },
-          enableUpload:
-            state.isValid.name && state.isValid.password && state.isValid.email,
+          isValid: { ...state.isValid, schedule: true },
+          enableUpload: state.isValid.name && state.isValid.password && state.isValid.email,
         }));
       }
     }
   }
 
   function onChangeFile(e) {
-    setPreviewPhoto(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
+    setPreviewPhoto(URL.createObjectURL(e.target.files[0]));
   }
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     if (image) {
-      console.log(image);
       formData.append('image', image);
     }
     updateTutorProfile(userData.inputs, formData, token);
@@ -237,9 +220,7 @@ function TutorProfilePage() {
       localStorage.setItem('token', response.data);
       MySwal.fire({
         icon: 'success',
-        title: (
-          <p className="swal__tittle">Your data was updated successfully!</p>
-        ),
+        title: <p className="swal__tittle">Your data was updated successfully!</p>,
         confirmButtonColor: '#0de26f',
       }).then(() => {
         history.go(0);
@@ -263,28 +244,15 @@ function TutorProfilePage() {
           <img src={previewPhoto} className="tutor-edit__photo" alt="user" />
           <label
             htmlFor="upload"
-            className={
-              profileMode === 'edit'
-                ? 'tutor-edit__button-photo'
-                : 'tutor-edit__button-photo-disabled'
-            }
+            className={profileMode === 'edit' ? 'tutor-edit__button-photo' : 'tutor-edit__button-photo-disabled'}
           >
             upload photo
           </label>
-          <input
-            type="file"
-            id="upload"
-            onChange={onChangeFile}
-            hidden
-            disabled={profileMode === 'view'}
-          />
+          <input type="file" id="upload" onChange={onChangeFile} hidden disabled={profileMode === 'view'} />
         </div>
         <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
           {profileMode !== 'edit' && (
-            <button
-              className="tutor-edit__button-edit"
-              onClick={enableEditMode}
-            >
+            <button className="tutor-edit__button-edit" onClick={enableEditMode}>
               Edit Profile
             </button>
           )}
@@ -293,15 +261,10 @@ function TutorProfilePage() {
               <input
                 type="submit"
                 value="save changes"
-                className={`tutor-edit__button-submit ${
-                  !userData.enableUpload && 'disabled'
-                }`}
+                className={`tutor-edit__button-submit ${!userData.enableUpload && 'disabled'}`}
                 disabled={!userData.enableUpload}
               />
-              <button
-                className="tutor-edit__button-cancel"
-                onClick={cancelEdit}
-              >
+              <button className="tutor-edit__button-cancel" onClick={cancelEdit}>
                 cancel
               </button>
             </div>
@@ -312,8 +275,7 @@ function TutorProfilePage() {
               onBlur={validateInput}
               type="text"
               name="name"
-              value={userData.inputs.name}
-              placeholder={previewDAta.inputs.name}
+              defaultValue={previewData.name}
               onChange={handleChange}
               disabled={profileMode === 'view'}
             />
@@ -323,10 +285,9 @@ function TutorProfilePage() {
             <label>Email</label>
             <input
               onBlur={validateInput}
-              value={userData.inputs.email}
+              defaultValue={previewData.email}
               type="text"
               name="email"
-              placeholder={previewDAta.inputs.email}
               onChange={handleChange}
               disabled={profileMode === 'view'}
             />
@@ -336,30 +297,25 @@ function TutorProfilePage() {
             <label>Password</label>
             <input
               onBlur={validateInput}
-              value={userData.inputs.password}
+              defaultValue="12345"
               type="password"
               name="password"
-              placeholder="type new password"
               onChange={handleChange}
               disabled={profileMode === 'view'}
             />
-            <span className="tutor-edit__errors">
-              {userData.errors.password}
-            </span>
+            <span className="tutor-edit__errors">{userData.errors.password}</span>
             <div className="tutor-edit__form-slot">
               <label>Schedule</label>
               <input
                 onBlur={validateInput}
-                value={userData.inputs.availability}
+                defaultValue={previewData.schedule}
+                placeholder="please type your schedule, example from mondays to fridays, from 8:30am to 5:00pm"
                 type="text"
-                name="availability"
-                placeholder="example / from: mondays to: fridays, from: 10am to: 4pm "
+                name="schedule"
                 onChange={handleChange}
                 disabled={profileMode === 'view'}
               />
-              <span className="tutor-edit__errors">
-                {userData.errors.availability}
-              </span>
+              <span className="tutor-edit__errors">{userData.errors.schedule}</span>
             </div>
           </div>
           <div className="tutor-edit__form-slot">
@@ -367,9 +323,9 @@ function TutorProfilePage() {
             <textarea
               id="form"
               name="description"
-              placeholder={previewDAta.inputs.description}
               onChange={handleChange}
-              value={userData.inputs.description}
+              defaultValue={previewData.description}
+              placeholder="Let our students know something about you"
               cols="30"
               rows="10"
               className="tutor-edit__form-description"

@@ -9,26 +9,23 @@ const SearchPage = (props) => {
 
   const [Tutors, setTutors] = useState([])
   const [Page, setPage] = useState(1)
-  const [Subject, setSubject] = useState('Math')
   const [Pages, setPages] = useState()
-  console.log(props.location.state)
 
-  // setSubject(props.location.state)
-  
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
+  const subject = props.location.state
+
+  useEffect(() => {
+    const search = async() => {
     try{
-      const responseTut = await axios.get(`/tutorsearch/${props.location.state}/${Page}`)
+      const responseTut = await axios.get(`/tutorsearch/${subject}/${Page}`)
       setTutors(responseTut.data.data)
       const count = responseTut.data.count
       setPages(parseInt(count/9))
       
     } catch(error) {
-      console.log(Page)
-    }
-  },[Page, props.location.stateps])
+      console.error(error)
+    }}
+    search()
+  },[Page, subject])
 
   
   return (
