@@ -2,14 +2,25 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 
-function StudentRateTutorship({ onStarsChange }) {
+function StudentRateTutorship({ swal, student, tutor }) {
     const [rating, setRating] = useState(0);
+    const [review, setReview] = useState('')
     const [hover, setHover] = useState(0);
 
-    const setStars = (index) => {
-        setRating(index);
-        onStarsChange(index);
-    }
+    const sendRatingController = () => {
+        console.log(`
+            RATING: ${rating}
+            TUTOR: ${tutor}
+            STUDENT: ${student}
+            REVIEW: ${review}
+            TOKEN: ${localStorage.getItem("token")}
+        `)
+        // Technical doubt:
+        // - Call to backend
+        // - Validations 
+        swal.close()
+      };
+    
 
     return (
         <div className="StudentRateTutorship-container">
@@ -23,7 +34,7 @@ function StudentRateTutorship({ onStarsChange }) {
                         type="button"
                         key={index}
                         className={index <= (hover || rating) ? "on" : "off"}
-                        onClick={() => setStars(index)}
+                        onClick={() => setRating(index)}
                         onMouseEnter={() => setHover(index)}
                         onMouseLeave={() => setHover(rating)}
                     >
@@ -31,6 +42,12 @@ function StudentRateTutorship({ onStarsChange }) {
                     </button>
                     );
                 })}
+                <h2>Leave a Review</h2>
+                <textarea onChange={e => setReview(e.target.value)} placeholder="Leave a short review" className="StudentRateTutorship-textarea" cols="30" rows="5"></textarea>
+            </div>
+            <div className="StudentRateTutorship-buttons-container">
+                <button onClick={sendRatingController} className="StudentRateTutorship-submit-button green">Submit</button>
+                <button onClick={() => swal.close()} className="StudentRateTutorship-submit-button red">Cancel</button>
             </div>
         </div>
     )

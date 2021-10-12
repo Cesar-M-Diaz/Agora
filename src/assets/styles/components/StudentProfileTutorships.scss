@@ -192,6 +192,62 @@ $color-b: #0de26f;
   }
 }
 
+.StudentCancelTutorship-buttons-container{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  button {
+    width: 40%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}
+
+.cancel-tutorship-button {
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.StudentRateTutorship-submit-button{
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.StudentRateTutorship-buttons-container{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.StudentRateTutorship-textarea{
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  padding: 0 3px;
+  font-size: 1.1rem;
+}
+
+.StudentRateTutorship-textarea:focus{
+  outline: none;
+}
+
 @media screen and(min-width: 992px) {
   .student__tutorship-container {
     flex-direction: row;
