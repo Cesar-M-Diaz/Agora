@@ -134,6 +134,9 @@ $color-b: #0de26f;
   background-color: white;
   color: $color-b;
   border: 2px solid $color-b;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .tutor-profile__schedule-button:hover {
