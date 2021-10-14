@@ -1,26 +1,34 @@
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
+import axios from '../utils/axios';
 
-function StudentRateTutorship({ swal, student, tutor }) {
+function StudentRateTutorship({ swal, student, tutor, tutorship, setState }) {
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState('')
     const [hover, setHover] = useState(0);
+    const [error, setError] = useState(false);
 
     const sendRatingController = () => {
-        console.log(`
-            RATING: ${rating}
-            TUTOR: ${tutor}
-            STUDENT: ${student}
-            REVIEW: ${review}
-            TOKEN: ${localStorage.getItem("token")}
-        `)
-        // Technical doubt:
-        // - Call to backend
-        // - Validations 
-        swal.close()
+        setError(false);
+        if(review === '' || rating === 0) {
+            setError(true);
+            return;
+        }
+        axios.post('/rateTutorship', {
+            rating, tutor, tutorship, student, review, token: localStorage.getItem("token")
+        })
+        .then((result) => {
+            swal.fire({
+                icon: "success",
+                html: <h1 style={{ fontFamily: 'open sans' }}>Tutorship rated successfully</h1>
+            })
+            setState(prevState => ({...prevState, renderSwitch: !prevState.renderSwitch}))
+        })
+        .catch(error => {
+            console.log(error)
+        })
       };
-    
 
     return (
         <div className="StudentRateTutorship-container">
@@ -44,6 +52,7 @@ function StudentRateTutorship({ swal, student, tutor }) {
                 })}
                 <h2>Leave a Review</h2>
                 <textarea onChange={e => setReview(e.target.value)} placeholder="Leave a short review" className="StudentRateTutorship-textarea" cols="30" rows="5"></textarea>
+                {error && <span style={{color: "red"}}>All fields are required</span>}
             </div>
             <div className="StudentRateTutorship-buttons-container">
                 <button onClick={sendRatingController} className="StudentRateTutorship-submit-button green">Submit</button>

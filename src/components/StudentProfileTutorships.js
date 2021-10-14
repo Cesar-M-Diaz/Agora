@@ -40,7 +40,7 @@ function StudentProfileTutorships() {
       },
       Pay: "pay",
       Rate: {
-        component: <StudentRateTutorship swal={mySwal} student={id} tutor={data.tutor} tutorshipId={data.tutorshipId} />,
+        component: <StudentRateTutorship swal={mySwal} student={id} tutor={data.tutor} tutorship={data.tutorshipId} setState={setState} />,
         confirm: false,
         cancel: false,
       },
@@ -61,7 +61,7 @@ function StudentProfileTutorships() {
         ? "Loading..."
         : state.tutorships.map((tutorship) => {
             const { name, focus, profile_photo, email } = tutorship.tutor_id;
-            const { status, _id: id } = tutorship;
+            const { status, _id: id, isRated } = tutorship;
             const date = new Date(tutorship.date);
             return (
               <div key={id} className="student__tutorship-container">
@@ -110,7 +110,7 @@ function StudentProfileTutorships() {
                           Contact
                         </a>
                       )}
-                      {status === "completed" && (
+                      {status === "completed" && !isRated && (
                         <button
                           onClick={(e) =>
                             handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)
