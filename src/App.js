@@ -43,6 +43,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
+          <PrivateRoute exact path="/profile/:section" component={ProfileRouteComponent} />
           <PrivateRoute exact path="/profile" component={ProfileRouteComponent} />
           <Route exact path="/tutor/:id" component={TutorDetailsPage} />
           <PrivateRoute exact path="/tutor/:id/schedule" component={TutorsSchedule} />

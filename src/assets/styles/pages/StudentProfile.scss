@@ -10,10 +10,11 @@ $color-b-dark: #0b753d;
 .student-profile-main{
     margin: 10px;
     box-shadow: 0 0 5px 2px rgb(161, 161, 161);
-    height: 800px;
+    min-height: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 20px 0;
 }
 
 .student-profile__photo-container{
@@ -169,6 +170,10 @@ $color-b-dark: #0b753d;
     list-style: none;
 }
 
+.student-profile-menu-list > a {
+    text-decoration: none;
+}
+
 .student-profile-menu-item{
     width: 15vw;
     padding: 12px 10px;
@@ -178,7 +183,7 @@ $color-b-dark: #0b753d;
     font-family: Source Code Pro;
     margin-top: 15px;
     user-select: none;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .student-profile-menu-item:hover{
