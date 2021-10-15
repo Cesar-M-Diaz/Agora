@@ -161,7 +161,6 @@ function TutorshipPage() {
       MySwal.fire({
         icon: 'success',
         title: <p className="swal__tittle">Tutorship created</p>,
-        text: 'tutorship created !',
         confirmButtonColor: '#0de26f',
       });
     } catch (err) {
