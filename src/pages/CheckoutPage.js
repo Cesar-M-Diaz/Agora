@@ -12,6 +12,7 @@ export default function CheckoutPage(props) {
   const tutorshipData = props.location.state.state;
   const { tutorship_id, tutorship_price } = tutorshipData;
   const MySwal = withReactContent(Swal);
+  const [loadingPayment, setLoadingPayment] = useState(false);
   const user_id = useSelector((state) => state.currentUser._id);
   const [cardName, setCardName] = useState({
     card_name: '',
@@ -56,8 +57,8 @@ export default function CheckoutPage(props) {
 
   function next() {
     setCount(count + 1);
-    if (count === 3) {
-      setCount(3);
+    if (count === 4) {
+      setCount(4);
     }
   }
 
@@ -117,6 +118,7 @@ export default function CheckoutPage(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoadingPayment(true);
     try {
       if (epayco_customer_id) {
         await axios.post('/payment', {
@@ -256,7 +258,7 @@ export default function CheckoutPage(props) {
             </div>
           </form>
         )}
-        {count === 3 && (
+        {count === 3 && !loadingPayment && (
           <form action="" className="payment__form" onSubmit={handleSubmit}>
             <div className="payment__form-slot">
               <label>total ammount</label>
@@ -269,11 +271,17 @@ export default function CheckoutPage(props) {
             <button className="payment__pay-button">pay</button>
           </form>
         )}
+        {loadingPayment && (
+          <div>
+            <h1 className="payment__loader-title">Processing payment, please wait</h1>
+            <Loader />
+          </div>
+        )}
         <div className="payment__button-container">
           <button
             onClick={previous}
             disabled={count === 1}
-            hidden={isLoading}
+            hidden={isLoading || loadingPayment}
             className={count === 1 ? 'payment__previous-button-disabled' : 'payment__page-button'}
           >
             previous
@@ -281,7 +289,7 @@ export default function CheckoutPage(props) {
           <button
             onClick={next}
             disabled={count === 3}
-            hidden={isLoading}
+            hidden={isLoading || loadingPayment}
             className={count === 3 ? 'payment__next-button-disabled' : 'payment__page-button'}
           >
             next

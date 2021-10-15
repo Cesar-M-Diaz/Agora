@@ -63,6 +63,15 @@ $warning-color: rgb(235, 99, 99);
   margin-bottom: 40px;
 }
 
+.payment__loader-title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Open Sans';
+  font-weight: 500;
+  margin-bottom: 60px;
+}
+
 .payment__card-form {
   width: 100%;
   display: flex;
