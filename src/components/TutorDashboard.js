@@ -49,14 +49,14 @@ function TutorDashboard() {
       <button
         className={location === 'create-tutorship' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
         onClick={handleClick}
-        name="create tutorship"
+        name="create-tutorship"
       >
         Create Tutorship
       </button>
       <button
         className={location === '/tutorship-history' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
         onClick={handleClick}
-        name="tutorship history"
+        name="tutorship-history"
       >
         Tutorships History
       </button>
