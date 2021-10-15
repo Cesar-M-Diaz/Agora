@@ -160,7 +160,7 @@ function TutorshipPage() {
       await axios.post('/tutorship', tutorshipData);
       MySwal.fire({
         icon: 'success',
-        title: <p className="swal__tittle">Successful Registration</p>,
+        title: <p className="swal__tittle">Tutorship created</p>,
         text: 'tutorship created !',
         confirmButtonColor: '#0de26f',
       });
