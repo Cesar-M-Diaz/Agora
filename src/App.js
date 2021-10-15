@@ -47,8 +47,8 @@ function App() {
           <PrivateRoute exact path="/profile" component={ProfileRouteComponent} />
           <Route exact path="/tutor/:id" component={TutorDetailsPage} />
           <PrivateRoute exact path="/tutor/:id/schedule" component={TutorsSchedule} />
-          <PrivateRoute exact path="/create tutorship" component={TutorshipPage} />
-          <PrivateRoute exact path="/checkout" component={CheckoutPage} />
+          <PrivateRoute exact path="/create-tutorship" component={TutorshipPage} />
+          <PrivateRoute exact path="/checkout/:id" component={CheckoutPage} />
           <Route path="*" component={errorPage} />
         </Switch>
       </Layout>

@@ -3,11 +3,14 @@ import axios from '../utils/axios';
 import { useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import CreditCard from '../components/CreditCard';
+import history from '../utils/history';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import '../assets/styles/pages/checkout.scss';
 
-export default function CheckoutPage() {
+export default function CheckoutPage(props) {
+  const tutorshipData = props.location.state.state;
+  const { tutorship_id, tutorship_price } = tutorshipData;
   const MySwal = withReactContent(Swal);
   const user_id = useSelector((state) => state.currentUser._id);
   const [cardName, setCardName] = useState({
@@ -37,9 +40,9 @@ export default function CheckoutPage() {
   const [paymentInfo, setPaymentInfo] = useState({
     doc_type: '',
     doc_number: '',
-    value: '',
+    value: tutorship_price,
     tax: '16000',
-    tax_base: '100000',
+    tax_base: '30000',
     currency: 'COP',
     dues: '',
   });
@@ -118,6 +121,7 @@ export default function CheckoutPage() {
     try {
       if (epayco_customer_id) {
         await axios.post('/payment', {
+          tutorship_id,
           user_id,
           currentPaymentData: {
             customer_id: epayco_customer_id,
@@ -131,8 +135,10 @@ export default function CheckoutPage() {
           title: <p className="swal__tittle">Succesfull payment!</p>,
           confirmButtonColor: '#0de26f',
         });
+        history.push('/profile/tutorships');
       } else {
         await axios.post('/payment', {
+          tutorship_id,
           user_id,
           cardInfo,
           customerInfo,
@@ -143,6 +149,7 @@ export default function CheckoutPage() {
           title: <p className="swal__tittle">Succesfull payment!</p>,
           confirmButtonColor: '#0de26f',
         });
+        history.push('/profile/tutorships');
       }
     } catch (err) {
       console.log(err);
@@ -254,7 +261,7 @@ export default function CheckoutPage() {
           <form action="" className="payment__form" onSubmit={handleSubmit}>
             <div className="payment__form-slot">
               <label>total ammount</label>
-              <input type="number" name="value" value={paymentInfo.value} onChange={paymentInfoChange} />
+              <input type="number" name="value" defaultValue={paymentInfo.value} />
               <span className="payment__errors"></span>
               <label>installments</label>
               <input type="number" name="dues" value={paymentInfo.dues} onChange={paymentInfoChange} />
