@@ -85,7 +85,6 @@ export default function CheckoutPage(props) {
 
   function selectCard(card) {
     setToken_card(card.token);
-    console.log(token_card);
   }
 
   function customerInfoChange(e) {
