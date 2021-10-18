@@ -130,7 +130,7 @@ function Header() {
               </span>
             </div>
             <div className="mobile-menu__buttons">
-              <Link to="/profile" className="mobile-menu__profile-button" onClick={toggleMenuCollapse}>
+              <Link to="/profile/edit" className="mobile-menu__profile-button" onClick={toggleMenuCollapse}>
                 Profile
               </Link>
               <Link
@@ -184,7 +184,7 @@ function Header() {
             <h3 className="profile-tooltip__name">
               {globalState.currentUser.name}
             </h3>
-            <Link to="/profile" className="profile-tooltip__profile">
+            <Link to="/profile/edit" className="profile-tooltip__profile">
               Profile
             </Link>
             <Link data-testid="sign-out-button" onClick={SignOut} to="/" className="profile-tooltip__signout">
