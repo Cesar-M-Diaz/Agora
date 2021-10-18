@@ -155,7 +155,6 @@ function TutorshipPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(tutorshipData);
     try {
       await axios.post('/tutorship', tutorshipData);
       MySwal.fire({

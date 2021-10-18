@@ -18,6 +18,8 @@ import { SearchPage } from './pages/searchPage';
 import ScrollToTop from './utils/ScrollToTop';
 import TutorsSchedule from './pages/TutorsSchedule';
 import TutorshipPage from './pages/TutorshipPage';
+import TutorProfilePage from './pages/TutorProfilePage';
+import TutorshipHistoy from './pages/TutorshipHistory'
 
 function App() {
   const token = useSelector((state) => state.token);
@@ -46,7 +48,8 @@ function App() {
           <Route exact path="/tutor-profile" component={TutorProfilePage} />
           <Route exact path="/tutor/:id" component={TutorDetailsPage} />
           <PrivateRoute exact path="/tutor/:id/schedule" component={TutorsSchedule} />
-          <PrivateRoute exact path="/create tutorship" component={TutorshipPage} />
+          <PrivateRoute exact path="/create-tutorship" component={TutorshipPage} />
+          <PrivateRoute exact path="/tutorship-history" component={TutorshipHistoy} />
 
           <Route path="*" component={errorPage} />
         </Switch>
