@@ -19,7 +19,7 @@ function TutorDashboard() {
         <option>
           {location === '/profile'
             ? 'Profile'
-            : location === '/create tutorship'
+            : location === 'create-tutorship'
             ? 'Create Tutorship'
             : 'Choose a category'}
         </option>
@@ -28,12 +28,12 @@ function TutorDashboard() {
             Profile
           </option>
         )}
-        {location !== '/create tutorship' && (
+        {location !== '/create-tutorship' && (
           <option className="tutor-dashboard__selector-element" value="create tutorship">
             Create Tutorship
           </option>
         )}
-        {location !== '/tutorship history' && (
+        {location !== '/tutorship-history' && (
           <option className="tutor-dashboard__selector-element" value="tutorship history">
             Tutorships History
           </option>
@@ -47,16 +47,16 @@ function TutorDashboard() {
         Profile
       </button>
       <button
-        className={location === '/create tutorship' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
+        className={location === 'create-tutorship' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
         onClick={handleClick}
-        name="create tutorship"
+        name="create-tutorship"
       >
         Create Tutorship
       </button>
       <button
-        className={location === '/tutorship history' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
+        className={location === '/tutorship-history' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
         onClick={handleClick}
-        name="tutorship history"
+        name="tutorship-history"
       >
         Tutorships History
       </button>
