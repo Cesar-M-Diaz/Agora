@@ -14,7 +14,6 @@ function StudentProfileTutorships() {
   const [state, setState] = useState({
     tutorships: [],
     loading: true,
-    renderSwitch: false,
   });
 
   useEffect(() => {
@@ -27,6 +26,7 @@ function StudentProfileTutorships() {
       }));
     };
     getTutorships();
+    renderSwitch: false,
   }, [id, state.renderSwitch]);
 
   const handleClick = async (data, e) => {
@@ -39,9 +39,7 @@ function StudentProfileTutorships() {
         cancel: 'No, return',
       },
       Rate: {
-        component: (
-          <StudentRateTutorship swal={mySwal} student={id} tutor={data.tutor} tutorshipId={data.tutorshipId} />
-        ),
+        component: <StudentRateTutorship swal={mySwal} student={id} tutor={data.tutor} tutorship={data.tutorshipId} setState={setState} />,
         confirm: false,
         cancel: false,
       },
@@ -69,7 +67,7 @@ function StudentProfileTutorships() {
         ? 'Loading...'
         : state.tutorships.map((tutorship) => {
             const { name, focus, profile_photo, email } = tutorship.tutor_id;
-            const { status, _id: id } = tutorship;
+            const { status, _id: id, isRated } = tutorship;
             const date = new Date(tutorship.date);
             return (
               <div key={id} className="student__tutorship-container">
@@ -112,7 +110,7 @@ function StudentProfileTutorships() {
                           Contact
                         </a>
                       )}
-                      {status === 'completed' && (
+                      {status === "completed" && !isRated && (
                         <button
                           onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
                           className="student__tutorship__buttons__rate-button"
