@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "../utils/axios";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from '../utils/axios';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import history from '../utils/history';
+import StudentCancelTutorship from './StudentCancelTutorship';
+import StudentRateTutorship from './StudentRateTutorship';
 
-import StudentCancelTutorship from "./StudentCancelTutorship";
-import StudentRateTutorship from "./StudentRateTutorship";
-
-import "../assets/styles/components/StudentProfileTutorships.scss";
+import '../assets/styles/components/StudentProfileTutorships.scss';
 
 function StudentProfileTutorships() {
   const id = useSelector((state) => state.currentUser._id);
   const [state, setState] = useState({
     tutorships: [],
     loading: true,
-    renderSwitch: false
   });
 
   useEffect(() => {
@@ -27,6 +26,7 @@ function StudentProfileTutorships() {
       }));
     };
     getTutorships();
+    renderSwitch: false,
   }, [id, state.renderSwitch]);
 
   const handleClick = async (data, e) => {
@@ -35,10 +35,9 @@ function StudentProfileTutorships() {
     const buttons = {
       Cancel: {
         component: <StudentCancelTutorship swal={mySwal} tutorshipId={data.tutorshipId} setState={setState} />,
-        confirm: "Yes, cancel",
-        cancel: "No, return",
+        confirm: 'Yes, cancel',
+        cancel: 'No, return',
       },
-      Pay: "pay",
       Rate: {
         component: <StudentRateTutorship swal={mySwal} student={id} tutor={data.tutor} tutorship={data.tutorshipId} setState={setState} />,
         confirm: false,
@@ -50,15 +49,22 @@ function StudentProfileTutorships() {
     await mySwal.fire({
       html: action.component,
       showCloseButton: true,
-      showConfirmButton: false
+      showConfirmButton: false,
     });
   };
+
+  function handlePayment(data, e) {
+    e.preventDefault();
+    history.push(`/checkout/${data.tutorshipId}`, {
+      state: { tutorship_id: data.tutorshipId, tutorship_price: data.tutorshipPrice },
+    });
+  }
 
   return (
     <div className="student__tutorships-container">
       <h1 className="student__tutorships-title">My Tutorships</h1>
       {state.loading
-        ? "Loading..."
+        ? 'Loading...'
         : state.tutorships.map((tutorship) => {
             const { name, focus, profile_photo, email } = tutorship.tutor_id;
             const { status, _id: id, isRated } = tutorship;
@@ -66,55 +72,47 @@ function StudentProfileTutorships() {
             return (
               <div key={id} className="student__tutorship-container">
                 <div className="student__tutorship__image-container">
-                  <img
-                    src={profile_photo}
-                    alt={name}
-                    className="student__tutorship__image"
-                  />
+                  <img src={profile_photo} alt={name} className="student__tutorship__image" />
                 </div>
                 <div className="student__tutorship__description-container">
                   <h2 className="student__tutorship__description-title">
                     {focus} tutorship with {name}
                   </h2>
                   <p className="student__tutorship__date">
-                    Tutorship scheduled for{" "}
-                    <strong>{date.toDateString()}</strong> at{" "}
-                    <strong>{date.getHours() + ":" + date.getMinutes()}</strong>
+                    Tutorship scheduled for <strong>{date.toDateString()}</strong> at{' '}
+                    <strong>{date.getHours() + ':' + date.getMinutes()}</strong>
                   </p>
                   <div className="student__tutorship__status-and-buttons-container">
                     <div className="student__tutorship__status-container">
                       <span>STATUS: {status}</span>
                     </div>
                     <div className="student__tutorship__buttons-container">
-                      {status === "pending" && (
+                      {status === 'pending' && (
                         <>
                           <button
-                            onClick={handleClick}
+                            onClick={(e) =>
+                              handlePayment({ tutorshipPrice: tutorship.tutor_id.price, tutorshipId: id }, e)
+                            }
                             className="student__tutorship__buttons__pay-button"
                           >
                             Pay
                           </button>
                           <button
-                            onClick={e => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
+                            onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
                             className="student__tutorship__buttons__cancel-button"
                           >
                             Cancel
                           </button>
                         </>
                       )}
-                      {status === "accepted" && (
-                        <a
-                          href={`mailto:${email}`}
-                          className="student__tutorship__buttons__contact-button"
-                        >
+                      {status === 'accepted' && (
+                        <a href={`mailto:${email}`} className="student__tutorship__buttons__contact-button">
                           Contact
                         </a>
                       )}
                       {status === "completed" && !isRated && (
                         <button
-                          onClick={(e) =>
-                            handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)
-                          }
+                          onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
                           className="student__tutorship__buttons__rate-button"
                         >
                           Rate
