@@ -12,7 +12,6 @@ function TutorshipPage() {
   const MySwal = withReactContent(Swal);
   const tutor_id = useSelector((state) => state.currentUser._id);
   const [tutorshipData, setTutorshipData] = useState({
-    name: '',
     email: '',
     date: '',
     time: '',
@@ -20,12 +19,11 @@ function TutorshipPage() {
   });
   const [errors, setErrors] = useState({
     errors: {
-      name: '',
       email: '',
       date: '',
       time: '',
     },
-    isValid: { name: false, email: false, date: false, time: true },
+    isValid: { email: false, date: false, time: true },
     enableUpload: false,
   });
 
@@ -46,40 +44,6 @@ function TutorshipPage() {
   function validateInput(e) {
     const input = e.target.name;
     const value = e.target.value;
-    if (input === 'name') {
-      const re = /^[a-zA-Z\s]*$/;
-      if (value.length < 4) {
-        setErrors((state) => ({
-          ...state,
-          errors: {
-            ...state.errors,
-            name: 'Name is too short',
-          },
-          isValid: { ...state.isValid, name: false },
-          enableUpload: false,
-        }));
-      } else if (!re.test(String(e.target.value).toLowerCase())) {
-        setErrors((state) => ({
-          ...state,
-          errors: {
-            ...state.errors,
-            name: 'Name must only contain letters',
-          },
-          isValid: { ...state.isValid, name: false },
-          enableUpload: false,
-        }));
-      } else {
-        setErrors((state) => ({
-          ...state,
-          errors: {
-            ...state.errors,
-            name: '',
-          },
-          isValid: { ...state.isValid, name: true },
-          enableUpload: state.isValid.email && state.isValid.date && state.isValid.time,
-        }));
-      }
-    }
     if (input === 'email') {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -101,7 +65,7 @@ function TutorshipPage() {
             email: '',
           },
           isValid: { ...state.isValid, email: true },
-          enableUpload: state.isValid.name && state.isValid.date && state.isValid.time,
+          enableUpload: state.isValid.date && state.isValid.time,
         }));
       }
     }
@@ -124,7 +88,7 @@ function TutorshipPage() {
             date: '',
           },
           isValid: { ...state.isValid, date: true },
-          enableUpload: state.isValid.name && state.isValid.email && state.isValid.time,
+          enableUpload: state.isValid.email && state.isValid.time,
         }));
       }
     }
@@ -147,7 +111,7 @@ function TutorshipPage() {
             time: '',
           },
           isValid: { ...state.isValid, time: true },
-          enableUpload: state.isValid.name && state.isValid.email && state.isValid.date,
+          enableUpload: state.isValid.email && state.isValid.date,
         }));
       }
     }
@@ -185,18 +149,6 @@ function TutorshipPage() {
       <TutorDashboard />
       <div className="tutorship__profile-body">
         <form action="" className="tutorship__form" onSubmit={handleSubmit}>
-          <div className="tutorship__form-slot">
-            <label>Student Name</label>
-            <input
-              onBlur={validateInput}
-              type="text"
-              name="name"
-              placeholder="Student name"
-              onChange={handleChange}
-              value={tutorshipData.name}
-            />
-            <span className="tutorship__errors">{errors.errors.name}</span>
-          </div>
           <div className="tutorship__form-slot">
             <label>Student Email</label>
             <input
