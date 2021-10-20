@@ -8,34 +8,97 @@ $color-b: #0de26f;
 $font-weight: 400;
 $font-selected-weight: 800;
 $spacing: 20px;
+$primary-color-dark: #1a90aa;
+$primary-color: #22b8d9;
+$secondary-color: #ffffff;
+$secondary-color-dark: #d3d3d3;
+$alpha-background: #55555555;
+$color-b: #0de26f;
+$color-b-dark: #0b753d;
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.tutor-dashboard__body {
+.tutor-profile-menu-select {
+  border: 1px solid $color-b;
+  color: $color-b;
+  font-size: 2rem;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin: 10px;
+  padding: 15px 0;
 }
 
-.tutor-dashboard__selector {
+.tutor-profile-menu-option {
+  height: 40px;
+}
+
+.tutor-profile-menu-select:focus {
+  outline: none;
+}
+
+.tutor-profile-menu-list {
+  list-style: none;
+}
+
+.tutor-profile-menu-list > a {
+  text-decoration: none;
+}
+
+.tutor-profile-menu-item {
+  display: flex;
+  align-items: center;
+  font-family: 'Source Code Pro', monospace;
+  background-color: white;
+  color: #5b5b5b;
+  border: 1px solid #5b5b5b;
+  text-align: left;
+  padding-left: 20px;
+  height: 54px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 100%;
+  cursor: pointer;
+}
+
+.tutor-profile-menu-item:hover {
+  color: $color-b;
+  border-color: $color-b;
+}
+
+.tutor-profile-menu-item.selected {
+  font-family: 'Source Code Pro', monospace;
+  text-align: left;
+  padding-left: 20px;
+  height: 54px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 100%;
+  transform: translateY(-3px);
+  box-shadow: -5px 5px rgb(0 0 0 / 20%);
+  border: 1px solid #0de26f;
+  background-color: #0de26f;
+  color: white;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.tutor-profile-menu.md {
+  display: none;
+}
+
+.tutor-profile-menu-select {
   font-family: 'Source Code Pro', monospace;
   letter-spacing: 1px;
   background-color: white;
-  color: $color-b;
-  border: 2px solid $color-b;
+  color: #0de26f;
+  border: 2px solid #0de26f;
   text-align: left;
   padding-left: 10px;
   height: 54px;
   margin-bottom: 20px;
   font-size: 1rem;
-  font-weight: $font-selected-weight;
+  font-weight: 800;
   width: 100%;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 15%);
   &:hover {
     background-color: $color-b;
     color: white;
@@ -44,57 +107,16 @@ $spacing: 20px;
   }
 }
 
-.tutor-dashboard__selector-element {
-  color: $title-color;
-}
-
-.tutor-dashboard__button {
-  display: none;
-  font-family: 'Source Code Pro', monospace;
-  background-color: white;
-  color: $subtitle-color;
-  border: 1px solid $subtitle-color;
-  text-align: left;
-  padding-left: 20px;
-  height: 54px;
-  margin-bottom: $spacing;
-  font-size: 1rem;
-  font-weight: $font-weight;
-  width: 100%;
-  &:hover {
-    border: 1px solid $color-b;
-    background-color: white;
-    color: $color-b;
-    cursor: pointer;
-    font-weight: $font-selected-weight;
+@media screen and(min-width: 992px) {
+  .tutor-profile__credentials {
+    width: 100%;
   }
-}
 
-.tutor-dashboard__button:focus {
-  transform: translateY(-3px);
-  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
-  border: 1px solid $color-b;
-  background-color: $color-b;
-  color: white;
-  cursor: pointer;
-  font-weight: $font-selected-weight;
-}
-
-.tutor-dashboard__button-selected {
-  display: none;
-  font-family: 'Source Code Pro', monospace;
-  text-align: left;
-  padding-left: 20px;
-  height: 54px;
-  margin-bottom: $spacing;
-  font-size: 1rem;
-  font-weight: $font-weight;
-  width: 100%;
-  transform: translateY(-3px);
-  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
-  border: 1px solid $color-b;
-  background-color: $color-b;
-  color: white;
-  cursor: pointer;
-  font-weight: $font-selected-weight;
+  .tutor-profile-menu-select.sm {
+    display: none;
+  }
+  .tutor-profile-menu.md {
+    width: 100%;
+    display: block;
+  }
 }
