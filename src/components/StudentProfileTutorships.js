@@ -6,6 +6,7 @@ import withReactContent from 'sweetalert2-react-content';
 import history from '../utils/history';
 import StudentCancelTutorship from './StudentCancelTutorship';
 import StudentRateTutorship from './StudentRateTutorship';
+import Loader from './Loader';
 
 import '../assets/styles/components/StudentProfileTutorships.scss';
 
@@ -23,10 +24,10 @@ function StudentProfileTutorships() {
         ...prevState,
         loading: false,
         tutorships: data,
+        renderSwitch: false,
       }));
     };
     getTutorships();
-    renderSwitch: false,
   }, [id, state.renderSwitch]);
 
   const handleClick = async (data, e) => {
@@ -39,7 +40,15 @@ function StudentProfileTutorships() {
         cancel: 'No, return',
       },
       Rate: {
-        component: <StudentRateTutorship swal={mySwal} student={id} tutor={data.tutor} tutorship={data.tutorshipId} setState={setState} />,
+        component: (
+          <StudentRateTutorship
+            swal={mySwal}
+            student={id}
+            tutor={data.tutor}
+            tutorship={data.tutorshipId}
+            setState={setState}
+          />
+        ),
         confirm: false,
         cancel: false,
       },
@@ -62,68 +71,69 @@ function StudentProfileTutorships() {
 
   return (
     <div className="student__tutorships-container">
-      <h1 className="student__tutorships-title">My Tutorships</h1>
-      {state.loading
-        ? 'Loading...'
-        : state.tutorships.map((tutorship) => {
-            const { name, focus, profile_photo, email } = tutorship.tutor_id;
-            const { status, _id: id, isRated } = tutorship;
-            const date = new Date(tutorship.date);
-            return (
-              <div key={id} className="student__tutorship-container">
-                <div className="student__tutorship__image-container">
-                  <img src={profile_photo} alt={name} className="student__tutorship__image" />
-                </div>
-                <div className="student__tutorship__description-container">
-                  <h2 className="student__tutorship__description-title">
-                    {focus} tutorship with {name}
-                  </h2>
-                  <p className="student__tutorship__date">
-                    Tutorship scheduled for <strong>{date.toDateString()}</strong> at{' '}
-                    <strong>{date.getHours() + ':' + date.getMinutes()}</strong>
-                  </p>
-                  <div className="student__tutorship__status-and-buttons-container">
-                    <div className="student__tutorship__status-container">
-                      <span>STATUS: {status}</span>
-                    </div>
-                    <div className="student__tutorship__buttons-container">
-                      {status === 'pending' && (
-                        <>
-                          <button
-                            onClick={(e) =>
-                              handlePayment({ tutorshipPrice: tutorship.tutor_id.price, tutorshipId: id }, e)
-                            }
-                            className="student__tutorship__buttons__pay-button"
-                          >
-                            Pay
-                          </button>
-                          <button
-                            onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
-                            className="student__tutorship__buttons__cancel-button"
-                          >
-                            Cancel
-                          </button>
-                        </>
-                      )}
-                      {status === 'accepted' && (
-                        <a href={`mailto:${email}`} className="student__tutorship__buttons__contact-button">
-                          Contact
-                        </a>
-                      )}
-                      {status === "completed" && !isRated && (
+      {state.loading ? (
+        <Loader />
+      ) : (
+        state.tutorships.map((tutorship) => {
+          const { name, focus, profile_photo, email } = tutorship.tutor_id;
+          const { status, _id: id, isRated } = tutorship;
+          const date = new Date(tutorship.date);
+          return (
+            <div key={id} className="student__tutorship-container">
+              <div className="student__tutorship__image-container">
+                <img src={profile_photo} alt={name} className="student__tutorship__image" />
+              </div>
+              <div className="student__tutorship__description-container">
+                <h2 className="student__tutorship__description-title">
+                  {focus} tutorship with {name}
+                </h2>
+                <p className="student__tutorship__date">
+                  Tutorship scheduled for <strong>{date.toDateString()}</strong> at{' '}
+                  <strong>{date.getHours() + ':' + date.getMinutes()}</strong>
+                </p>
+                <div className="student__tutorship__status-and-buttons-container">
+                  <div className="student__tutorship__status-container">
+                    <span>STATUS: {status}</span>
+                  </div>
+                  <div className="student__tutorship__buttons-container">
+                    {status === 'pending' && (
+                      <>
+                        <button
+                          onClick={(e) =>
+                            handlePayment({ tutorshipPrice: tutorship.tutor_id.price, tutorshipId: id }, e)
+                          }
+                          className="student__tutorship__buttons__pay-button"
+                        >
+                          Pay
+                        </button>
                         <button
                           onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
-                          className="student__tutorship__buttons__rate-button"
+                          className="student__tutorship__buttons__cancel-button"
                         >
-                          Rate
+                          Cancel
                         </button>
-                      )}
-                    </div>
+                      </>
+                    )}
+                    {status === 'accepted' && (
+                      <a href={`mailto:${email}`} className="student__tutorship__buttons__contact-button">
+                        Contact
+                      </a>
+                    )}
+                    {status === 'completed' && !isRated && (
+                      <button
+                        onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
+                        className="student__tutorship__buttons__rate-button"
+                      >
+                        Rate
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          );
+        })
+      )}
     </div>
   );
 }

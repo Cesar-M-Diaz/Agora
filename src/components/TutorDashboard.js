@@ -17,11 +17,11 @@ function TutorDashboard() {
     <main className="tutor-dashboard__body">
       <select name="page selector" className="tutor-dashboard__selector" onChange={handleChange}>
         <option>
-          {location === '/profile'
+          {location === '/profile' || '/profile/edit'
             ? 'Profile'
-            : location === 'create-tutorship'
+            : location === '/create-tutorship'
             ? 'Create Tutorship'
-            : 'Choose a category'}
+            : 'Tutorships History'}
         </option>
         {location !== '/profile' && (
           <option className="tutor-dashboard__selector-element" value="profile">
@@ -29,12 +29,12 @@ function TutorDashboard() {
           </option>
         )}
         {location !== '/create-tutorship' && (
-          <option className="tutor-dashboard__selector-element" value="create tutorship">
+          <option className="tutor-dashboard__selector-element" value="create-tutorship">
             Create Tutorship
           </option>
         )}
         {location !== '/tutorship-history' && (
-          <option className="tutor-dashboard__selector-element" value="tutorship history">
+          <option className="tutor-dashboard__selector-element" value="tutorship-history">
             Tutorships History
           </option>
         )}
