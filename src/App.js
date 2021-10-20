@@ -18,10 +18,8 @@ import { SearchPage } from './pages/searchPage';
 import ScrollToTop from './utils/ScrollToTop';
 import TutorsSchedule from './pages/TutorsSchedule';
 import TutorshipPage from './pages/TutorshipPage';
-import TutorProfilePage from './pages/TutorProfilePage';
-import TutorshipHistoy from './pages/TutorshipHistory'
+import TutorshipHistoy from './pages/TutorshipHistory';
 import CheckoutPage from './pages/CheckoutPage';
-
 
 function App() {
   const token = useSelector((state) => state.token);
