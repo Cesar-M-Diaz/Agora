@@ -63,9 +63,9 @@ function Header() {
     }))
   }
 
-  const SignOut = () => {
+  const SignOut = async () => {
     profileTooltipCollapse()
-    setState((prevState) => ({
+    await setState((prevState) => ({
       ...prevState,
       isMenuCollapsed: true,
       isProfileTooltipCollapsed: true,
