@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from '../utils/axios';
 import { useSelector } from 'react-redux';
 import TutorDashboard from '../components/TutorDashboard';
-import '../assets/styles/pages/TutorEditProfile.scss';
 import history from '../utils/history';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import '../assets/styles/pages/TutorEditProfile.scss';
 
 function TutorProfilePage() {
   const MySwal = withReactContent(Swal);
@@ -13,7 +15,13 @@ function TutorProfilePage() {
   const token = useSelector((state) => state.token);
   const [previewPhoto, setPreviewPhoto] = useState('');
   const [image, setImage] = useState('');
-  const [profileMode, setProfileMode] = useState('view');
+  const [isDisabled, setIsDisabled] = useState({
+    name: true,
+    email: true,
+    password: true,
+    schedule: true,
+    description: true,
+  });
   const [previewData, setPreviewData] = useState({
     name: '',
     email: '',
@@ -35,7 +43,7 @@ function TutorProfilePage() {
       schedule: '',
     },
     isValid: { name: true, password: true, email: true, schedule: true },
-    enableUpload: true,
+    enableUpload: false,
   });
 
   useEffect(() => {
@@ -56,30 +64,6 @@ function TutorProfilePage() {
         ...state.inputs,
         [e.target.name]: e.target.value,
       },
-    }));
-  }
-
-  function enableEditMode(e) {
-    e.preventDefault();
-    setProfileMode('edit');
-  }
-
-  function cancelEdit(e) {
-    e.preventDefault();
-    setProfileMode('view');
-    setPreviewPhoto(globalUser.profile_photo);
-    setUserData((state) => ({
-      ...state,
-      inputs: {
-        name: globalUser.name,
-        email: globalUser.email,
-        description: globalUser.description,
-        schedule: globalUser.schedule,
-        password: '',
-      },
-      errors: { name: '', email: '', password: '', schedule: '' },
-      isValid: { name: true, password: true, email: true, schedule: true },
-      enableUpload: true,
     }));
   }
 
@@ -193,9 +177,31 @@ function TutorProfilePage() {
     }
   }
 
+  const handleClick = (e) => {
+    const buttonClass = e.currentTarget.className;
+    if (buttonClass.match(/email/)) {
+      setIsDisabled((prevState) => ({ ...prevState, email: !prevState.email }));
+    } else if (buttonClass.match(/password/)) {
+      setIsDisabled((prevState) => ({
+        ...prevState,
+        password: !prevState.password,
+      }));
+    } else if (buttonClass.match(/name/)) {
+      setIsDisabled((prevState) => ({ ...prevState, name: !prevState.name }));
+    } else if (buttonClass.match(/description/)) {
+      setIsDisabled((prevState) => ({ ...prevState, description: !prevState.description }));
+    } else if (buttonClass.match(/schedule/)) {
+      setIsDisabled((prevState) => ({ ...prevState, schedule: !prevState.schedule }));
+    }
+  };
+
   function onChangeFile(e) {
     setImage(e.target.files[0]);
     setPreviewPhoto(URL.createObjectURL(e.target.files[0]));
+    setUserData((state) => ({
+      ...state,
+      enableUpload: true,
+    }));
   }
 
   const onSubmit = async (e) => {
@@ -242,95 +248,115 @@ function TutorProfilePage() {
       <div className="tutor-edit__profile-body">
         <div className="tutor-edit__photo-container">
           <img src={previewPhoto} className="tutor-edit__photo" alt="user" />
-          <label
-            htmlFor="upload"
-            className={profileMode === 'edit' ? 'tutor-edit__button-photo' : 'tutor-edit__button-photo-disabled'}
-          >
+          <label htmlFor="upload" className="tutor-edit__button-photo">
             upload photo
           </label>
-          <input type="file" id="upload" onChange={onChangeFile} hidden disabled={profileMode === 'view'} />
+          <input type="file" id="upload" onChange={onChangeFile} hidden type="file" accept="image/png, image/jpeg" />
         </div>
         <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
-          {profileMode !== 'edit' && (
-            <button className="tutor-edit__button-edit" onClick={enableEditMode}>
-              Edit Profile
-            </button>
-          )}
-          {profileMode !== 'view' && (
-            <div className="tutor-edit__button-container">
-              <input
-                type="submit"
-                value="save changes"
-                className={`tutor-edit__button-submit ${!userData.enableUpload && 'disabled'}`}
-                disabled={!userData.enableUpload}
-              />
-              <button className="tutor-edit__button-cancel" onClick={cancelEdit}>
-                cancel
-              </button>
-            </div>
-          )}
           <div className="tutor-edit__form-slot">
             <label>Name</label>
-            <input
-              onBlur={validateInput}
-              type="text"
-              name="name"
-              defaultValue={previewData.name}
-              onChange={handleChange}
-              disabled={profileMode === 'view'}
-            />
+            <div className="tutor-edit__form-slot-container">
+              <input
+                onBlur={validateInput}
+                type="text"
+                name="name"
+                defaultValue={previewData.name}
+                onChange={handleChange}
+                disabled={isDisabled.name}
+              />
+              <button onClick={handleClick} className="tutor-profile__credentials__name-input-button" type="button">
+                <FontAwesomeIcon icon={faPencilAlt} />
+              </button>
+            </div>
             <span className="tutor-edit__errors">{userData.errors.name}</span>
           </div>
           <div className="tutor-edit__form-slot">
             <label>Email</label>
-            <input
-              onBlur={validateInput}
-              defaultValue={previewData.email}
-              type="text"
-              name="email"
-              onChange={handleChange}
-              disabled={profileMode === 'view'}
-            />
+            <div className="tutor-edit__form-slot-container">
+              <input
+                onBlur={validateInput}
+                defaultValue={previewData.email}
+                type="text"
+                name="email"
+                onChange={handleChange}
+                disabled={isDisabled.email}
+              />
+              <button onClick={handleClick} className="tutor-profile__credentials__email-input-button" type="button">
+                <FontAwesomeIcon icon={faPencilAlt} />
+              </button>
+            </div>
             <span className="tutor-edit__errors">{userData.errors.email}</span>
           </div>
           <div className="tutor-edit__form-slot">
             <label>Password</label>
-            <input
-              onBlur={validateInput}
-              defaultValue="12345"
-              type="password"
-              name="password"
-              onChange={handleChange}
-              disabled={profileMode === 'view'}
-            />
+            <div className="tutor-edit__form-slot-container">
+              <input
+                onBlur={validateInput}
+                defaultValue="12345"
+                type="password"
+                name="password"
+                onChange={handleChange}
+                disabled={isDisabled.password}
+              />
+              <button onClick={handleClick} className="tutor-profile__credentials__password-input-button" type="button">
+                <FontAwesomeIcon icon={faPencilAlt} />
+              </button>
+            </div>
             <span className="tutor-edit__errors">{userData.errors.password}</span>
             <div className="tutor-edit__form-slot">
               <label>Schedule</label>
-              <input
-                onBlur={validateInput}
-                defaultValue={previewData.schedule}
-                placeholder="please type your schedule, example from mondays to fridays, from 8:30am to 5:00pm"
-                type="text"
-                name="schedule"
-                onChange={handleChange}
-                disabled={profileMode === 'view'}
-              />
+              <div className="tutor-edit__form-slot-container">
+                <input
+                  onBlur={validateInput}
+                  defaultValue={previewData.schedule}
+                  placeholder="please type your schedule, example from mondays to fridays, from 8:30am to 5:00pm"
+                  type="text"
+                  name="schedule"
+                  onChange={handleChange}
+                  disabled={isDisabled.schedule}
+                />
+                <button
+                  onClick={handleClick}
+                  className="tutor-profile__credentials__schedule-input-button"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faPencilAlt} />
+                </button>
+              </div>
               <span className="tutor-edit__errors">{userData.errors.schedule}</span>
             </div>
           </div>
           <div className="tutor-edit__form-slot">
             <label>Description</label>
-            <textarea
-              id="form"
-              name="description"
-              onChange={handleChange}
-              defaultValue={previewData.description}
-              placeholder="Let our students know something about you"
-              cols="30"
-              rows="10"
-              className="tutor-edit__form-description"
-              disabled={profileMode === 'view'}
-            ></textarea>
+            <div className="tutor-edit__form-slot-container">
+              <textarea
+                id="form"
+                name="description"
+                onChange={handleChange}
+                defaultValue={previewData.description}
+                placeholder="Let our students know something about you"
+                cols="30"
+                rows="10"
+                className="tutor-edit__form-description"
+                disabled={isDisabled.description}
+              ></textarea>
+              <button
+                onClick={handleClick}
+                className="tutor-profile__credentials__description-input-button"
+                type="button"
+              >
+                <FontAwesomeIcon icon={faPencilAlt} />
+              </button>
+            </div>
+          </div>
+          <div className="tutor-edit__button-container">
+            <input
+              type="submit"
+              value="save changes"
+              className={`tutor-edit__button-submit ${!userData.enableUpload && 'disabled'}`}
+              disabled={!userData.enableUpload}
+            />
           </div>
         </form>
       </div>
