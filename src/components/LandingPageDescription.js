@@ -1,7 +1,6 @@
 import React from 'react';
-import illustration__main from '../assets/images/study.svg';
-import illustration__secondary from '../assets/images/tutors.svg';
 import '../assets/styles/components/LandigPageDescription.scss';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 function LandingPageDescription() {
   return (
@@ -11,40 +10,37 @@ function LandingPageDescription() {
           <p className="description__title">
             For each student,{' '}
             <span className="description__text--breack">
-              a <span className="description__text--highlight">commited</span>{' '}
-              tutor.
+              a <span className="description__text--highlight">commited</span> tutor.
             </span>
           </p>
           <p className="description__subtitle">
-            For each question.{' '}
-            <span className="description__text--breack">The right answer.</span>
+            For each question. <span className="description__text--breack">The right answer.</span>
           </p>
           <div className="description__line"></div>
         </section>
-        <img
+        <Player
+          autoplay
+          loop
+          src="https://assets6.lottiefiles.com/packages/lf20_tykkhlvn.json"
           className="description__illustration"
-          src={illustration__main}
-          alt="main illustration"
-        />
+        ></Player>
       </section>
       <section className="description-secondary__container">
         <div className="description-secondary__text-container">
           <p className="description__title">
             Ask <span className="description__text--highlight">anything</span>,{' '}
-            <span className="description__text--breack">
-              we've got you covered
-            </span>
+            <span className="description__text--breack">we've got you covered</span>
           </p>
           <p className="description__subtitle">
-            Search for every subject you can imagine, a spetialized tutor will
-            help you with your problem
+            Search for every subject you can imagine, a spetialized tutor will help you with your problem
           </p>
         </div>
-        <img
+        <Player
+          autoplay
+          loop
+          src="https://assets2.lottiefiles.com/packages/lf20_dikusanq.json"
           className="description__illustration"
-          src={illustration__secondary}
-          alt="secondary illustration"
-        />
+        ></Player>
       </section>
     </>
   );
