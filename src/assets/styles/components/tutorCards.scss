@@ -11,15 +11,14 @@ $select-color: #0de26f;
 
 .card {
   border: 3px gray solid;
-  width: 300px;
-  height: 150px;
+  width: 80vw;
+  height: 180px;
   display: flex;
-  margin-bottom: 25px;
-  padding: 20px;
   font-family: 'Open Sans';
   cursor: pointer;
   user-select: none;
   color: #112031;
+  margin: 10px;
 }
 
 .card:hover {
@@ -28,35 +27,36 @@ $select-color: #0de26f;
 }
 
 .card-visual-info {
+  
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: column;
-  width: 150px;
-  height: 150px;
+  width: 30vw;
+  height: 180px;
   img {
-    width: 100px;
+    width: 25vw;
     height: 100px;
-    // margin-top: 5px;
+    margin-top: 5px;
     object-fit: cover;
     border-radius: 50%;
   }
   h1 {
-    font-size: 0.9rem;
-    margin: 0;
+    font-size: 12px;
+    text-align: center;
   }
 }
 
 .card-tutor-info {
-  width: 150px;
-  height: 150px;
+  width: 50vw;
+  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   h2 {
-    font-size: 20px;
+    font-size: 1rem;
     margin: 0;
     text-align: center;
   }
@@ -69,37 +69,44 @@ $select-color: #0de26f;
   p {
     font-size: 0.7rem;
     text-align: justify;
-    margin-top: 5px;
-    width: 130px;
-    height: 60px;
+    margin-bottom: 5px;
+    width: 43vw;
+    height: 80px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 600;
+    text-overflow: hidden;
+
 
   }
 }
 
 .card-stars {
-  width: 100px;
-  height: 20px;
+  width: 30vw;
+  height: 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   color: #ffb319;
+  margin-left: 25px;
+}
+
+.price{
+  font-size: 20px !important;
+  color: $select-color;
 }
 
 /* Tablets */
 
 @media (min-width: 768px) {
   .card {
-    width: 300px;
-    height: 200px;
+    width: 350px;
+    height: 250px;
   }
 
   .card-visual-info {
-    width: 100px;
-    height: 200px;
+    width: 150px;
+    height: 250px;
     text-align: center;
+    
     img {
       width: 100px;
       height: 100px;
@@ -110,23 +117,25 @@ $select-color: #0de26f;
       font-size: 1.3rem;
     }
     p {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      padding: 5px;
     }
   }
 
   .card-tutor-info {
     width: 200px;
-    height: 200px;
+    height: 250px;
     text-align: center;
     h2 {
       font-size: 1.3rem;
     }
     h3 {
-      font-size: 1.1rem;
+      font-size: 1.0rem;
     }
     p {
-      width: 150px;
+      width: 180px;
       height: 90px;
+      font-size: 0.9rem;
     }
   }
 
@@ -139,42 +148,48 @@ $select-color: #0de26f;
 /* Monitores */
 @media (min-width: 992px) {
   .card {
-    width: 320px;
-    height: 220px;
+    width: 350px;
+    height: 250px;
     padding: 5px;
   }
 
   .card-visual-info {
     width: 150px;
-    height: 220px;
+    height: 250px;
     img {
       width: 130px;
       height: 130px;
     }
     h1 {
-      font-size: 1.3rem;
+      font-size: 1.0rem;
     }
     p {
-      font-size: 1.1rem;
+      font-size: 1.0rem;
     }
   }
 
   .card-tutor-info {
-    width: 200px;
-    height: 220px;
+    width: 190px;
+    height: 250px;
     h2 {
       font-size: 1.3rem;
+      width: 200px;
+      height: 50px;
     }
     h3 {
       font-size: 1.1rem;
+      width: 200px;
+      height: 25px;
     }
     p {
-      font-size: 0.8rem;
-      margin: 5px;
+      font-size:1rem;
+      width: 200px;
+      height: 135px;
     }
   }
 
   .card-stars {
     width: 100px;
+    margin-left: 20px;
   }
 }

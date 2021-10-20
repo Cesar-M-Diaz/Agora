@@ -4,7 +4,7 @@ import '../assets/styles/components/tutorCards.scss';
 import history from '../utils/history';
 
 function TutorsCard(tutor) {
-  const { rating, profile_photo, name, profession, focus, description, _id } =
+  const { rating, profile_photo, name, profession, focus, description, _id, price } =
     tutor.props;
   const starNodes = [];
 
@@ -22,6 +22,7 @@ function TutorsCard(tutor) {
         <img src={profile_photo} alt="profilepicture"></img>
         <h1 key={name}>{name}</h1>
         <div className="card-stars" >{starNodes}</div>
+        <p className="price">$ {price.toLocaleString()}</p>
       </div>
       <div className="card-tutor-info">
         <h2 key = {profession}>{profession}</h2>
