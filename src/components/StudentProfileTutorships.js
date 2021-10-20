@@ -89,7 +89,7 @@ function StudentProfileTutorships() {
                 </h2>
                 <p className="student__tutorship__date">
                   Tutorship scheduled for <strong>{date.toDateString()}</strong> at{' '}
-                  <strong>{date.getHours() + ':' + date.getMinutes()}</strong>
+                  <strong>{date.getUTCHours() + ':' + date.getUTCMinutes()}</strong>
                 </p>
                 <div className="student__tutorship__status-and-buttons-container">
                   <div className="student__tutorship__status-container">
