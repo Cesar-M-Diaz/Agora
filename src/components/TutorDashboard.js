@@ -1,67 +1,66 @@
-import React from 'react';
-import '../assets/styles/components/TutorDashboard.scss';
+import { useEffect, useState } from 'react';
 import history from '../utils/history';
+import '../assets/styles/components/TutorDashboard.scss';
 
-function TutorDashboard() {
-  const location = history.location.pathname;
+function TutorshipDashboard({ page }) {
+  const [selected, setSelected] = useState('Edit Profile');
 
-  function handleClick(e) {
-    e.preventDefault();
-    history.push(`/${e.target.name}`);
-  }
-  function handleChange(e) {
-    history.push(`/${e.target.value}`);
-  }
+  const handleSelect = (e) => {
+    const value = e.target.id || e.target.value;
+    setSelected(value);
+    history.push(`/profile/${value}`);
+  };
+
+  useEffect(() => {
+    setSelected(page);
+  }, [page]);
 
   return (
-    <main className="tutor-dashboard__body">
-      <select name="page selector" className="tutor-dashboard__selector" onChange={handleChange}>
-        <option>
-          {location === '/profile' || '/profile/edit'
-            ? 'Profile'
-            : location === '/create-tutorship'
-            ? 'Create Tutorship'
-            : 'Tutorships History'}
+    <>
+      <select onChange={handleSelect} className="tutor-profile-menu-select sm" value={selected}>
+        <option className="tutor-profile-menu-option" value="edit">
+          Edit Profile
         </option>
-        {location !== '/profile' && (
-          <option className="tutor-dashboard__selector-element" value="profile">
-            Profile
-          </option>
-        )}
-        {location !== '/create-tutorship' && (
-          <option className="tutor-dashboard__selector-element" value="create-tutorship">
-            Create Tutorship
-          </option>
-        )}
-        {location !== '/tutorship-history' && (
-          <option className="tutor-dashboard__selector-element" value="tutorship-history">
-            Tutorships History
-          </option>
-        )}
+        <option className="tutor-profile-menu-option" value="create-tutorship">
+          Create Tutorship
+        </option>
+        <option className="tutor-profile-menu-option" value="tutorships">
+          My tutorships
+        </option>
       </select>
-      <button
-        className={location === '/profile' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
-        onClick={handleClick}
-        name="profile"
-      >
-        Profile
-      </button>
-      <button
-        className={location === 'create-tutorship' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
-        onClick={handleClick}
-        name="create-tutorship"
-      >
-        Create Tutorship
-      </button>
-      <button
-        className={location === '/tutorship-history' ? 'tutor-dashboard__button-selected' : 'tutor-dashboard__button'}
-        onClick={handleClick}
-        name="tutorship-history"
-      >
-        Tutorships History
-      </button>
-    </main>
+      <section className="tutor-profile-menu md">
+        <ul className="tutor-profile-menu-list">
+          <div to="edit">
+            <li
+              onClick={handleSelect}
+              id="edit"
+              className={`tutor-profile-menu-item ${selected === 'edit' && 'selected'}`}
+            >
+              Profile
+            </li>
+          </div>
+          <div to="createtutorship">
+            <li
+              onClick={handleSelect}
+              id="create-tutorship"
+              className={`tutor-profile-menu-item ${selected === 'create-tutorship' && 'selected'}`}
+            >
+              Create Tutorship
+            </li>
+          </div>
+          <div to="tutorships">
+            <li
+              onClick={handleSelect}
+              id="tutorships"
+              className={`tutor-profile-menu-item ${selected === 'tutorships' && 'selected'}`}
+            >
+              My Tutorships
+            </li>
+          </div>
+        </ul>
+      </section>
+    </>
   );
 }
 
-export default TutorDashboard;
+export default TutorshipDashboard;

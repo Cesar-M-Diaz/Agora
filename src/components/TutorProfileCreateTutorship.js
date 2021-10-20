@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../utils/axios';
-import TutorDashboard from '../components/TutorDashboard';
 import { useSelector } from 'react-redux';
 import '../assets/styles/pages/TutorEditProfile.scss';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-
 import '../assets/styles/pages/Tutorship.scss';
 
-function TutorshipPage() {
+function TutorProfileCreateTutorship() {
   const MySwal = withReactContent(Swal);
   const tutor_id = useSelector((state) => state.currentUser._id);
   const [tutorshipData, setTutorshipData] = useState({
@@ -154,41 +152,36 @@ function TutorshipPage() {
   }
 
   return (
-    <div className="tutorship__body">
-      <TutorDashboard />
-      <div className="tutorship__profile-body">
-        <form action="" className="tutorship__form" onSubmit={handleSubmit}>
-          <div className="tutorship__form-slot">
-            <label>Student Email</label>
-            <input
-              onBlur={validateInput}
-              type="text"
-              name="email"
-              value={tutorshipData.email}
-              placeholder="Student email"
-              onChange={handleChange}
-            />
-            <span className="tutorship__errors">{errors.errors.email}</span>
-          </div>
-          <div className="tutorship__form-slot">
-            <label>Date and time for the tutorship</label>
-            <input type="date" onChange={handleChange} onBlur={validateInput} name="date" value={tutorshipData.date} />
-            <span className="tutorship__errors">{errors.errors.date}</span>
-            <input type="time" onChange={handleChange} onBlur={validateInput} name="time" value={tutorshipData.time} />
-            <span className="tutorship__errors">{errors.errors.time}</span>
-          </div>
-          <div className="tutorship__button-container">
-            <input
-              type="submit"
-              value="Save Tutorship"
-              className="tutorship__button-submit"
-              disabled={!errors.enableUpload}
-            />
-          </div>
-        </form>
+    <form action="" className="tutorship__form" onSubmit={handleSubmit}>
+      <div className="tutorship__form-slot">
+        <label>Student Email</label>
+        <input
+          onBlur={validateInput}
+          type="text"
+          name="email"
+          value={tutorshipData.email}
+          placeholder="Student email"
+          onChange={handleChange}
+        />
+        <span className="tutorship__errors">{errors.errors.email}</span>
       </div>
-    </div>
+      <div className="tutorship__form-slot">
+        <label>Date and time for the tutorship</label>
+        <input type="date" onChange={handleChange} onBlur={validateInput} name="date" value={tutorshipData.date} />
+        <span className="tutorship__errors">{errors.errors.date}</span>
+        <input type="time" onChange={handleChange} onBlur={validateInput} name="time" value={tutorshipData.time} />
+        <span className="tutorship__errors">{errors.errors.time}</span>
+      </div>
+      <div className="tutorship__button-container">
+        <input
+          type="submit"
+          value="Save Tutorship"
+          className="tutorship__button-submit"
+          disabled={!errors.enableUpload}
+        />
+      </div>
+    </form>
   );
 }
 
-export default TutorshipPage;
+export default TutorProfileCreateTutorship;
