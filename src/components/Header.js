@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Logo from '../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
 
@@ -21,13 +21,15 @@ function Header() {
     isMenuCollapsed: true,
     isProfileTooltipCollapsed: true,
   });
+  const desktopInput = useRef();
+  const mobileInput = useRef();
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, searchInput: e.target.value }));
     // console.log(state.searchInput)
   };
 
-  const toggleSearchCollapse = () => {
+  const toggleSearchCollapse = async () => {
     if (!state.isMenuCollapsed)
       setState((prevState) => ({
         ...prevState,
@@ -37,6 +39,9 @@ function Header() {
       ...prevState,
       isSearchCollapsed: !state.isSearchCollapsed,
     }));
+    setTimeout(() => {
+      state.isSearchCollapsed && mobileInput.current.focus();
+    }, 100);
   };
 
   const toggleMenuCollapse = () => {
@@ -68,13 +73,14 @@ function Header() {
     dispatch(logout());
   };
 
-  const search = () => {
+  const search = async e => {
+    desktopInput.current.value = ""
+    mobileInput.current.value = ""
+    !state.isSearchCollapsed && await setState(prevState => ({...prevState, isSearchCollapsed: true}));
     history.push({
       pathname: '/search',
       state: state.searchInput,
     })
-  
-
   }
 
   return (
@@ -88,6 +94,8 @@ function Header() {
           className="search-container__input"
           type="text"
           placeholder="Search"
+          onKeyDown={e => e.code === 'Enter' && search()}
+          ref={desktopInput}
         />
         <div className="search-container__icon-container" onClick={search}>
           <FontAwesomeIcon icon={faSearch}  />
@@ -109,7 +117,8 @@ function Header() {
           className="search-container__input"
           type="text"
           placeholder="Search"
-          
+          onKeyDown={e => e.code === 'Enter' && search()}
+          ref={mobileInput}
         />
         <div className="search-container__icon-container" onClick={search}>
           <FontAwesomeIcon icon={faSearch} />
