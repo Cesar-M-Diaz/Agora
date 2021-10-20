@@ -23,7 +23,7 @@ function TutorshipPage() {
       date: '',
       time: '',
     },
-    isValid: { email: false, date: false, time: true },
+    isValid: { email: false, date: false, time: false },
     enableUpload: false,
   });
 
@@ -142,6 +142,15 @@ function TutorshipPage() {
       date: '',
       time: '',
     }));
+    setErrors({
+      errors: {
+        email: '',
+        date: '',
+        time: '',
+      },
+      isValid: { email: false, date: false, time: false },
+      enableUpload: false,
+    });
   }
 
   return (

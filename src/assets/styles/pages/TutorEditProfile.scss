@@ -66,25 +66,6 @@ $warning-color: rgb(235, 99, 99);
     border: $border-width solid $color-a;
     cursor: pointer;
   }
-  &:disabled {
-    color: $subtitle-color;
-    border: $border-width solid $subtitle-color;
-  }
-}
-
-.tutor-edit__button-photo-disabled {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Open Sans';
-  background-color: white;
-  color: $subtitle-color;
-  border: $border-width solid $subtitle-color;
-  height: 40px;
-  margin-bottom: 55px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  width: 130px;
 }
 
 .tutor-edit__form {
@@ -184,23 +165,27 @@ $warning-color: rgb(235, 99, 99);
   }
 }
 
-.tutor-edit__button-cancel {
-  font-family: 'Source Code Pro', monospace;
-  letter-spacing: 1px;
-  background-color: white;
-  color: $warning-color;
-  border: $border-width solid $warning-color;
-  text-align: center;
-  height: 40px;
-  font-size: 1rem;
-  font-weight: $font-selected-weight;
-  width: 100%;
-  &:hover:enabled {
-    background-color: $warning-color;
-    color: white;
-    border: $border-width solid $warning-color;
+.tutor-profile__credentials__name-input-button,
+.tutor-profile__credentials__email-input-button,
+.tutor-profile__credentials__schedule-input-button,
+.tutor-profile__credentials__description-input-button,
+.tutor-profile__credentials__password-input-button {
+  width: 10%;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  margin-left: 5px;
+  & :hover {
     cursor: pointer;
   }
+  & :focus {
+    outline: none;
+  }
+}
+
+.tutor-edit__form-slot-container {
+  width: 100%;
+  display: flex;
 }
 
 @media (min-width: 992px) {
@@ -288,7 +273,7 @@ $warning-color: rgb(235, 99, 99);
 
   .tutor-edit__button-submit {
     margin: 35px 0px;
-    width: 80%;
+    width: 100%;
   }
 
   .tutor-edit__button-cancel {
