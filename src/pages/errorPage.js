@@ -1,16 +1,16 @@
 import React from 'react';
 import '../assets/styles/pages/errorPage.scss';
-import error from '../assets/images/error.svg';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 function errorPage() {
   return (
     <div className="error-page">
-      <div className="error-info">
-        <h1>Oops!</h1>
-        <h2>We can't seem to find the page you're looking for</h2>
-        <p>Try another url or go back to homepage...</p>
-      </div>
-      <img src={error} alt="error"></img>
+      <Player
+        autoplay
+        loop
+        src="https://assets2.lottiefiles.com/packages/lf20_ck8dimsp.json"
+        className="error__illustration"
+      ></Player>
     </div>
   );
 }
