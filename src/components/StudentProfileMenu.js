@@ -23,9 +23,9 @@ function StudentProfileMenu({ page }) {
             </select>
             <section className="student-profile-menu md">
                 <ul className="student-profile-menu-list">
-                    <div to="edit"><li onClick={handleSelect} id="edit" className={`student-profile-menu-item ${selected === 'edit' && 'selected'}`}>Edit Profile</li></div>
-                    <div to="payment"><li onClick={handleSelect} id="payment" className={`student-profile-menu-item ${selected === 'payment' && 'selected'}`}>Payment methods</li></div>
-                    <div to="tutorships"><li onClick={handleSelect} id="tutorships" className={`student-profile-menu-item ${selected === 'tutorships' && 'selected'}`}>My tutorships</li></div>
+                    <div to="edit"><li onClick={handleSelect} id="edit" className={`student-profile-menu-item ${selected === 'edit' && 'selected'}`}>Profile</li></div>
+                    <div to="payment"><li onClick={handleSelect} id="payment" className={`student-profile-menu-item ${selected === 'payment' && 'selected'}`}>Payment Methods</li></div>
+                    <div to="tutorships"><li onClick={handleSelect} id="tutorships" className={`student-profile-menu-item ${selected === 'tutorships' && 'selected'}`}>My Tutorships</li></div>
                 </ul>
             </section>
         </>
