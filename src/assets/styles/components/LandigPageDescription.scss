@@ -36,7 +36,7 @@ $color-b: #0de26f;
 }
 
 .description-secondary__container {
-  margin: 0px 10vw 50px 10vw;
+  margin: 0px 10vw 120px 10vw;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -58,6 +58,7 @@ $color-b: #0de26f;
   height: 5px;
   width: 85%;
   background-color: $color-b;
+  margin-bottom: 40px;
 }
 
 .description__title {
@@ -126,7 +127,7 @@ $color-b: #0de26f;
 }
 @media (min-width: 1200px) {
   .description-main__container {
-    margin: 0px 0px 160px 0px;
+    margin: 0px 0px 150px 0px;
   }
 
   .description-main__text-container {
