@@ -60,10 +60,21 @@ export default function CheckoutPage(props) {
     name: '',
     last_name: '',
     email: '',
-    value: '',
     card_name: '',
   });
-  const [disableSubmit, setDisableSubmit] = useState(true);
+  const [isValid, setIsValid] = useState({
+    dues: false,
+    doc_type: false,
+    doc_number: false,
+    'card[number]': false,
+    'card[exp_year]': false,
+    'card[exp_month]': false,
+    'card[cvc]': false,
+    name: true,
+    last_name: true,
+    email: true,
+    card_name: true,
+  });
 
   function previous() {
     setCount(count - 1);
@@ -107,7 +118,7 @@ export default function CheckoutPage(props) {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (
-      value <= 0 &&
+      !value &&
       (input === 'card[exp_month]' ||
         input === 'card[exp_year]' ||
         input === 'card[cvc]' ||
@@ -118,13 +129,19 @@ export default function CheckoutPage(props) {
         ...state,
         [input]: 'this fields are mandatory, please fill each one of them',
       }));
-      setDisableSubmit(true);
-    } else if (value <= 0) {
+      setIsValid((state) => ({
+        ...state,
+        [input]: false,
+      }));
+    } else if (!value) {
       setErrors((state) => ({
         ...state,
         [input]: 'this field is mandatory',
       }));
-      setDisableSubmit(true);
+      setIsValid((state) => ({
+        ...state,
+        [input]: false,
+      }));
     } else if (
       (input === 'card_name' || input === 'name' || input === 'last_name') &&
       !textRegex.test(String(e.target.value).toLowerCase())
@@ -133,34 +150,28 @@ export default function CheckoutPage(props) {
         ...state,
         [input]: 'field must only contain letters',
       }));
-      setDisableSubmit(true);
+      setIsValid((state) => ({
+        ...state,
+        [input]: false,
+      }));
     } else if (input === 'email' && !emailRegex.test(String(value).toLowerCase())) {
       setErrors((state) => ({
         ...state,
         [input]: 'please enter a valid email',
       }));
-      setDisableSubmit(true);
+      setIsValid((state) => ({
+        ...state,
+        [input]: false,
+      }));
     } else {
       setErrors((state) => ({
         ...state,
         [input]: '',
       }));
-    }
-
-    if (
-      !token_card &&
-      Object.values(errors).some((value) => value.length <= 0) &&
-      Object.values(cardInfo).every((value) => value.length > 0) &&
-      Object.values(paymentInfo).every((value) => value.length > 0) &&
-      Object.values(customerInfo).every((value) => value.length > 0)
-    ) {
-      setDisableSubmit(false);
-    } else if (
-      Object.values(errors).some((value) => value.length <= 0) &&
-      Object.values(paymentInfo).every((value) => value.length > 0) &&
-      Object.values(customerInfo).every((value) => value.length > 0)
-    ) {
-      setDisableSubmit(false);
+      setIsValid((state) => ({
+        ...state,
+        [input]: true,
+      }));
     }
   }
 
@@ -422,7 +433,24 @@ export default function CheckoutPage(props) {
               />
               <span className="payment__errors">{errors.dues}</span>
             </div>
-            <button className="payment__pay-button" disabled={disableSubmit}>
+            <button
+              className="payment__pay-button"
+              disabled={
+                !(
+                  isValid.dues &&
+                  isValid.doc_type &&
+                  isValid.doc_number &&
+                  isValid['card[number]'] &&
+                  isValid['card[exp_year]'] &&
+                  isValid['card[exp_month]'] &&
+                  isValid['card[cvc]'] &&
+                  isValid.name &&
+                  isValid.last_name &&
+                  isValid.email &&
+                  isValid.card_name
+                )
+              }
+            >
               pay
             </button>
           </form>
