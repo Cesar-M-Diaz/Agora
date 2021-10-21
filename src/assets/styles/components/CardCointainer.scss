@@ -22,6 +22,13 @@ $color-b: #0de26f;
   align-items: center;
 }
 
+@media (min-width: 768px) {
+  .cards__container{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
 @media (min-width: 992px) {
   .cards__container {
     grid-row: 2 / span 2;
