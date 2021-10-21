@@ -9,6 +9,7 @@ import {
   AUTH_FAILED,
   AUTHORIZED,
   UNAUTHORIZED,
+  TOGGLEPROFILETOOLTIP
 } from '../actions/constants';
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   login_failed: false,
   auth_status: LOADING,
   emailIsTaken: false,
+  isProfileTooltipCollapsed: true
 };
 
 // Modify the reducer in order to receive the actions
@@ -74,6 +76,11 @@ const reducer = function (state = initialState, action) {
       ...state,
       auth_status: UNAUTHORIZED,
     };
+  } else if (action.type === TOGGLEPROFILETOOLTIP) {
+    return {
+      ...state,
+      isProfileTooltipCollapsed: !state.isProfileTooltipCollapsed
+    }
   }
   return state;
 };

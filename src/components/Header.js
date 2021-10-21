@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Logo from '../assets/images/Logo.png';
 import { Link } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ import '../assets/styles/components/Header.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import logout from '../actions/logout';
+import toggleProfileTooltip from '../actions/toggleProfileTooltip';
 import { AUTHORIZED } from '../actions/constants';
 import history from '../utils/history';
 
@@ -19,14 +20,13 @@ function Header() {
     searchInput: '',
     isSearchCollapsed: true,
     isMenuCollapsed: true,
-    isProfileTooltipCollapsed: true,
   });
   const desktopInput = useRef();
   const mobileInput = useRef();
+  const signingOut = useRef(false);
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, searchInput: e.target.value }));
-    // console.log(state.searchInput)
   };
 
   const toggleSearchCollapse = async () => {
@@ -57,26 +57,34 @@ function Header() {
   };
 
   const profileTooltipCollapse = () => {
-    setState((prevState) => ({
-      ...prevState,
-      isProfileTooltipCollapsed: !prevState.isProfileTooltipCollapsed,
-    }))
+    console.log(!signingOut.current)
+    setTimeout(() => {
+      !signingOut.current && dispatch(toggleProfileTooltip());
+    }, 100);
   }
 
-  const SignOut = async () => {
-    profileTooltipCollapse()
-    await setState((prevState) => ({
+  const SignOut = () => {
+    signingOut.current = true;
+    setState((prevState) => ({
       ...prevState,
       isMenuCollapsed: true,
-      isProfileTooltipCollapsed: true,
     }));
-    dispatch(logout());
   };
+  useEffect(() => {
+    if(signingOut.current){
+        dispatch(toggleProfileTooltip());
+      setTimeout(() => {
+        signingOut.current = false;
+        dispatch(logout());
+        history.push('/');
+      }, 200);      
+    }
+  }, [state, dispatch]);
 
-  const search = async e => {
+  const search = e => {
     desktopInput.current.value = ""
     mobileInput.current.value = ""
-    !state.isSearchCollapsed && await setState(prevState => ({...prevState, isSearchCollapsed: true}));
+    !state.isSearchCollapsed && setState(prevState => ({...prevState, isSearchCollapsed: true}));
     history.push({
       pathname: '/search',
       state: state.searchInput,
@@ -142,13 +150,12 @@ function Header() {
               <Link to="/profile/edit" className="mobile-menu__profile-button" onClick={toggleMenuCollapse}>
                 Profile
               </Link>
-              <Link
+              <div
                 onClick={SignOut}
-                to="/"
                 className="mobile-menu__signout-button"
               >
                 Sign out
-              </Link>
+              </div>
             </div>
           </>
         ) : (
@@ -178,7 +185,7 @@ function Header() {
           <img
             onClick={profileTooltipCollapse}
             onBlur={() => { setTimeout(() => {
-              !state.isProfileTooltipCollapsed && profileTooltipCollapse()
+              !globalState.isProfileTooltipCollapsed && profileTooltipCollapse()
             }, 100)}}
             className="header__profile-photo"
             src={globalState.currentUser.profile_photo}
@@ -187,7 +194,7 @@ function Header() {
           />
           <div
             className={`header__profile-tooltip ${
-              !state.isProfileTooltipCollapsed && 'active'
+              !globalState.isProfileTooltipCollapsed && 'active'
             }`}
           >
             <h3 className="profile-tooltip__name">
@@ -196,9 +203,9 @@ function Header() {
             <Link to="/profile/edit" className="profile-tooltip__profile">
               Profile
             </Link>
-            <Link data-testid="sign-out-button" onClick={SignOut} to="/" className="profile-tooltip__signout">
+            <div data-testid="sign-out-button" onClick={SignOut} className="profile-tooltip__signout">
               Sign out
-            </Link>
+            </div>
           </div>
         </div>
       ) : (
