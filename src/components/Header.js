@@ -1,23 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
-import Logo from '../assets/images/Logo.png';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from "react";
+import Logo from "../assets/images/Logo.png";
+import { Link } from "react-router-dom";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 
-import '../assets/styles/components/Header.scss';
+import "../assets/styles/components/Header.scss";
 
-import { useDispatch, useSelector } from 'react-redux';
-import logout from '../actions/logout';
-import toggleProfileTooltip from '../actions/toggleProfileTooltip';
-import { AUTHORIZED } from '../actions/constants';
-import history from '../utils/history';
+import { useDispatch, useSelector } from "react-redux";
+import logout from "../actions/logout";
+import toggleProfileTooltip from "../actions/toggleProfileTooltip";
+import { AUTHORIZED } from "../actions/constants";
+import history from "../utils/history";
 
 function Header() {
   const globalState = useSelector((state) => state);
   const dispatch = useDispatch();
   const [state, setState] = useState({
-    searchInput: '',
+    searchInput: "",
     isSearchCollapsed: true,
     isMenuCollapsed: true,
   });
@@ -60,7 +60,7 @@ function Header() {
     setTimeout(() => {
       !signingOut.current && dispatch(toggleProfileTooltip());
     }, 100);
-  }
+  };
 
   const SignOut = () => {
     signingOut.current = true;
@@ -70,53 +70,67 @@ function Header() {
     }));
   };
   useEffect(() => {
-    if(signingOut.current){
-        dispatch(toggleProfileTooltip());
+    if (signingOut.current) {
+      dispatch(toggleProfileTooltip());
       setTimeout(() => {
         signingOut.current = false;
         dispatch(logout());
-        history.push('/');
-      }, 200);      
+        history.push("/");
+      }, 200);
     }
   }, [state, dispatch]);
 
-  const search = e => {
-    desktopInput.current.value = ""
-    mobileInput.current.value = ""
-    !state.isSearchCollapsed && setState(prevState => ({...prevState, isSearchCollapsed: true}));
+  const search = (e) => {
+    desktopInput.current.value = "";
+    mobileInput.current.value = "";
+    !state.isSearchCollapsed &&
+      setState((prevState) => ({ ...prevState, isSearchCollapsed: true }));
     history.push({
-      pathname: '/search',
+      pathname: "/search",
       state: state.searchInput,
-    })
-  }
-
+    });
+  };
   return (
     <header className="header">
-      <Link data-testid="logo-image" to={globalState.auth_status === AUTHORIZED ? '/home' : '/'}>
+      <Link
+        data-testid="logo-image"
+        to={
+          globalState.auth_status === AUTHORIZED &&
+          globalState.currentUser.type === "student"
+            ? "/home"
+            : globalState.currentUser.type === "tutor"
+            ? "/profile/tutorships"
+            : "/"
+        }
+      >
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
-      <div className="header__search-container">
-        <input
-          onChange={handleChange}
-          className="search-container__input"
-          type="text"
-          placeholder="Search"
-          onKeyDown={e => e.code === 'Enter' && search()}
-          ref={desktopInput}
-        />
-        <div className="search-container__icon-container" onClick={search}>
-          <FontAwesomeIcon icon={faSearch}  />
+      {globalState.currentUser.type === "student" && (
+        <div className="header__search-container">
+          <input
+            onChange={handleChange}
+            className="search-container__input"
+            type="text"
+            placeholder="Search"
+            onKeyDown={(e) => e.code === "Enter" && search()}
+            ref={desktopInput}
+          />
+          <div className="search-container__icon-container" onClick={search}>
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="mobile-nav-buttons-container">
-        <FontAwesomeIcon onClick={toggleSearchCollapse} icon={faSearch} />
+        {globalState.currentUser.type === "student" && (
+          <FontAwesomeIcon onClick={toggleSearchCollapse} icon={faSearch} />
+        )}
         <FontAwesomeIcon onClick={toggleMenuCollapse} icon={faBars} />
       </div>
 
       <div
         className={`mobile-search-input ${
-          !state.isSearchCollapsed && 'active'
+          !state.isSearchCollapsed && "active"
         }`}
       >
         <input
@@ -124,7 +138,7 @@ function Header() {
           className="search-container__input"
           type="text"
           placeholder="Search"
-          onKeyDown={e => e.code === 'Enter' && search()}
+          onKeyDown={(e) => e.code === "Enter" && search()}
           ref={mobileInput}
         />
         <div className="search-container__icon-container" onClick={search}>
@@ -132,7 +146,7 @@ function Header() {
         </div>
       </div>
 
-      <div className={`mobile-menu ${!state.isMenuCollapsed && 'active'}`}>
+      <div className={`mobile-menu ${!state.isMenuCollapsed && "active"}`}>
         {!!globalState.token ? (
           <>
             <div className="mobile-menu__profile-photo-container">
@@ -146,13 +160,14 @@ function Header() {
               </span>
             </div>
             <div className="mobile-menu__buttons">
-              <Link to="/profile/edit" className="mobile-menu__profile-button" onClick={toggleMenuCollapse}>
+              <Link
+                to="/profile/edit"
+                className="mobile-menu__profile-button"
+                onClick={toggleMenuCollapse}
+              >
                 Profile
               </Link>
-              <div
-                onClick={SignOut}
-                className="mobile-menu__signout-button"
-              >
+              <div onClick={SignOut} className="mobile-menu__signout-button">
                 Sign out
               </div>
             </div>
@@ -183,9 +198,12 @@ function Header() {
         <div className="header__profile-photo-container">
           <img
             onClick={profileTooltipCollapse}
-            onBlur={() => { setTimeout(() => {
-              !globalState.isProfileTooltipCollapsed && profileTooltipCollapse()
-            }, 100)}}
+            onBlur={() => {
+              setTimeout(() => {
+                !globalState.isProfileTooltipCollapsed &&
+                  profileTooltipCollapse();
+              }, 100);
+            }}
             className="header__profile-photo"
             src={globalState.currentUser.profile_photo}
             alt="Profile"
@@ -193,7 +211,7 @@ function Header() {
           />
           <div
             className={`header__profile-tooltip ${
-              !globalState.isProfileTooltipCollapsed && 'active'
+              !globalState.isProfileTooltipCollapsed && "active"
             }`}
           >
             <h3 className="profile-tooltip__name">
@@ -202,7 +220,11 @@ function Header() {
             <Link to="/profile/edit" className="profile-tooltip__profile">
               Profile
             </Link>
-            <div data-testid="sign-out-button" onClick={SignOut} className="profile-tooltip__signout">
+            <div
+              data-testid="sign-out-button"
+              onClick={SignOut}
+              className="profile-tooltip__signout"
+            >
               Sign out
             </div>
           </div>
