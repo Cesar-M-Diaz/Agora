@@ -18,6 +18,7 @@ import { SearchPage } from './pages/searchPage';
 import ScrollToTop from './utils/ScrollToTop';
 import TutorsSchedule from './pages/TutorsSchedule';
 import CheckoutPage from './pages/CheckoutPage';
+import StudentRoute from './utils/StudentRoute';
 
 function App() {
   const token = useSelector((state) => state.token);
@@ -36,16 +37,16 @@ function App() {
       <ScrollToTop />
       <Layout>
         <Switch>
-          <PrivateRoute exact path="/home" component={HomePage} />
+          <StudentRoute exact path="/home" component={HomePage} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/search" component={SearchPage} />
+          <StudentRoute exact path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
           <PrivateRoute exact path="/profile/:section" component={ProfileRouteComponent} />
-          <Route exact path="/tutor/:id" component={TutorDetailsPage} />
-          <PrivateRoute exact path="/tutor/:id/schedule" component={TutorsSchedule} />
-          <PrivateRoute exact path="/checkout/:id" component={CheckoutPage} />
+          <StudentRoute exact path="/tutor/:id" component={TutorDetailsPage} />
+          <StudentRoute exact path="/tutor/:id/schedule" component={TutorsSchedule} />
+          <StudentRoute exact path="/checkout/:id" component={CheckoutPage} />
           <Route path="*" component={errorPage} />
         </Switch>
       </Layout>
