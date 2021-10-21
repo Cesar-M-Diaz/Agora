@@ -38,7 +38,6 @@ $warning-color: rgb(235, 99, 99);
 
 .credit-card__button {
   background-color: white;
-  color: $color-b;
   border: $border-width solid rgb(197, 197, 197);
   border-radius: 50%;
   height: 20px;
@@ -52,8 +51,14 @@ $warning-color: rgb(235, 99, 99);
     border: $border-width solid $color-b;
     cursor: pointer;
   }
-  &:focus {
+  &-selected {
     background-color: $color-b;
     border: $border-width solid $color-b;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    font-size: 1rem;
+    font-weight: $font-selected-weight;
+    letter-spacing: 1px;
   }
 }
