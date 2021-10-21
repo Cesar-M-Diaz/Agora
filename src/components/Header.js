@@ -57,7 +57,6 @@ function Header() {
   };
 
   const profileTooltipCollapse = () => {
-    console.log(!signingOut.current)
     setTimeout(() => {
       !signingOut.current && dispatch(toggleProfileTooltip());
     }, 100);
