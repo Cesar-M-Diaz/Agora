@@ -12,15 +12,14 @@ $color-b: #0de26f;
 }
 
 .tutors__container {
-  margin: 0px 10vw;
+  margin: 0px 7vw 40px;
   display: flex;
   flex-direction: column;
 }
 
 .categories__container {
-  width: 95%;
-  margin-top: 50px;
-  align-self: center;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .tutors__title-container {
@@ -31,7 +30,7 @@ $color-b: #0de26f;
   text-align: center;
   color: $title-color;
   letter-spacing: 4px;
-  margin: 100px 2vw 40px;
+  margin: 50px 2vw 40px;
 }
 
 .tutors__subtitle {
@@ -45,20 +44,7 @@ $color-b: #0de26f;
   letter-spacing: 4px;
 }
 
-@media (min-width: 768px) {
-  .tutors__title-container {
-    margin: 100px 2vw 80px;
-  }
-}
 @media (min-width: 992px) {
-  .tutors__subtitle {
-    margin: 20px 0px;
-    text-align: left;
-    font-size: 1.5rem;
-    line-height: 3rem;
-    padding-right: 20%;
-  }
-
   .tutors__container {
     margin: 50px 25px 20px 25px;
     display: grid;
@@ -72,13 +58,8 @@ $color-b: #0de26f;
     grid-column: 1 / span 3;
   }
 
-  .tutors__subtitle {
-    display: none;
-  }
-
   .categories__container {
-    width: 95%;
-    margin: 0;
+    width: 90%;
     grid-column: 1;
     grid-row: 2 / span 2;
   }
@@ -88,12 +69,13 @@ $color-b: #0de26f;
     margin: 50px 0px 20px 0px;
     display: grid;
     grid-template-columns: 300px auto;
-    grid-template-rows: 100px 500px;
+    grid-template-rows: 100px 650px;
   }
 
   .categories__container {
     width: 100%;
     margin: 0;
+    height: 100%;
     grid-column: 1;
     grid-row: 2 / span 2;
   }
