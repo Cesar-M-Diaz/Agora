@@ -20,7 +20,7 @@ function StudentProfileMenu({ page }) {
         <option className="student-profile-menu-option" value="edit">
           Edit Profile
         </option>
-        <option className="student-profile-menu-option" value="payment">
+        <option className="student-profile-menu-option" value="payment-methods">
           Payment methods
         </option>
         <option className="student-profile-menu-option" value="tutorships">
@@ -38,11 +38,11 @@ function StudentProfileMenu({ page }) {
               Profile
             </li>
           </div>
-          <div to="payment">
+          <div to="payment-methods">
             <li
               onClick={handleSelect}
-              id="payment"
-              className={`student-profile-menu-item ${selected === 'payment' && 'selected'}`}
+              id="payment-methods"
+              className={`student-profile-menu-item ${selected === 'payment-methods' && 'selected'}`}
             >
               Payment Methods
             </li>
