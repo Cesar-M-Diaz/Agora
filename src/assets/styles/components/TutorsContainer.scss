@@ -44,6 +44,14 @@ $color-b: #0de26f;
   letter-spacing: 4px;
 }
 
+
+@media (min-width: 768px) {
+  
+  .tutors__title-container {
+    margin: 100px 2vw 80px;
+  }
+}
+
 @media (min-width: 992px) {
   .tutors__container {
     margin: 50px 25px 20px 25px;
