@@ -5,7 +5,7 @@ function HomePage() {
   return (
     <main className="homepage-container">
       <div className="homepage-content">
-        <TutorsContainer subtitle=" " title="Find a tutorship" />
+        <TutorsContainer title="Find a tutorship" />
       </div>
     </main>
   );
