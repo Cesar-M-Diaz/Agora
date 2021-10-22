@@ -74,7 +74,7 @@ function PaymentMethods() {
       }
       setIsLoading(false);
     });
-  }, [epayco_customer_id, user_id]);
+  }, [user_id]);
 
   function cardInfoChange(e) {
     setCardInfo((state) => ({
@@ -180,11 +180,16 @@ function PaymentMethods() {
         .get(`/get-customer?id=${user_id}`)
         .then((result) => {
           const customer = result.data.customer.data;
-          setEpayco_customer_id(customer.id_customer);
           if (customer.id_customer) {
+            setEpayco_customer_id(customer.id_customer);
             setExistingCards((prevState) => ({
               ...prevState,
               cards: customer.cards,
+            }));
+            setIsValid((prevState) => ({
+              ...prevState,
+              doc_type: true,
+              doc_number: true,
             }));
           }
         })
@@ -221,11 +226,16 @@ function PaymentMethods() {
         .get(`/get-customer?id=${user_id}`)
         .then((result) => {
           const customer = result.data.customer.data;
-          setEpayco_customer_id(customer.id_customer);
           if (customer.id_customer) {
+            setEpayco_customer_id(customer.id_customer);
             setExistingCards((prevState) => ({
               ...prevState,
               cards: customer.cards,
+            }));
+            setIsValid((prevState) => ({
+              ...prevState,
+              doc_type: true,
+              doc_number: true,
             }));
           }
         })
@@ -266,15 +276,27 @@ function PaymentMethods() {
       'card[cvc]': '',
       card_name: '',
     });
-    setIsValid({
-      doc_type: false,
-      doc_number: false,
-      'card[number]': false,
-      'card[exp_year]': false,
-      'card[exp_month]': false,
-      'card[cvc]': false,
-      card_name: true,
-    });
+    if (epayco_customer_id) {
+      setIsValid({
+        doc_type: true,
+        doc_number: true,
+        'card[number]': false,
+        'card[exp_year]': false,
+        'card[exp_month]': false,
+        'card[cvc]': false,
+        card_name: true,
+      });
+    } else {
+      setIsValid({
+        doc_type: false,
+        doc_number: false,
+        'card[number]': false,
+        'card[exp_year]': false,
+        'card[exp_month]': false,
+        'card[cvc]': false,
+        card_name: true,
+      });
+    }
     setPaymentInfo({
       doc_type: '',
       doc_number: '',
