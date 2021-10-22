@@ -23,7 +23,7 @@ $warning-color: rgb(235, 99, 99);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 30px;
+  margin: auto;
 }
 
 .payment__page-body {
@@ -144,7 +144,9 @@ $warning-color: rgb(235, 99, 99);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  input {
+  width: 50vw;
+  input,
+  select {
     box-sizing: border-box;
     padding: 0px 10px;
     padding-left: 10px;
@@ -153,6 +155,7 @@ $warning-color: rgb(235, 99, 99);
     border: 1px solid $subtitle-color;
     text-align: center;
     margin: $input-margin;
+    margin-right: 8px;
     color: $subtitle-color;
     font-family: 1rem;
     font-family: 'Open Sans';
@@ -199,11 +202,12 @@ $warning-color: rgb(235, 99, 99);
   flex-direction: column;
   align-items: flex-start;
   width: 60%;
-  input {
+  input,
+  select {
     box-sizing: border-box;
     padding: 0px 10px;
     padding-left: 10px;
-    width: 80%;
+    width: 90%;
     height: $input-height;
     border: 1px solid $subtitle-color;
     text-align: left;
