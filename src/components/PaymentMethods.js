@@ -5,8 +5,7 @@ import Loader from '../components/Loader';
 import CreditCard from '../components/CreditCard';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import history from '../utils/history';
-import '../assets/styles/pages/checkout.scss';
+import '../assets/styles/components/PaymentMethods.scss';
 
 function PaymentMethods() {
   const user_id = useSelector((state) => state.currentUser._id);
@@ -34,7 +33,7 @@ function PaymentMethods() {
     'card[exp_month]': '',
     'card[cvc]': '',
   });
-  const [customerInfo, setCustomerInfo] = useState({
+  const [customerInfo] = useState({
     name: firstName,
     last_name: lastName,
     email: user_email,
@@ -61,21 +60,21 @@ function PaymentMethods() {
   useEffect(() => {
     axios.get(`/get-customer?id=${user_id}`).then((result) => {
       const customer = result.data.customer.data;
-      console.log(customer);
-      setEpayco_customer_id(customer.id_customer);
       if (customer.id_customer) {
+        setEpayco_customer_id(customer.id_customer);
         setExistingCards((prevState) => ({
           ...prevState,
           cards: customer.cards,
+        }));
+        setIsValid((prevState) => ({
+          ...prevState,
+          doc_type: true,
+          doc_number: true,
         }));
       }
       setIsLoading(false);
     });
   }, [epayco_customer_id, user_id]);
-
-  function selectCard(card) {
-    console.log(card.token);
-  }
 
   function cardInfoChange(e) {
     setCardInfo((state) => ({
@@ -163,7 +162,7 @@ function PaymentMethods() {
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    setHidden(true);
+    handleCancel();
     try {
       if (epayco_customer_id) {
         await axios.post('/create-card', {
@@ -177,13 +176,67 @@ function PaymentMethods() {
           cardInfo,
         });
       }
+      await axios
+        .get(`/get-customer?id=${user_id}`)
+        .then((result) => {
+          const customer = result.data.customer.data;
+          setEpayco_customer_id(customer.id_customer);
+          if (customer.id_customer) {
+            setExistingCards((prevState) => ({
+              ...prevState,
+              cards: customer.cards,
+            }));
+          }
+        })
+        .then(() => {
+          setIsLoading(false);
+          MySwal.fire({
+            icon: 'success',
+            title: <p className="swal__tittle">Card created</p>,
+            confirmButtonColor: '#0de26f',
+          });
+        });
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      const errorMessage = err.response.data;
       MySwal.fire({
-        icon: 'success',
-        title: <p className="swal__tittle">Card Created</p>,
-        confirmButtonColor: '#0de26f',
-      }).then(() => {
-        history.go(0);
+        icon: 'error',
+        title: <p className="swal__tittle">Oops... Please try again</p>,
+        text: errorMessage,
+        confirmButtonColor: '#ce4c4c',
       });
+    }
+  }
+
+  async function deleteCard(card) {
+    setIsLoading(true);
+    try {
+      await axios.post('/delete-card', {
+        epayco_customer_id,
+        franchise: card.franchise,
+        mask: card.mask,
+      });
+      await axios
+        .get(`/get-customer?id=${user_id}`)
+        .then((result) => {
+          const customer = result.data.customer.data;
+          setEpayco_customer_id(customer.id_customer);
+          if (customer.id_customer) {
+            setExistingCards((prevState) => ({
+              ...prevState,
+              cards: customer.cards,
+            }));
+          }
+        })
+        .then(() => {
+          setIsLoading(false);
+          MySwal.fire({
+            icon: 'success',
+            title: <p className="swal__tittle">Card deleted</p>,
+            confirmButtonColor: '#0de26f',
+          });
+        });
     } catch (err) {
       setIsLoading(false);
       const errorMessage = err.response.data;
@@ -204,9 +257,6 @@ function PaymentMethods() {
       'card[exp_month]': '',
       'card[cvc]': '',
     });
-    setCardName({
-      card_name: '',
-    });
     setErrors({
       doc_type: '',
       doc_number: '',
@@ -216,34 +266,30 @@ function PaymentMethods() {
       'card[cvc]': '',
       card_name: '',
     });
+    setIsValid({
+      doc_type: false,
+      doc_number: false,
+      'card[number]': false,
+      'card[exp_year]': false,
+      'card[exp_month]': false,
+      'card[cvc]': false,
+      card_name: true,
+    });
+    setPaymentInfo({
+      doc_type: '',
+      doc_number: '',
+    });
   }
 
   return (
-    <>
-      {isLoading ? (
-        <Loader />
-      ) : existingCards.cards.length === 0 ? (
-        <>
-          <h2 className="payment__credit-card-title">My Credit Cards</h2>
-          <button onClick={() => setHidden(false)} hidden={!hidden}>
-            add card
-          </button>
-        </>
-      ) : (
-        <div>
-          <h2 className="payment__credit-card-title">My Credit Cards</h2>
-          <button onClick={() => setHidden(false)} hidden={!hidden}>
-            add card
-          </button>
-          {existingCards.cards.map((card) => {
-            return <CreditCard card={card} key={card.token} selectCard={selectCard} />;
-          })}
-        </div>
-      )}
-
+    <div className="payment-method__page-body">
+      <h2 className="payment-method__credit-card-title">My Credit Cards</h2>
+      <button onClick={() => setHidden(false)} hidden={!hidden} className="payment-method__button-add">
+        add card
+      </button>
       {!hidden && (
-        <form action="" className="payment__form" onSubmit={handleSubmit}>
-          <div className="payment__form-slot">
+        <form action="" className="payment-method__form" onSubmit={handleSubmit}>
+          <div className="payment-method__form-slot">
             <label>name on card</label>
             <input
               type="text"
@@ -252,9 +298,9 @@ function PaymentMethods() {
               onChange={cardNameChange}
               onBlur={validateinputs}
             />
-            <span className="payment__errors">{errors.card_name}</span>
+            <span className="payment-method__errors">{errors.card_name}</span>
           </div>
-          <div className="payment__form-slot">
+          <div className="payment-method__form-slot">
             <label>card number</label>
             <input
               type="number"
@@ -263,10 +309,10 @@ function PaymentMethods() {
               onChange={cardInfoChange}
               onBlur={validateinputs}
             />
-            <span className="payment__errors">{errors['card[number]']}</span>
+            <span className="payment-method__errors">{errors['card[number]']}</span>
           </div>
-          <div className="payment__card-form">
-            <div className="payment__card-form-slot">
+          <div className="payment-method__card-form">
+            <div className="payment-method__card-form-slot">
               <label>exp date</label>
               <select
                 name="card[exp_month]"
@@ -292,8 +338,8 @@ function PaymentMethods() {
                 <option value={12}>12</option>
               </select>
             </div>
-            <div className="payment__card-form-slot">
-              <label className="payment__hidden">.</label>
+            <div className="payment-method__card-form-slot">
+              <label className="payment-method__hidden">.</label>
               <input
                 type="number"
                 name="card[exp_year]"
@@ -302,7 +348,7 @@ function PaymentMethods() {
                 onBlur={validateinputs}
               />
             </div>
-            <div className="payment__cvc-form-slot">
+            <div className="payment-method__cvc-form-slot">
               <label>cvc</label>
               <input
                 type="number"
@@ -313,58 +359,75 @@ function PaymentMethods() {
               />
             </div>
           </div>
-          <span className="payment__errors">
+          <span className="payment-method__errors">
             {errors['card[cvc]'] || errors['card[exp_year]'] || errors['card[exp_month]']}
           </span>
-          <div className="payment__card-form">
-            <div className="payment__id-type-form-slot">
-              <label>id type</label>
-              <select
-                name="doc_type"
-                id="doc_type"
-                onChange={paymentInfoChange}
-                value={paymentInfo.doc_type}
-                onBlur={validateinputs}
-              >
-                <option value={0} hidden>
-                  please select
-                </option>
-                <option value="cc">CC</option>
-                <option value="nit">NIT</option>
-              </select>
+          {!epayco_customer_id && (
+            <div className="payment-method__card-form">
+              <div className="payment-method__id-type-form-slot">
+                <label>id type</label>
+                <select
+                  name="doc_type"
+                  id="doc_type"
+                  onChange={paymentInfoChange}
+                  value={paymentInfo.doc_type}
+                  onBlur={validateinputs}
+                >
+                  <option value={0} hidden>
+                    please select
+                  </option>
+                  <option value="cc">CC</option>
+                  <option value="nit">NIT</option>
+                </select>
+              </div>
+              <div className="payment-method__id-num-form-slot">
+                <label>id number</label>
+                <input
+                  name="doc_number"
+                  type="number"
+                  value={paymentInfo.doc_number}
+                  onChange={paymentInfoChange}
+                  onBlur={validateinputs}
+                />
+              </div>
             </div>
-            <div className="payment__id-num-form-slot">
-              <label>id number</label>
-              <input
-                name="doc_number"
-                type="number"
-                value={paymentInfo.doc_number}
-                onChange={paymentInfoChange}
-                onBlur={validateinputs}
-              />
-            </div>
+          )}
+          <span className="payment-method__errors">{errors.doc_type || errors.doc_number}</span>
+          <div className="payment-method__button-container">
+            <button
+              className="payment-method__button-add"
+              disabled={
+                !(
+                  isValid.doc_type &&
+                  isValid.doc_number &&
+                  isValid['card[number]'] &&
+                  isValid['card[exp_year]'] &&
+                  isValid['card[exp_month]'] &&
+                  isValid['card[cvc]'] &&
+                  isValid.card_name
+                )
+              }
+            >
+              add card
+            </button>
+            <button onClick={handleCancel} className="payment-method__button-cancel">
+              cancel
+            </button>
           </div>
-          <span className="payment__errors">{errors.doc_type || errors.doc_number}</span>
-          <button
-            className="payment__pay-button"
-            disabled={
-              !(
-                isValid.doc_type &&
-                isValid.doc_number &&
-                isValid['card[number]'] &&
-                isValid['card[exp_year]'] &&
-                isValid['card[exp_month]'] &&
-                isValid['card[cvc]'] &&
-                isValid.card_name
-              )
-            }
-          >
-            add card
-          </button>
-          <button onClick={handleCancel}>cancel</button>
         </form>
       )}
-    </>
+      {isLoading ? (
+        <Loader />
+      ) : existingCards.cards.length === 0 ? (
+        <></>
+      ) : (
+        <div>
+          {existingCards.cards.map((card) => {
+            return <CreditCard card={card} key={card.token} deleteCard={deleteCard} />;
+          })}
+        </div>
+      )}
+    </div>
   );
 }
 
