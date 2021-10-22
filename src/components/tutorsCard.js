@@ -22,7 +22,7 @@ function TutorsCard(tutor) {
         <img src={profile_photo} alt="profilepicture"></img>
         <h1 key={name}>{name}</h1>
         <div className="card-stars" >{starNodes}</div>
-        <p className="price">$ {price.toLocaleString()}</p>
+        <p className="price">{price? 'COP $ ' + price.toLocaleString(): "Price not assigned"}</p>
       </div>
       <div className="card-tutor-info">
         <h2 key = {profession}>{profession}</h2>
