@@ -310,7 +310,7 @@ function PaymentMethods() {
         add card
       </button>
       {!hidden && (
-        <form action="" className="payment-method__form" onSubmit={handleSubmit}>
+        <div action="" className="payment-method__form">
           <div className="payment-method__form-slot">
             <label>name on card</label>
             <input
@@ -417,6 +417,7 @@ function PaymentMethods() {
           <span className="payment-method__errors">{errors.doc_type || errors.doc_number}</span>
           <div className="payment-method__button-container">
             <button
+              onClick={handleSubmit}
               className="payment-method__button-add"
               disabled={
                 !(
@@ -436,7 +437,7 @@ function PaymentMethods() {
               cancel
             </button>
           </div>
-        </form>
+        </div>
       )}
       {isLoading ? (
         <Loader />

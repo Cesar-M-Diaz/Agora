@@ -22,7 +22,7 @@ export default function CheckoutPage(props) {
     card_name: user_name,
   });
   const [count, setCount] = useState(1);
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [epayco_customer_id, setEpayco_customer_id] = useState('');
   const [existingCards, setExistingCards] = useState({
@@ -91,24 +91,37 @@ export default function CheckoutPage(props) {
   }
 
   useEffect(() => {
-    axios.get(`/get-customer?id=${user_id}`).then((result) => {
-      const customer = result.data.customer.data;
-      setEpayco_customer_id(customer.id_customer);
-      setCustomerInfo((prevState) => ({
-        ...prevState,
-        name: customer.name || firstName,
-        email: customer.email || user_email,
-      }));
-      setExistingCards((prevState) => ({
-        ...prevState,
-        cards: customer.cards,
-      }));
-      if (customer.id_customer) {
-        setHidden(true);
-      }
-      setIsLoading(false);
-    });
-  }, [epayco_customer_id, user_id, user_email, firstName]);
+    axios
+      .get(`/get-customer?id=${user_id}`)
+      .then((result) => {
+        const customer = result.data.customer.data;
+        setEpayco_customer_id(customer.id_customer);
+        setCustomerInfo((prevState) => ({
+          ...prevState,
+          name: customer.name || firstName,
+          email: customer.email || user_email,
+        }));
+        setExistingCards((prevState) => ({
+          ...prevState,
+          cards: customer.cards,
+        }));
+        if (customer.cards.length === 0) {
+          setHidden(false);
+        } else {
+          setHidden(true);
+          setIsValid((prevState) => ({
+            ...prevState,
+            'card[number]': true,
+            'card[exp_year]': true,
+            'card[exp_month]': true,
+            'card[cvc]': true,
+          }));
+        }
+      })
+      .then(() => {
+        setIsLoading(false);
+      });
+  }, [user_id, user_email, firstName]);
 
   function validateinputs(e) {
     const input = e.target.name;
@@ -211,7 +224,7 @@ export default function CheckoutPage(props) {
     e.preventDefault();
     setLoadingPayment(true);
     try {
-      if (epayco_customer_id) {
+      if (existingCards.cards.length !== 0) {
         await axios.post('/payment', {
           tutorship_id,
           user_id,
