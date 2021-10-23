@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import Logo from "../assets/images/Logo.png";
 import { Link } from "react-router-dom";
+import Autosuggest from "react-autosuggest";
+import axios from "../utils/axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
@@ -20,10 +22,12 @@ function Header() {
     searchInput: "",
     isSearchCollapsed: true,
     isMenuCollapsed: true,
+
   });
   const desktopInput = useRef();
   const mobileInput = useRef();
   const signingOut = useRef(false);
+
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, searchInput: e.target.value }));
@@ -80,17 +84,29 @@ function Header() {
     }
   }, [state, dispatch]);
 
+  
+
   const search = (e) => {
+
+    if(state.searchInput.length > 0){
     desktopInput.current.value = "";
     mobileInput.current.value = "";
     !state.isSearchCollapsed &&
       setState((prevState) => ({ ...prevState, isSearchCollapsed: true }));
+      const params = new URLSearchParams(document.location.search.substring(1));
+      const page = parseInt(params.get("page")); 
+
     history.push({
-      pathname: "/search",
+      pathname: `/search/?query=${state.searchInput}&page=1`,
       state: state.searchInput,
     });
+    }
+
+    
   };
-  return (
+return (
+
+
     <header className="header">
       <Link
         data-testid="logo-image"
@@ -115,6 +131,7 @@ function Header() {
             onKeyDown={(e) => e.code === "Enter" && search()}
             ref={desktopInput}
           />
+
           <div className="search-container__icon-container" onClick={search}>
             <FontAwesomeIcon icon={faSearch} />
           </div>

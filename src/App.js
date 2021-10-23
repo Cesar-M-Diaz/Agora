@@ -41,14 +41,14 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={LoginPage} />
-          <StudentRoute exact path="/search" component={SearchPage} />
+          <StudentRoute  path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
           <PrivateRoute exact path="/profile/:section" component={ProfileRouteComponent} />
           <StudentRoute exact path="/tutor/:id" component={TutorDetailsPage} />
           <StudentRoute exact path="/tutor/:id/schedule" component={TutorsSchedule} />
           <StudentRoute exact path="/checkout/:id" component={CheckoutPage} />
           <Route path="*" component={errorPage} />
-        </Switch>
+           </Switch>
       </Layout>
     </Router>
   );
