@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Logo from "../assets/images/Logo.png";
 import { Link } from "react-router-dom";
-import Autosuggest from "react-autosuggest";
-import axios from "../utils/axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
