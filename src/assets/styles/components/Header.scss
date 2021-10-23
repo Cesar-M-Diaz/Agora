@@ -144,6 +144,7 @@ body {
 .mobile-menu__profile-button,
 .mobile-menu__signout-button {
   display: flex;
+  justify-content: center;
   background-color: #22b8d9;
   width: 60vw;
   text-align: center;
@@ -152,6 +153,8 @@ body {
   font-size: 25px;
   color: $secondary-color;
   font-family: sans-serif;
+  user-select: none;
+  cursor: pointer;
 }
 
 .header__profile-name {
@@ -192,6 +195,8 @@ body {
   font-size: 20px;
   font-family: sans-serif;
   transition: color 200ms;
+  user-select: none;
+  cursor: pointer;
 }
 
 .profile-tooltip__profile:hover,

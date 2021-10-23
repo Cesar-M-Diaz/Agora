@@ -3,12 +3,15 @@ import axios from '../utils/axios';
 import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { register as registerAction } from '../actions/register';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FormTutor from '../components/FormTutor';
+import { AUTHORIZED } from '../actions/constants';
+import history from '../utils/history';
 
 import '../assets/styles/pages/register.scss';
 
 function Register() {
+  const auth_status = useSelector((state) => state.auth_status);
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const [state, setState] = useState({
@@ -32,14 +35,17 @@ function Register() {
   });
 
   useEffect(() => {
+    if (auth_status === AUTHORIZED) {
+      history.push('/home');
+    }
     axios
       .get('/categories')
       .then((response) => {
         const categories = response.data.categories;
         setCategories(categories);
       })
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => console.error(err));
+  }, [auth_status]);
 
   function validateInputs(e) {
     const inputName = e.target.name;
@@ -249,7 +255,7 @@ function Register() {
           Register
         </button>
         <p className="register-form__account">
-          Do you already have an account? <Link to="/sign in">Sign in</Link>
+          Do you already have an account? <Link to="/login">Sign in</Link>
         </p>
       </form>
     </>

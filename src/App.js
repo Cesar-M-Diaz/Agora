@@ -8,11 +8,17 @@ import TutorDetailsPage from './pages/TutorDetailsPage';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import getUserData from './actions/getUserData';
+import { AUTH_FAILED } from './actions/constants';
 import { useEffect } from 'react';
 import { errorPage } from './pages/errorPage';
 import HomePage from './pages/HomePage';
 import history from './utils/history';
-import { AUTH_FAILED } from './actions/constants';
+import ProfileRouteComponent from './utils/ProfileRouteComponent';
+import { SearchPage } from './pages/searchPage';
+import ScrollToTop from './utils/ScrollToTop';
+import TutorsSchedule from './pages/TutorsSchedule';
+import CheckoutPage from './pages/CheckoutPage';
+import StudentRoute from './utils/StudentRoute';
 
 function App() {
   const token = useSelector((state) => state.token);
@@ -28,16 +34,21 @@ function App() {
 
   return (
     <Router history={history}>
+      <ScrollToTop />
       <Layout>
         <Switch>
-          <PrivateRoute exact path="/home" component={HomePage} />
+          <StudentRoute exact path="/home" component={HomePage} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={LoginPage} />
+          <StudentRoute  path="/search" component={SearchPage} />
           <Route exact path="/error" component={errorPage} />
-          <Route exact path="/tutor" component={TutorDetailsPage} />
+          <PrivateRoute exact path="/profile/:section" component={ProfileRouteComponent} />
+          <StudentRoute exact path="/tutor/:id" component={TutorDetailsPage} />
+          <StudentRoute exact path="/tutor/:id/schedule" component={TutorsSchedule} />
+          <StudentRoute exact path="/checkout/:id" component={CheckoutPage} />
           <Route path="*" component={errorPage} />
-        </Switch>
+           </Switch>
       </Layout>
     </Router>
   );

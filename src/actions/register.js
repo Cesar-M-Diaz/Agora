@@ -22,10 +22,11 @@ export function register(type, inputs) {
       });
       history.push('/home');
     } catch (err) {
+      const errorMessage = err.response.data.message;
       MySwal.fire({
         icon: 'error',
-        title: <p className="swal__tittle">Oops...</p>,
-        text: 'Registration failed',
+        title: <p className="swal__tittle">Oops... Please try again</p>,
+        text: errorMessage,
         confirmButtonColor: '#ce4c4c',
       });
     }

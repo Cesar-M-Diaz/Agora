@@ -1,23 +1,18 @@
 import React from 'react';
-import history from '../utils/history';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
-function TutorPageHead({ tutor }) {
+function TutorPageHead({ tutor, tutorId }) {
   const starNodes = [];
 
   for (let i = 1; i <= tutor.rating; i++) {
-    starNodes.push(<FontAwesomeIcon icon={faStar} />);
-  }
-
-  function onClick(e) {
-    e.preventDefault();
-    history.push('/pay');
+    starNodes.push(<FontAwesomeIcon icon={faStar} key={i} title="tutor-rating-star" />);
   }
 
   return (
     <main className="tutor-profile__profile-container">
-      <img src={tutor.profile_photo} alt="" className="tutor-profile__photo" />
+      <img src={tutor.profile_photo} alt="tutor profile" className="tutor-profile__photo" />
       <div className="tutor-profile__profile-container-text">
         <h1 className="tutor-profile__title">{tutor.name}</h1>
         <h2 className="tutor-profile__subtitle">{tutor.profession}</h2>
@@ -27,9 +22,9 @@ function TutorPageHead({ tutor }) {
       <div className="tutor-profile__schedule-container">
         <h2 className="tutor-profile__subtitle">Availability</h2>
         <h3 className="tutor-profile__availability">{tutor.schedule}</h3>
-        <button onClick={onClick} className="tutor-profile__schedule-button">
+        <Link to={`/tutor/${tutorId}/schedule`} className="tutor-profile__schedule-button">
           Schedule Appointment
-        </button>
+        </Link>
       </div>
     </main>
   );
