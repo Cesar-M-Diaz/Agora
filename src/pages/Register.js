@@ -44,7 +44,7 @@ function Register() {
         const categories = response.data.categories;
         setCategories(categories);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }, [auth_status]);
 
   function validateInputs(e) {

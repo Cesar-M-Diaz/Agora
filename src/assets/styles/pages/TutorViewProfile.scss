@@ -68,6 +68,7 @@ $color-b: #0de26f;
   text-align: center;
 }
 
+.tutor-profile__availability,
 .tutor-profile__subtitle {
   font-size: 1.3rem;
   color: $title-color;
@@ -164,7 +165,7 @@ $color-b: #0de26f;
   }
 
   .tutor-profile__schedule-container {
-    width: 200px;
+    width: 225px;
     flex-direction: column;
   }
 
@@ -180,7 +181,15 @@ $color-b: #0de26f;
 
   .tutor-profile__schedule-button {
     padding: 0px 0px;
-    width: 200px;
+    width: 100%;
+  }
+
+  .tutor-profile__availability {
+    font-size: 1.2rem;
+    color: $title-color;
+    font-weight: 400;
+    margin-top: 10px;
+    text-align: center;
   }
 }
 
@@ -189,6 +198,11 @@ $color-b: #0de26f;
     width: 1040px;
     margin: 30px auto;
     padding: 60px;
+  }
+
+  .tutor-profile__schedule-container {
+    width: 230px;
+    flex-direction: column;
   }
 
   .tutor-profile__profile-container {

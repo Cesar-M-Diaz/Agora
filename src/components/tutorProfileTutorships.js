@@ -41,7 +41,6 @@ function TutorProfileTutorships() {
   useEffect(() => {
     const getTutorships = async () => {
       const { data } = await axios.get(`/tutorships/${id}`);
-      console.log(data)
       setState((prevState) => ({
         ...prevState,
         loading: true,
@@ -51,7 +50,6 @@ function TutorProfileTutorships() {
 
     getTutorships();
   }, [id, state.renderSwitch]);
-
 
   return (
     <div className="tutor__tutorships-container">
