@@ -4,10 +4,10 @@ import axios from '../utils/axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Loader from './Loader';
-import tutorCancelTutorship from './tutorCancelTutorship.js';
+// import tutorCancelTutorship from './tutorCancelTutorship.js';
 
 import '../assets/styles/components/tutorProfileTutorships.scss';
-import { StaticRouter } from 'react-router';
+// import { StaticRouter } from 'react-router';
 
 function TutorProfileTutorships() {
   const id = useSelector((state) => state.currentUser._id);
@@ -89,6 +89,7 @@ function TutorProfileTutorships() {
                         >
                           Cancel
                         </button> */}
+
                       </>
                     )}
                     {status === 'accepted' && (
