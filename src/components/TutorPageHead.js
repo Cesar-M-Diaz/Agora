@@ -7,18 +7,12 @@ function TutorPageHead({ tutor, tutorId }) {
   const starNodes = [];
 
   for (let i = 1; i <= tutor.rating; i++) {
-    starNodes.push(
-      <FontAwesomeIcon icon={faStar} key={i} title="tutor-rating-star" />,
-    );
+    starNodes.push(<FontAwesomeIcon icon={faStar} key={i} title="tutor-rating-star" />);
   }
 
   return (
     <main className="tutor-profile__profile-container">
-      <img
-        src={tutor.profile_photo}
-        alt="tutor profile"
-        className="tutor-profile__photo"
-      />
+      <img src={tutor.profile_photo} alt="tutor profile" className="tutor-profile__photo" />
       <div className="tutor-profile__profile-container-text">
         <h1 className="tutor-profile__title">{tutor.name}</h1>
         <h2 className="tutor-profile__subtitle">{tutor.profession}</h2>

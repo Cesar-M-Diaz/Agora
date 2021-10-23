@@ -51,7 +51,6 @@ function TutorProfileTutorships() {
     getTutorships();
   }, [id, state.renderSwitch]);
 
-
   return (
     <div className="tutor__tutorships-container">
       {!state.loading ? (

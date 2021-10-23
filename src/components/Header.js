@@ -1,31 +1,29 @@
-import React, { useState, useRef, useEffect } from "react";
-import Logo from "../assets/images/Logo.png";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
+import Logo from '../assets/images/Logo.png';
+import { Link } from 'react-router-dom';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 
-import "../assets/styles/components/Header.scss";
+import '../assets/styles/components/Header.scss';
 
-import { useDispatch, useSelector } from "react-redux";
-import logout from "../actions/logout";
-import toggleProfileTooltip from "../actions/toggleProfileTooltip";
-import { AUTHORIZED } from "../actions/constants";
-import history from "../utils/history";
+import { useDispatch, useSelector } from 'react-redux';
+import logout from '../actions/logout';
+import toggleProfileTooltip from '../actions/toggleProfileTooltip';
+import { AUTHORIZED } from '../actions/constants';
+import history from '../utils/history';
 
 function Header() {
   const globalState = useSelector((state) => state);
   const dispatch = useDispatch();
   const [state, setState] = useState({
-    searchInput: "",
+    searchInput: '',
     isSearchCollapsed: true,
     isMenuCollapsed: true,
-
   });
   const desktopInput = useRef();
   const mobileInput = useRef();
   const signingOut = useRef(false);
-
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, searchInput: e.target.value }));
@@ -77,56 +75,47 @@ function Header() {
       setTimeout(() => {
         signingOut.current = false;
         dispatch(logout());
-        history.push("/");
+        history.push('/');
       }, 200);
     }
   }, [state, dispatch]);
 
-  
-
   const search = (e) => {
+    if (state.searchInput.length > 0) {
+      desktopInput.current.value = '';
+      mobileInput.current.value = '';
+      !state.isSearchCollapsed && setState((prevState) => ({ ...prevState, isSearchCollapsed: true }));
+      // const params = new URLSearchParams(document.location.search.substring(1));
+      // const page = parseInt(params.get('page'));
 
-    if(state.searchInput.length > 0){
-    desktopInput.current.value = "";
-    mobileInput.current.value = "";
-    !state.isSearchCollapsed &&
-      setState((prevState) => ({ ...prevState, isSearchCollapsed: true }));
-      const params = new URLSearchParams(document.location.search.substring(1));
-      const page = parseInt(params.get("page")); 
-
-    history.push({
-      pathname: `/search/?query=${state.searchInput}&page=1`,
-      state: state.searchInput,
-    });
+      history.push({
+        pathname: `/search/?query=${state.searchInput}&page=1`,
+        state: state.searchInput,
+      });
     }
-
-    
   };
-return (
-
-
+  return (
     <header className="header">
       <Link
         data-testid="logo-image"
         to={
-          globalState.auth_status === AUTHORIZED &&
-          globalState.currentUser.type === "student"
-            ? "/home"
-            : globalState.currentUser.type === "tutor"
-            ? "/profile/tutorships"
-            : "/"
+          globalState.auth_status === AUTHORIZED && globalState.currentUser.type === 'student'
+            ? '/home'
+            : globalState.currentUser.type === 'tutor'
+            ? '/profile/tutorships'
+            : '/'
         }
       >
         <img className="header__logo" src={Logo} alt="Logo" />
       </Link>
-      {globalState.currentUser.type === "student" && (
+      {globalState.currentUser.type === 'student' && (
         <div className="header__search-container">
           <input
             onChange={handleChange}
             className="search-container__input"
             type="text"
             placeholder="Search"
-            onKeyDown={(e) => e.code === "Enter" && search()}
+            onKeyDown={(e) => e.code === 'Enter' && search()}
             ref={desktopInput}
           />
 
@@ -137,23 +126,19 @@ return (
       )}
 
       <div className="mobile-nav-buttons-container">
-        {globalState.currentUser.type === "student" && (
+        {globalState.currentUser.type === 'student' && (
           <FontAwesomeIcon onClick={toggleSearchCollapse} icon={faSearch} />
         )}
         <FontAwesomeIcon onClick={toggleMenuCollapse} icon={faBars} />
       </div>
 
-      <div
-        className={`mobile-search-input ${
-          !state.isSearchCollapsed && "active"
-        }`}
-      >
+      <div className={`mobile-search-input ${!state.isSearchCollapsed && 'active'}`}>
         <input
           onChange={handleChange}
           className="search-container__input"
           type="text"
           placeholder="Search"
-          onKeyDown={(e) => e.code === "Enter" && search()}
+          onKeyDown={(e) => e.code === 'Enter' && search()}
           ref={mobileInput}
         />
         <div className="search-container__icon-container" onClick={search}>
@@ -161,25 +146,15 @@ return (
         </div>
       </div>
 
-      <div className={`mobile-menu ${!state.isMenuCollapsed && "active"}`}>
+      <div className={`mobile-menu ${!state.isMenuCollapsed && 'active'}`}>
         {!!globalState.token ? (
           <>
             <div className="mobile-menu__profile-photo-container">
-              <img
-                className="header__profile-photo"
-                src={globalState.currentUser.profile_photo}
-                alt="Profile"
-              />
-              <span className="header__profile-name">
-                {globalState.currentUser.name}
-              </span>
+              <img className="header__profile-photo" src={globalState.currentUser.profile_photo} alt="Profile" />
+              <span className="header__profile-name">{globalState.currentUser.name}</span>
             </div>
             <div className="mobile-menu__buttons">
-              <Link
-                to="/profile/edit"
-                className="mobile-menu__profile-button"
-                onClick={toggleMenuCollapse}
-              >
+              <Link to="/profile/edit" className="mobile-menu__profile-button" onClick={toggleMenuCollapse}>
                 Profile
               </Link>
               <div onClick={SignOut} className="mobile-menu__signout-button">
@@ -189,12 +164,7 @@ return (
           </>
         ) : (
           <div className="mobile__buttons-container">
-            <Link
-              to="/login"
-              onClick={toggleMenuCollapse}
-              className="button-container__signin-button"
-              type="button"
-            >
+            <Link to="/login" onClick={toggleMenuCollapse} className="button-container__signin-button" type="button">
               Sign in
             </Link>
             <Link
@@ -215,8 +185,7 @@ return (
             onClick={profileTooltipCollapse}
             onBlur={() => {
               setTimeout(() => {
-                !globalState.isProfileTooltipCollapsed &&
-                  profileTooltipCollapse();
+                !globalState.isProfileTooltipCollapsed && profileTooltipCollapse();
               }, 100);
             }}
             className="header__profile-photo"
@@ -224,34 +193,19 @@ return (
             alt="Profile"
             tabIndex="1"
           />
-          <div
-            className={`header__profile-tooltip ${
-              !globalState.isProfileTooltipCollapsed && "active"
-            }`}
-          >
-            <h3 className="profile-tooltip__name">
-              {globalState.currentUser.name}
-            </h3>
+          <div className={`header__profile-tooltip ${!globalState.isProfileTooltipCollapsed && 'active'}`}>
+            <h3 className="profile-tooltip__name">{globalState.currentUser.name}</h3>
             <Link to="/profile/edit" className="profile-tooltip__profile">
               Profile
             </Link>
-            <div
-              data-testid="sign-out-button"
-              onClick={SignOut}
-              className="profile-tooltip__signout"
-            >
+            <div data-testid="sign-out-button" onClick={SignOut} className="profile-tooltip__signout">
               Sign out
             </div>
           </div>
         </div>
       ) : (
         <div className="header__buttons-container">
-          <Link
-            to="/login"
-            className="button-container__signin-button"
-            type="button"
-            data-testid="sign-in-button"
-          >
+          <Link to="/login" className="button-container__signin-button" type="button" data-testid="sign-in-button">
             Sign in
           </Link>
           <Link

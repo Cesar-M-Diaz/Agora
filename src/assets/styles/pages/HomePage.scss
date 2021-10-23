@@ -3,23 +3,13 @@
   justify-content: center;
 }
 
-.homepage-content {
-  margin: 0px 10vw;
-  width: 95%;
-}
-
 @media (min-width: 992px) {
   .homepage-content {
-    margin: 0px 3vw 60px;
+    margin: 0px 0px 60px;
     width: 990px;
   }
 }
-@media (min-width: 1020px) {
-  .homepage-content {
-    margin: 0px 3vw 60px;
-    width: 990px;
-  }
-}
+
 @media (min-width: 1200px) {
   .homepage-content {
     width: 1150px;

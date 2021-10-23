@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { TutorPageHead } from "../components/TutorPageHead";
-import { TutorDescription } from "../components/TutorDescription";
-import { ReviewsContainer } from "../components/ReviewsContainer";
-import "../assets/styles/pages/TutorViewProfile.scss";
-import axios from "../utils/axios";
-import Loader from "../components/Loader";
-import history from "../utils/history";
+import React, { useEffect, useState } from 'react';
+import { TutorPageHead } from '../components/TutorPageHead';
+import { TutorDescription } from '../components/TutorDescription';
+import { ReviewsContainer } from '../components/ReviewsContainer';
+import '../assets/styles/pages/TutorViewProfile.scss';
+import axios from '../utils/axios';
+import Loader from '../components/Loader';
+import history from '../utils/history';
 
 function TutorDetailsPage(props) {
   const [tutor, setTutor] = useState({});

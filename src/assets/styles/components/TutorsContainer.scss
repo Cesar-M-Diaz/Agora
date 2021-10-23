@@ -17,11 +17,6 @@ $color-b: #0de26f;
   flex-direction: column;
 }
 
-.categories__container {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
 .tutors__title-container {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.8rem;
@@ -44,9 +39,7 @@ $color-b: #0de26f;
   letter-spacing: 4px;
 }
 
-
 @media (min-width: 768px) {
-  
   .tutors__title-container {
     margin: 100px 2vw 80px;
   }
@@ -56,8 +49,8 @@ $color-b: #0de26f;
   .tutors__container {
     margin: 50px 25px 20px 25px;
     display: grid;
-    grid-template-columns: 200px auto;
-    grid-template-rows: 100px 500px;
+    grid-template-columns: 180px auto;
+    grid-template-rows: 100px 630px;
   }
 
   .tutors__title-container {
@@ -67,7 +60,6 @@ $color-b: #0de26f;
   }
 
   .categories__container {
-    width: 90%;
     grid-column: 1;
     grid-row: 2 / span 2;
   }
@@ -78,13 +70,5 @@ $color-b: #0de26f;
     display: grid;
     grid-template-columns: 300px auto;
     grid-template-rows: 100px 650px;
-  }
-
-  .categories__container {
-    width: 100%;
-    margin: 0;
-    height: 100%;
-    grid-column: 1;
-    grid-row: 2 / span 2;
   }
 }
