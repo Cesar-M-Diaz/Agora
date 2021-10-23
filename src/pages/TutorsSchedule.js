@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
+
 import Loader from '../components/Loader';
 import axios from '../utils/axios';
 import history from '../utils/history';
@@ -8,6 +10,7 @@ import withReactContent from 'sweetalert2-react-content';
 import '../assets/styles/pages/TutorsSchedule.scss';
 
 function TutorsSchedule(props) {
+  const student = useSelector((state) => state.currentUser);
   const MySwal = withReactContent(Swal);
   const createDate = () => {
     const date = new Date();
@@ -44,7 +47,6 @@ function TutorsSchedule(props) {
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, inputs: { ...prevState.inputs, [e.target.id]: e.target.value } }));
-    console.log(state.inputs);
   };
 
   const handleSubmit = (e) => {
@@ -52,9 +54,15 @@ function TutorsSchedule(props) {
     setState((prevState) => ({ ...prevState, error: false }));
     const { subject, description, date, time } = state.inputs;
     if (subject && description && date && time) {
+      const apponintment = {
+        tutor: state.tutor,
+        inputs: state.inputs,
+        student: student, 
+      }
+          
       axios
-        .post('/studentTutorship')
-        .then(() => {
+        .post('/sendAppointment', apponintment)
+        .then((req, res) => {
           MySwal.fire({
             icon: 'success',
             title: <p className="swal__tittle">Tutorship request sent successfully!</p>,
@@ -63,6 +71,7 @@ function TutorsSchedule(props) {
           }).then(() => {
             history.replace('/home');
           });
+         
         })
         .catch((error) => {
           MySwal.fire({
