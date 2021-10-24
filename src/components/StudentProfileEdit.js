@@ -5,7 +5,6 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import history from '../utils/history';
 import axios from '../utils/axios';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 
 const StudentProfileEdit = () => {
   const state = useSelector((state) => state.currentUser);

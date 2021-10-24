@@ -3,7 +3,6 @@ import axios from '../utils/axios';
 import { useSelector } from 'react-redux';
 import '../assets/styles/pages/TutorEditProfile.scss';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import '../assets/styles/pages/Tutorship.scss';
 
 function TutorProfileCreateTutorship() {

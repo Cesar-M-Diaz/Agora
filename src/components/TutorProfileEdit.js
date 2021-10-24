@@ -3,7 +3,6 @@ import axios from '../utils/axios';
 import { useSelector } from 'react-redux';
 import history from '../utils/history';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/pages/TutorEditProfile.scss';
