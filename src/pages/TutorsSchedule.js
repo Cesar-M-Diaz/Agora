@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
 import Loader from '../components/Loader';
 import axios from '../utils/axios';
@@ -57,21 +57,20 @@ function TutorsSchedule(props) {
       const apponintment = {
         tutor: state.tutor,
         inputs: state.inputs,
-        student: student, 
-      }
-          
+        student: student,
+      };
+
       axios
         .post('/sendAppointment', apponintment)
         .then((req, res) => {
           MySwal.fire({
             icon: 'success',
             title: <p className="swal__tittle">Tutorship request sent successfully!</p>,
-            text: 'Please check your email for more details',
+            text: `${state.tutor.name} will get in contact soon`,
             confirmButtonColor: '#0de26f',
           }).then(() => {
             history.replace('/home');
           });
-         
         })
         .catch((error) => {
           MySwal.fire({
