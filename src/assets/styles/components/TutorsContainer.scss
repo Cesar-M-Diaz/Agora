@@ -25,7 +25,7 @@ $color-b: #0de26f;
   text-align: center;
   color: $title-color;
   letter-spacing: 4px;
-  margin: 50px 2vw 40px;
+  margin: 50px 2vw 50px;
 }
 
 .tutors__subtitle {
@@ -41,16 +41,16 @@ $color-b: #0de26f;
 
 @media (min-width: 768px) {
   .tutors__title-container {
-    margin: 100px 2vw 80px;
+    margin: 50px 2vw 50px;
   }
 }
 
 @media (min-width: 992px) {
   .tutors__container {
-    margin: 50px 25px 20px 25px;
+    margin: 25px 25px 20px 25px;
     display: grid;
     grid-template-columns: 180px auto;
-    grid-template-rows: 100px 630px;
+    grid-template-rows: 130px 630px;
   }
 
   .tutors__title-container {
@@ -66,9 +66,9 @@ $color-b: #0de26f;
 }
 @media (min-width: 1200px) {
   .tutors__container {
-    margin: 50px 0px 20px 0px;
+    margin: 25px 0px 20px 0px;
     display: grid;
-    grid-template-columns: 300px auto;
-    grid-template-rows: 100px 650px;
+    grid-template-columns: 250px auto;
+    grid-template-rows: 130px 650px;
   }
 }
