@@ -73,6 +73,8 @@ function StudentProfileTutorships() {
     <div className="student__tutorships-container">
       {state.loading ? (
         <Loader />
+      ) : state.tutorships.length === 0 ? (
+        <p className="student__tutorships__title">You don't have any pending tutorships</p>
       ) : (
         state.tutorships.map((tutorship) => {
           const { name, focus, profile_photo, email } = tutorship.tutor_id;
