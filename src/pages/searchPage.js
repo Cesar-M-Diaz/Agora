@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import SearchResult from '../components/searchResult.js';
 import SelectPage from '../components/selectPage.js';
 import { Player } from '@lottiefiles/react-lottie-player';
+import Loader from '../components/Loader';
 import axios from '../utils/axios';
 import history from '../utils/history.js';
 
@@ -13,6 +14,7 @@ const SearchPage = () => {
   const [Page, setPage] = useState(page);
   const [Pages, setPages] = useState(page);
   const [notFound, setNotFound] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const search = async () => {
@@ -29,6 +31,7 @@ const SearchPage = () => {
         } else {
           setNotFound(true);
         }
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -38,7 +41,9 @@ const SearchPage = () => {
 
   return (
     <div className="search-page">
-      {notFound ? (
+      {isLoading ? (
+        <Loader />
+      ) : notFound ? (
         <div className="search-page__nothing-found">
           <p>Nothing found, please try again</p>
           <Player
