@@ -3,13 +3,11 @@ import axios from '../utils/axios';
 import { useSelector } from 'react-redux';
 import history from '../utils/history';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/pages/TutorEditProfile.scss';
 
 function TutorProfilePage() {
-  const MySwal = withReactContent(Swal);
   const globalUser = useSelector((state) => state.currentUser);
   const token = useSelector((state) => state.token);
   const [previewPhoto, setPreviewPhoto] = useState('');
@@ -43,6 +41,16 @@ function TutorProfilePage() {
     },
     isValid: { name: true, password: true, email: true, schedule: true },
     enableUpload: false,
+  });
+  const swalStyled = Swal.mixin({
+    customClass: {
+      confirmButton: 'swal__confirm',
+      cancelButton: 'swal__cancel',
+      title: 'swal__title',
+      container: 'swal__text',
+      actions: 'swal__actions',
+    },
+    buttonsStyling: false,
   });
 
   useEffect(() => {
@@ -223,13 +231,14 @@ function TutorProfilePage() {
         type: 'tutor',
       });
       localStorage.setItem('token', response.data);
-      MySwal.fire({
-        icon: 'success',
-        title: <p className="swal__tittle">Your data was updated successfully!</p>,
-        confirmButtonColor: '#0de26f',
-      }).then(() => {
-        history.go(0);
-      });
+      swalStyled
+        .fire({
+          icon: 'success',
+          title: 'Your data was updated successfully',
+        })
+        .then(() => {
+          history.go(0);
+        });
     } catch (error) {
       setUserData((state) => ({
         ...state,

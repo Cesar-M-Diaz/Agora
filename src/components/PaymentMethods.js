@@ -4,16 +4,30 @@ import { useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import CreditCard from '../components/CreditCard';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import '../assets/styles/components/PaymentMethods.scss';
 
 function PaymentMethods() {
   const user_id = useSelector((state) => state.currentUser._id);
   const user_email = useSelector((state) => state.currentUser.email);
   const user_name = useSelector((state) => state.currentUser.name);
-  const firstName = user_name.split(' ')[0];
-  const lastName = user_name.split(' ')[1];
-  const MySwal = withReactContent(Swal);
+  const firstName = function (user_name) {
+    const fullName = user_name.split(' ');
+    if (fullName.length > 2) {
+      const result = fullName.slice(0, 2).join(' ');
+      return result;
+    } else {
+      return fullName[0];
+    }
+  };
+  const lastName = function (user_name) {
+    const fullName = user_name.split(' ');
+    if (fullName.length > 2) {
+      const result = fullName.slice(2, 4).join(' ');
+      return result;
+    } else {
+      return fullName[1];
+    }
+  };
   const [paymentInfo, setPaymentInfo] = useState({
     doc_type: '',
     doc_number: '',
@@ -34,8 +48,8 @@ function PaymentMethods() {
     'card[cvc]': '',
   });
   const [customerInfo] = useState({
-    name: firstName,
-    last_name: lastName,
+    name: firstName(user_name),
+    last_name: lastName(user_name),
     email: user_email,
   });
   const [errors, setErrors] = useState({
@@ -55,6 +69,27 @@ function PaymentMethods() {
     'card[exp_month]': false,
     'card[cvc]': false,
     card_name: true,
+  });
+
+  const swalStyled = Swal.mixin({
+    customClass: {
+      confirmButton: 'swal__confirm',
+      cancelButton: 'swal__cancel',
+      title: 'swal__title',
+      container: 'swal__text',
+      actions: 'swal__actions',
+    },
+    buttonsStyling: false,
+  });
+  const swalStyledDelete = Swal.mixin({
+    customClass: {
+      confirmButton: 'swal__delete',
+      cancelButton: 'swal__delete-cancel',
+      title: 'swal__title',
+      container: 'swal__text',
+      actions: 'swal__actions',
+    },
+    buttonsStyling: false,
   });
 
   useEffect(() => {
@@ -195,67 +230,80 @@ function PaymentMethods() {
         })
         .then(() => {
           setIsLoading(false);
-          MySwal.fire({
+          swalStyled.fire({
             icon: 'success',
-            title: <p className="swal__tittle">Card created</p>,
-            confirmButtonColor: '#0de26f',
+            title: 'Card created',
           });
         });
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
       const errorMessage = err.response.data;
-      MySwal.fire({
+      swalStyled.fire({
         icon: 'error',
-        title: <p className="swal__tittle">Oops... Please try again</p>,
+        title: 'Oops... Please try again',
         text: errorMessage,
-        confirmButtonColor: '#ce4c4c',
       });
     }
   }
 
-  async function deleteCard(card) {
-    setIsLoading(true);
-    try {
-      await axios.post('/delete-card', {
-        epayco_customer_id,
-        franchise: card.franchise,
-        mask: card.mask,
+  function deleteCard(card) {
+    swalStyledDelete
+      .fire({
+        title: `Are you sure?`,
+        text: `this action can't be undone`,
+        showCancelButton: true,
+        confirmButtonText: 'delete',
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          confirmDelete(card);
+        }
       });
-      await axios
-        .get(`/get-customer?id=${user_id}`)
-        .then((result) => {
-          const customer = result.data.customer.data;
-          if (customer.id_customer) {
-            setEpayco_customer_id(customer.id_customer);
-            setExistingCards((prevState) => ({
-              ...prevState,
-              cards: customer.cards,
-            }));
-            setIsValid((prevState) => ({
-              ...prevState,
-              doc_type: true,
-              doc_number: true,
-            }));
-          }
-        })
-        .then(() => {
-          setIsLoading(false);
-          MySwal.fire({
-            icon: 'success',
-            title: <p className="swal__tittle">Card deleted</p>,
-            confirmButtonColor: '#0de26f',
-          });
+
+    async function confirmDelete(card) {
+      setIsLoading(true);
+      try {
+        await axios.post('/delete-card', {
+          epayco_customer_id,
+          franchise: card.franchise,
+          mask: card.mask,
         });
-    } catch (err) {
-      setIsLoading(false);
-      const errorMessage = err.response.data;
-      MySwal.fire({
-        icon: 'error',
-        title: <p className="swal__tittle">Oops... Please try again</p>,
-        text: errorMessage,
-        confirmButtonColor: '#ce4c4c',
-      });
+        await axios
+          .get(`/get-customer?id=${user_id}`)
+          .then((result) => {
+            const customer = result.data.customer.data;
+            if (customer.id_customer) {
+              setEpayco_customer_id(customer.id_customer);
+              setExistingCards((prevState) => ({
+                ...prevState,
+                cards: customer.cards,
+              }));
+              setIsValid((prevState) => ({
+                ...prevState,
+                doc_type: true,
+                doc_number: true,
+              }));
+            }
+          })
+          .then(() => {
+            setIsLoading(false);
+            swalStyled.fire({
+              icon: 'success',
+              title: 'Card deleted',
+              confirmButtonColor: '#0de26f',
+            });
+          });
+      } catch (err) {
+        setIsLoading(false);
+        const errorMessage = err.response.data;
+        swalStyled.fire({
+          icon: 'error',
+          title: <p className="swal__tittle">Oops... Please try again</p>,
+          text: errorMessage,
+          confirmButtonColor: '#ce4c4c',
+        });
+      }
     }
   }
 

@@ -23,7 +23,7 @@ $warning-color: rgb(235, 99, 99);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: auto;
+  margin: 20px;
 }
 
 .payment__page-body {
@@ -278,6 +278,13 @@ $warning-color: rgb(235, 99, 99);
 }
 .payment__next-button-disabled {
   visibility: hidden;
+}
+
+@media (min-width: 768px) {
+  .payment__body {
+    width: 700px;
+    margin: 20px auto;
+  }
 }
 
 @media (min-width: 992px) {

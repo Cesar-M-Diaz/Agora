@@ -5,10 +5,8 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import history from '../utils/history';
 import axios from '../utils/axios';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 
 const StudentProfileEdit = () => {
-  const MySwal = withReactContent(Swal);
   const state = useSelector((state) => state.currentUser);
   const token = useSelector((state) => state.token);
   const [isDisabled, setIsDisabled] = useState({
@@ -37,6 +35,16 @@ const StudentProfileEdit = () => {
       setIsDisabled((prevState) => ({ ...prevState, submit: true }));
     }
   }, [inputs, state]);
+  const swalStyled = Swal.mixin({
+    customClass: {
+      confirmButton: 'swal__confirm',
+      cancelButton: 'swal__cancel',
+      title: 'swal__title',
+      container: 'swal__text',
+      actions: 'swal__actions',
+    },
+    buttonsStyling: false,
+  });
 
   const handleClick = (e) => {
     const buttonClass = e.currentTarget.className;
@@ -129,13 +137,14 @@ const StudentProfileEdit = () => {
         type: 'student',
       });
       localStorage.setItem('token', response.data);
-      MySwal.fire({
-        icon: 'success',
-        title: <p className="swal__tittle">Your data was updated successfully!</p>,
-        confirmButtonColor: '#0de26f',
-      }).then(() => {
-        history.go(0);
-      });
+      swalStyled
+        .fire({
+          icon: 'success',
+          title: 'Your data was updated successfully',
+        })
+        .then(() => {
+          history.go(0);
+        });
     } catch (error) {
       setErrors((prevState) => ({
         ...prevState,
