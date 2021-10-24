@@ -1,11 +1,26 @@
+$subtitle-color: #5b5b5b;
+$title-color: #3f3f3f;
 $color-a: #22b8d9;
 $color-b: #0de26f;
+$font-weight: 400;
+$font-selected-weight: 800;
+$border-width: 2px;
+$spacing: 30px;
+$warning-color: rgb(235, 99, 99);
 
 .tutor__tutorships-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.tutor__tutorships__title {
+  margin: 60px 20px;
+  font-family: open sans;
+  color: $subtitle-color;
+  font-weight: 600;
+  text-align: center;
 }
 
 .tutor__tutorship-container {
@@ -192,7 +207,7 @@ $color-b: #0de26f;
   }
 }
 
-.tutorCancelTutorship-buttons-container{
+.tutorCancelTutorship-buttons-container {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -209,17 +224,6 @@ $color-b: #0de26f;
 }
 
 .cancel-tutorship-button {
-    width: 80px;
-    height: 40px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.tutorRateTutorship-submit-button{
   width: 80px;
   height: 40px;
   border: none;
@@ -230,13 +234,24 @@ $color-b: #0de26f;
   cursor: pointer;
 }
 
-.tutorRateTutorship-buttons-container{
+.tutorRateTutorship-submit-button {
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.tutorRateTutorship-buttons-container {
   display: flex;
   justify-content: center;
   gap: 10px;
 }
 
-.tutorRateTutorship-textarea{
+.tutorRateTutorship-textarea {
   width: 100%;
   box-sizing: border-box;
   resize: none;
@@ -244,7 +259,7 @@ $color-b: #0de26f;
   font-size: 1.1rem;
 }
 
-.tutorRateTutorship-textarea:focus{
+.tutorRateTutorship-textarea:focus {
   outline: none;
 }
 

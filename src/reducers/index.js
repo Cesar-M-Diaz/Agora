@@ -9,7 +9,7 @@ import {
   AUTH_FAILED,
   AUTHORIZED,
   UNAUTHORIZED,
-  TOGGLEPROFILETOOLTIP
+  TOGGLEPROFILETOOLTIP,
 } from '../actions/constants';
 
 const initialState = {
@@ -23,11 +23,12 @@ const initialState = {
     focus: null,
     description: null,
     schedule: null,
+    price: null,
   },
   login_failed: false,
   auth_status: LOADING,
   emailIsTaken: false,
-  isProfileTooltipCollapsed: true
+  isProfileTooltipCollapsed: true,
 };
 
 // Modify the reducer in order to receive the actions
@@ -62,6 +63,7 @@ const reducer = function (state = initialState, action) {
         focus: action.payload.focus || null,
         description: action.payload.description || null,
         schedule: action.payload.schedule || null,
+        price: action.payload.price || null,
       },
       auth_status: AUTHORIZED,
     };
@@ -79,8 +81,8 @@ const reducer = function (state = initialState, action) {
   } else if (action.type === TOGGLEPROFILETOOLTIP) {
     return {
       ...state,
-      isProfileTooltipCollapsed: !state.isProfileTooltipCollapsed
-    }
+      isProfileTooltipCollapsed: !state.isProfileTooltipCollapsed,
+    };
   }
   return state;
 };

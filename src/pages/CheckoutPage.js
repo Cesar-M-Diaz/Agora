@@ -57,7 +57,7 @@ export default function CheckoutPage(props) {
   const [paymentInfo, setPaymentInfo] = useState({
     doc_type: '',
     doc_number: '',
-    value: `${tutorship_price}`,
+    value: tutorship_price,
     tax: '16000',
     tax_base: '30000',
     currency: 'COP',
@@ -102,6 +102,7 @@ export default function CheckoutPage(props) {
 
   function previous() {
     setCount(count - 1);
+    console.log(paymentInfo.value);
     if (count === 1) {
       setCount(1);
     }
@@ -126,7 +127,7 @@ export default function CheckoutPage(props) {
         }));
         setExistingCards((prevState) => ({
           ...prevState,
-          cards: customer.cards,
+          cards: customer.cards || [],
         }));
         if (customer.status === 'error') {
           setHidden(false);
@@ -281,11 +282,12 @@ export default function CheckoutPage(props) {
       }
     } catch (err) {
       setLoadingPayment(false);
-      const errorMessage = err.response.data;
+      // const errorMessage = err.response.data;
       swalStyled.fire({
         icon: 'error',
         title: 'Oops... Please try again',
-        text: errorMessage,
+        // text: errorMessage,
+        text: err,
       });
     }
   }
@@ -456,7 +458,7 @@ export default function CheckoutPage(props) {
           <form action="" className="payment__form" onSubmit={handleSubmit}>
             <div className="payment__form-slot">
               <label>total ammount</label>
-              <input type="number" name="value" value={paymentInfo.value} readOnly />
+              <input type="text" name="value" defaultValue={paymentInfo.value.toLocaleString()} disabled={true} />
               <span className="payment__errors">{errors.value}</span>
               <label>installments</label>
               <input

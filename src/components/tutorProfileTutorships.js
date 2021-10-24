@@ -55,6 +55,8 @@ function TutorProfileTutorships() {
     <div className="tutor__tutorships-container">
       {!state.loading ? (
         <Loader />
+      ) : state.tutorships.length === 0 ? (
+        <p className="tutor__tutorships__title">You don't have any pending tutorships</p>
       ) : (
         state.tutorships.map((tutorship, i) => {
           const { name, focus, email } = tutorship.tutor_id;
@@ -89,7 +91,6 @@ function TutorProfileTutorships() {
                         >
                           Cancel
                         </button> */}
-
                       </>
                     )}
                     {status === 'accepted' && (
