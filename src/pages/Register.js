@@ -197,7 +197,7 @@ function Register() {
   };
 
   return (
-    <>
+    <div className="register-form__container">
       <form className="register-form">
         <h2 className="register-form__title" data-testid="register-title">
           Register
@@ -258,7 +258,7 @@ function Register() {
           Do you already have an account? <Link to="/login">Sign in</Link>
         </p>
       </form>
-    </>
+    </div>
   );
 }
 export default Register;

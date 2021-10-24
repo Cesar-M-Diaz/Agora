@@ -282,12 +282,11 @@ export default function CheckoutPage(props) {
       }
     } catch (err) {
       setLoadingPayment(false);
-      // const errorMessage = err.response.data;
+      const errorMessage = err.response.data;
       swalStyled.fire({
         icon: 'error',
         title: 'Oops... Please try again',
-        // text: errorMessage,
-        text: err,
+        text: errorMessage,
       });
     }
   }

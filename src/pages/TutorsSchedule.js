@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
 import Loader from '../components/Loader';
 import axios from '../utils/axios';
 import history from '../utils/history';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 
 import '../assets/styles/pages/TutorsSchedule.scss';
 
 function TutorsSchedule(props) {
   const student = useSelector((state) => state.currentUser);
-  const MySwal = withReactContent(Swal);
+  const swalStyled = Swal.mixin({
+    customClass: {
+      confirmButton: 'swal__confirm',
+      cancelButton: 'swal__cancel',
+      title: 'swal__title',
+      container: 'swal__text',
+      actions: 'swal__actions',
+    },
+    buttonsStyling: false,
+  });
   const createDate = () => {
     const date = new Date();
     return `${date.getFullYear()}-${date.getMonth().toString().length < 2 ? `0${date.getMonth()}` : date.getMonth()}-${
@@ -63,21 +70,21 @@ function TutorsSchedule(props) {
       axios
         .post('/sendAppointment', apponintment)
         .then((req, res) => {
-          MySwal.fire({
-            icon: 'success',
-            title: <p className="swal__tittle">Tutorship request sent successfully!</p>,
-            text: `${state.tutor.name} will get in contact soon`,
-            confirmButtonColor: '#0de26f',
-          }).then(() => {
-            history.replace('/home');
-          });
+          swalStyled
+            .fire({
+              icon: 'success',
+              title: 'Tutorship request sent successfully!',
+              text: `${state.tutor.name} will get in contact soon`,
+            })
+            .then(() => {
+              history.replace('/home');
+            });
         })
         .catch((error) => {
-          MySwal.fire({
+          swalStyled.fire({
             icon: 'error',
-            title: <p className="swal__tittle">Error sending your request</p>,
+            title: 'Error sending your request',
             text: `${error}`,
-            confirmButtonColor: '#0de26f',
           });
         });
     } else {
