@@ -18,12 +18,14 @@ function TutorProfilePage() {
     password: true,
     schedule: true,
     description: true,
+    price: true,
   });
   const [previewData, setPreviewData] = useState({
     name: '',
     email: '',
     description: '',
     schedule: '',
+    price: '',
   });
   const [userData, setUserData] = useState({
     inputs: {
@@ -32,14 +34,16 @@ function TutorProfilePage() {
       password: '',
       description: '',
       schedule: '',
+      price: '',
     },
     errors: {
       name: '',
       email: '',
       password: '',
       schedule: '',
+      price: '',
     },
-    isValid: { name: true, password: true, email: true, schedule: true },
+    isValid: { name: true, password: true, email: true, schedule: true, price: true },
     enableUpload: false,
   });
   const swalStyled = Swal.mixin({
@@ -60,6 +64,7 @@ function TutorProfilePage() {
       email: globalUser.email,
       description: globalUser.description,
       schedule: globalUser.schedule,
+      price: globalUser.price,
     }));
     setPreviewPhoto(globalUser.profile_photo);
   }, [globalUser]);
@@ -107,7 +112,7 @@ function TutorProfilePage() {
             name: '',
           },
           isValid: { ...state.isValid, name: true },
-          enableUpload: state.isValid.password && state.isValid.email && state.isValid.schedule,
+          enableUpload: state.isValid.password && state.isValid.email && state.isValid.schedule && state.isValid.price,
         }));
       }
     }
@@ -132,7 +137,7 @@ function TutorProfilePage() {
             email: '',
           },
           isValid: { ...state.isValid, email: true },
-          enableUpload: state.isValid.name && state.isValid.password && state.isValid.schedule,
+          enableUpload: state.isValid.name && state.isValid.password && state.isValid.schedule && state.isValid.price,
         }));
       }
     }
@@ -155,7 +160,7 @@ function TutorProfilePage() {
             password: '',
           },
           isValid: { ...state.isValid, password: true },
-          enableUpload: state.isValid.name && state.isValid.email && state.isValid.schedule,
+          enableUpload: state.isValid.name && state.isValid.email && state.isValid.schedule && state.isValid.price,
         }));
       }
     }
@@ -178,7 +183,30 @@ function TutorProfilePage() {
             schedule: '',
           },
           isValid: { ...state.isValid, schedule: true },
-          enableUpload: state.isValid.name && state.isValid.password && state.isValid.email,
+          enableUpload: state.isValid.name && state.isValid.password && state.isValid.email && state.isValid.price,
+        }));
+      }
+    }
+    if (input === 'price') {
+      if (value.length === 0) {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            schedule: 'this field is mandatory',
+          },
+          isValid: { ...state.isValid, price: false },
+          enableUpload: false,
+        }));
+      } else {
+        setUserData((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            price: '',
+          },
+          isValid: { ...state.isValid, price: true },
+          enableUpload: state.isValid.name && state.isValid.password && state.isValid.email && state.isValid.schedule,
         }));
       }
     }
@@ -199,6 +227,8 @@ function TutorProfilePage() {
       setIsDisabled((prevState) => ({ ...prevState, description: !prevState.description }));
     } else if (buttonClass.match(/schedule/)) {
       setIsDisabled((prevState) => ({ ...prevState, schedule: !prevState.schedule }));
+    } else if (buttonClass.match(/price/)) {
+      setIsDisabled((prevState) => ({ ...prevState, price: !prevState.price }));
     }
   };
 
@@ -310,24 +340,41 @@ function TutorProfilePage() {
             </button>
           </div>
           <span className="tutor-edit__errors">{userData.errors.password}</span>
-          <div className="tutor-edit__form-slot">
-            <label>Schedule</label>
-            <div className="tutor-edit__form-slot-container">
-              <input
-                onBlur={validateInput}
-                defaultValue={previewData.schedule}
-                placeholder="please type your schedule, example from mondays to fridays, from 8:30am to 5:00pm"
-                type="text"
-                name="schedule"
-                onChange={handleChange}
-                disabled={isDisabled.schedule}
-              />
-              <button onClick={handleClick} className="tutor-profile__credentials__schedule-input-button" type="button">
-                <FontAwesomeIcon icon={faPencilAlt} />
-              </button>
-            </div>
-            <span className="tutor-edit__errors">{userData.errors.schedule}</span>
+        </div>
+        <div className="tutor-edit__form-slot">
+          <label>Tutorship Fee</label>
+          <div className="tutor-edit__form-slot-container">
+            <input
+              defaultValue={previewData.price}
+              onBlur={validateInput}
+              type="number"
+              name="price"
+              onChange={handleChange}
+              disabled={isDisabled.price}
+            />
+            <button onClick={handleClick} className="tutor-profile__credentials__price-input-button" type="button">
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </button>
           </div>
+          <span className="tutor-edit__errors">{userData.errors.price}</span>
+        </div>
+        <div className="tutor-edit__form-slot">
+          <label>Schedule</label>
+          <div className="tutor-edit__form-slot-container">
+            <input
+              onBlur={validateInput}
+              defaultValue={previewData.schedule}
+              placeholder="please type your schedule, example from mondays to fridays, from 8:30am to 5:00pm"
+              type="text"
+              name="schedule"
+              onChange={handleChange}
+              disabled={isDisabled.schedule}
+            />
+            <button onClick={handleClick} className="tutor-profile__credentials__schedule-input-button" type="button">
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </button>
+          </div>
+          <span className="tutor-edit__errors">{userData.errors.schedule}</span>
         </div>
         <div className="tutor-edit__form-slot">
           <label>Description</label>
