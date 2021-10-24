@@ -3,11 +3,9 @@ import axios from '../utils/axios';
 import { useSelector } from 'react-redux';
 import '../assets/styles/pages/TutorEditProfile.scss';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import '../assets/styles/pages/Tutorship.scss';
 
 function TutorProfileCreateTutorship() {
-  const MySwal = withReactContent(Swal);
   const tutor_id = useSelector((state) => state.currentUser._id);
   const [tutorshipData, setTutorshipData] = useState({
     email: '',
@@ -23,6 +21,16 @@ function TutorProfileCreateTutorship() {
     },
     isValid: { email: false, date: false, time: false },
     enableUpload: false,
+  });
+  const swalStyled = Swal.mixin({
+    customClass: {
+      confirmButton: 'swal__confirm',
+      cancelButton: 'swal__cancel',
+      title: 'swal__title',
+      container: 'swal__text',
+      actions: 'swal__actions',
+    },
+    buttonsStyling: false,
   });
 
   useEffect(() => {
@@ -119,18 +127,16 @@ function TutorProfileCreateTutorship() {
     e.preventDefault();
     try {
       await axios.post('/tutorship', tutorshipData);
-      MySwal.fire({
+      swalStyled.fire({
         icon: 'success',
-        title: <p className="swal__tittle">Tutorship created</p>,
-        confirmButtonColor: '#0de26f',
+        title: 'Tutorship created',
       });
     } catch (err) {
       const errorMessage = err.response.data.message;
-      MySwal.fire({
+      swalStyled.fire({
         icon: 'error',
-        title: <p className="swal__tittle">Oops...</p>,
+        title: 'Oops...',
         text: errorMessage,
-        confirmButtonColor: '#ce4c4c',
       });
     }
     setTutorshipData((state) => ({

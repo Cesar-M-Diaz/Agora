@@ -5,19 +5,33 @@ import Loader from '../components/Loader';
 import CreditCard from '../components/CreditCard';
 import history from '../utils/history';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import '../assets/styles/pages/checkout.scss';
 
 export default function CheckoutPage(props) {
   const tutorshipData = props.location.state.state;
   const { tutorship_id, tutorship_price } = tutorshipData;
-  const MySwal = withReactContent(Swal);
   const [loadingPayment, setLoadingPayment] = useState(false);
   const user_id = useSelector((state) => state.currentUser._id);
   const user_email = useSelector((state) => state.currentUser.email);
   const user_name = useSelector((state) => state.currentUser.name);
-  const firstName = user_name.split(' ')[0];
-  const lastName = user_name.split(' ')[1];
+  const firstName = function (user_name) {
+    const fullName = user_name.split(' ');
+    if (fullName.length > 2) {
+      const result = fullName.slice(0, 2).join(' ');
+      return result;
+    } else {
+      return fullName[0];
+    }
+  };
+  const lastName = function (user_name) {
+    const fullName = user_name.split(' ');
+    if (fullName.length > 2) {
+      const result = fullName.slice(2, 4).join(' ');
+      return result;
+    } else {
+      return fullName[1];
+    }
+  };
   const [cardName, setCardName] = useState({
     card_name: user_name,
   });
@@ -36,8 +50,8 @@ export default function CheckoutPage(props) {
     'card[cvc]': '',
   });
   const [customerInfo, setCustomerInfo] = useState({
-    name: '',
-    last_name: lastName,
+    name: firstName(user_name),
+    last_name: lastName(user_name),
     email: '',
   });
   const [paymentInfo, setPaymentInfo] = useState({
@@ -75,6 +89,16 @@ export default function CheckoutPage(props) {
     email: true,
     card_name: true,
   });
+  const swalStyled = Swal.mixin({
+    customClass: {
+      confirmButton: 'swal__confirm',
+      cancelButton: 'swal__cancel',
+      title: 'swal__title',
+      container: 'swal__text',
+      actions: 'swal__actions',
+    },
+    buttonsStyling: false,
+  });
 
   function previous() {
     setCount(count - 1);
@@ -98,14 +122,15 @@ export default function CheckoutPage(props) {
         setEpayco_customer_id(customer.id_customer);
         setCustomerInfo((prevState) => ({
           ...prevState,
-          name: customer.name || firstName,
           email: customer.email || user_email,
         }));
         setExistingCards((prevState) => ({
           ...prevState,
           cards: customer.cards,
         }));
-        if (customer.cards.length === 0) {
+        if (customer.status === 'error') {
+          setHidden(false);
+        } else if (customer.cards.length === 0) {
           setHidden(false);
         } else {
           setHidden(true);
@@ -121,7 +146,7 @@ export default function CheckoutPage(props) {
       .then(() => {
         setIsLoading(false);
       });
-  }, [user_id, user_email, firstName]);
+  }, [user_id, user_email]);
 
   function validateinputs(e) {
     const input = e.target.name;
@@ -235,10 +260,9 @@ export default function CheckoutPage(props) {
             ...customerInfo,
           },
         });
-        MySwal.fire({
+        swalStyled.fire({
           icon: 'success',
-          title: <p className="swal__tittle">Succesfull payment!</p>,
-          confirmButtonColor: '#0de26f',
+          title: 'Succesfull payment',
         });
         history.push('/profile/tutorships');
       } else {
@@ -249,21 +273,19 @@ export default function CheckoutPage(props) {
           customerInfo,
           paymentInfo,
         });
-        MySwal.fire({
+        swalStyled.fire({
           icon: 'success',
-          title: <p className="swal__tittle">Succesfull payment!</p>,
-          confirmButtonColor: '#0de26f',
+          title: 'Succesfull payment',
         });
         history.push('/profile/tutorships');
       }
     } catch (err) {
       setLoadingPayment(false);
       const errorMessage = err.response.data;
-      MySwal.fire({
+      swalStyled.fire({
         icon: 'error',
-        title: <p className="swal__tittle">Oops... Please try again</p>,
+        title: 'Oops... Please try again',
         text: errorMessage,
-        confirmButtonColor: '#ce4c4c',
       });
     }
   }
