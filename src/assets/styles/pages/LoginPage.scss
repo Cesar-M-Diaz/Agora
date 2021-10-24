@@ -16,7 +16,7 @@ $alpha-background: #55555555;
 }
 
 .login-form {
-  width: 70vw;
+  width: 70%;
   display: flex;
   flex-direction: column;
   border: 1px solid $primary-color;
@@ -35,6 +35,7 @@ $alpha-background: #55555555;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 40px;
   border: none;
   margin: 0;
@@ -54,18 +55,14 @@ $alpha-background: #55555555;
 }
 
 .login-form__submit {
-  width: 100%;
-  padding: 17px 0;
-  color: $secondary-color;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  width: 90%;
   background-color: $primary-color;
-  font-size: 20px;
   border: none;
-  border-radius: 10px;
-  margin-bottom: 40px;
-}
-
-.login-form__submit:hover {
-  background-color: $primary-color-dark;
+  padding: 15px;
+  font-size: 1rem;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -96,6 +93,7 @@ $alpha-background: #55555555;
 .signup__text {
   text-align: center;
   margin: auto;
+  margin-bottom: 30px;
 }
 
 .input-container__error-message {
@@ -114,20 +112,24 @@ $alpha-background: #55555555;
   cursor: auto;
 }
 
+@media (min-width: 768px) {
+  .login-form {
+    width: 70%;
+  }
+}
+
 @media screen and(min-width: 992px) {
   .login-form {
     width: 40vw;
   }
   .signup__text {
-    font-size: 25px;
+    font-size: 1rem;
+    margin-bottom: 30px;
   }
 }
 
 @media screen and(min-width: 1200px) {
-  .login-form {
-    width: 20vw;
-  }
   .signup__text {
-    font-size: 25px;
+    font-size: 1rem;
   }
 }

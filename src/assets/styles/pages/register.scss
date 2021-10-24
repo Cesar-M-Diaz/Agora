@@ -5,6 +5,15 @@ $color-gray: #aaa;
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
 
+.register-form__container {
+  font-family: 'Open Sans';
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .register-form {
   font-family: 'Open Sans';
   display: flex;
@@ -12,11 +21,10 @@ $color-gray: #aaa;
   align-items: center;
   justify-content: center;
   border-radius: 1px;
-  width: 70vw;
+  width: 70%;
   text-align: center;
   padding: 15px;
   padding-top: 0;
-  margin: 100px auto;
   border: 1px solid $color-primary;
 }
 
@@ -72,7 +80,7 @@ $color-gray: #aaa;
   background-color: $color-primary;
   border: none;
   padding: 15px;
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #fff;
   cursor: pointer;
 }
@@ -125,11 +133,11 @@ $color-gray: #aaa;
 }
 @media (min-width: 768px) {
   .register-form {
-    width: 40vw;
+    width: 70%;
   }
 }
 @media (min-width: 992px) {
   .register-form {
-    width: 30vw;
+    width: 40vw;
   }
 }
