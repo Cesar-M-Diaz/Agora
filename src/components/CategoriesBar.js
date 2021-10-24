@@ -1,7 +1,8 @@
-import { React } from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/components/CategoriesBar.scss';
 
 function CategoriesBar({ Categories, setFilter }) {
+  const [selected, setSelected] = useState(null);
   return (
     <main className="categories__container">
       <select
@@ -18,7 +19,14 @@ function CategoriesBar({ Categories, setFilter }) {
         ))}
       </select>
       {Categories.map((e, i) => (
-        <button className="category__button" key={i} onClick={() => setFilter(e.subject)}>
+        <button
+          className={selected === e.subject ? 'category__button-selected' : 'category__button'}
+          key={i}
+          onClick={() => {
+            setFilter(e.subject);
+            setSelected(e.subject);
+          }}
+        >
           {e.subject}
         </button>
       ))}

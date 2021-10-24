@@ -85,8 +85,6 @@ function Header() {
       desktopInput.current.value = '';
       mobileInput.current.value = '';
       !state.isSearchCollapsed && setState((prevState) => ({ ...prevState, isSearchCollapsed: true }));
-      // const params = new URLSearchParams(document.location.search.substring(1));
-      // const page = parseInt(params.get('page'));
 
       history.push({
         pathname: `/search/?query=${state.searchInput}&page=1`,

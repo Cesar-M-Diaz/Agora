@@ -32,7 +32,7 @@ function LandingPageDescription() {
             <span className="description__text--breack">we've got you covered</span>
           </p>
           <p className="description__subtitle">
-            Search for every subject you can imagine, a spetialized tutor will help you with your problem
+            Search for any subject you can imagine, a specialized tutor will help you with your problem
           </p>
         </div>
         <Player
