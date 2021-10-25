@@ -87,7 +87,8 @@ $warning-color: rgb(235, 99, 99);
 .tutor__tutorship__buttons__pay-button,
 .tutor__tutorship__buttons__cancel-button,
 .tutor__tutorship__buttons__contact-button,
-.tutor__tutorship__buttons__rate-button {
+.tutor__tutorship__buttons__rate-button,
+.tutor__tutorship__buttons__complete-button {
   padding: 5px;
   background-color: white;
   border: 2px solid green;
@@ -137,6 +138,16 @@ $warning-color: rgb(235, 99, 99);
 }
 .tutor__tutorship__buttons__rate-button:hover {
   background-color: rgb(199, 199, 0);
+  color: white;
+}
+
+.tutor__tutorship__buttons__complete-button{
+  border: 3px solid $color-b;
+  color: $color-b;
+}
+
+.tutor__tutorship__buttons__complete-button:hover{
+  background-color: $color-b;
   color: white;
 }
 
