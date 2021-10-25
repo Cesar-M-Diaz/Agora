@@ -1,41 +1,47 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import axios from '../utils/axios';
 
 function TutorCancelTutorship({ swal, tutorshipId, setState }) {
   const handleClick = (e) => {
     const buttonId = e.target.id;
-    if (buttonId === 'cancel') {
+    if (buttonId === "cancel") {
       swal.close();
       return;
     }
 
-    console.log(`
-            PERFORM CANCEL REQUEST TO BACKEND
-            TUTORSHIP ID: ${tutorshipId}
-            TOKEN: ${localStorage.getItem('token')}
-        `);
-
-    const mySwal = swal.mixin({
-      customClass: {
-        confirmButton: 'cancel-tutorship-button green',
-        cancelButton: 'cancel-tutorship-button red',
-      },
-      buttonsStyling: false,
-    });
-
-    mySwal
-      .fire({
-        icon: 'success',
-        html: <h1 style={{ fontFamily: 'open sans' }}>Tutorship cancelled successfully</h1>,
-        confirmButtonText: 'OK',
+    axios
+      .post("/cancelTutorship", {
+        tutorship: tutorshipId,
+        token: localStorage.getItem("token"),
       })
-      .then(() =>
-        setState((prevState) => ({
-          ...prevState,
-          renderSwitch: !prevState.renderSwitch,
-        })),
-      );
+      .then(() => {
+        const mySwal = swal.mixin({
+          customClass: {
+            confirmButton: "cancel-tutorship-button green",
+            cancelButton: "cancel-tutorship-button red",
+          },
+          buttonsStyling: false,
+        });
+
+        mySwal
+          .fire({
+            icon: "success",
+            html: (
+              <h1 style={{ fontFamily: "open sans" }}>
+                Tutorship cancelled successfully
+              </h1>
+            ),
+            confirmButtonText: "OK",
+          })
+          .then(() =>
+            setState((prevState) => ({
+              ...prevState,
+              renderSwitch: !prevState.renderSwitch,
+            }))
+          );
+      });
   };
 
   return (
