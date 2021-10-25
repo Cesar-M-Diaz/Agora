@@ -1,7 +1,7 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from '../utils/axios';
+
+import '../assets/styles/components/TutorCompleteTutorship.scss'
 
 function TutorCancelTutorship({ swal, tutorshipId, setState }) {
   const handleClick = (e) => {
@@ -12,7 +12,7 @@ function TutorCancelTutorship({ swal, tutorshipId, setState }) {
     }
 
     axios
-      .post("/cancelTutorship", {
+      .post("/completeTutorship", {
         tutorship: tutorshipId,
         token: localStorage.getItem("token"),
       })
@@ -30,7 +30,7 @@ function TutorCancelTutorship({ swal, tutorshipId, setState }) {
             icon: "success",
             html: (
               <h1 style={{ fontFamily: "open sans" }}>
-                Tutorship cancelled successfully
+                Tutorship completed successfully
               </h1>
             ),
             confirmButtonText: "OK",
@@ -46,16 +46,11 @@ function TutorCancelTutorship({ swal, tutorshipId, setState }) {
 
   return (
     <div className="tutorCancelTutorship-container">
-      <div className="swal2-icon swal2-danger swal2-icon-show" style={{ display: 'flex' }}>
-        <div className="swal2-icon-content">
-          <FontAwesomeIcon icon={faTrash} />
-        </div>
-      </div>
-      <h1>Are you sure you want to cancel this tutorship?</h1>
+      <h1 className="tutorCompleteTutorship-title">Are you sure you want to complete this tutorship?</h1>
       <h2>This action cannot be undone</h2>
       <div className="tutorCancelTutorship-buttons-container">
         <button onClick={handleClick} id="confirm" className="green">
-          Yes, cancel tutorship
+          Yes, complete
         </button>
         <button onClick={handleClick} id="cancel" className="red">
           No, return

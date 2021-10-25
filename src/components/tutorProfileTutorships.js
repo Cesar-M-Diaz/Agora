@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from '../utils/axios';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-import Loader from './Loader';
-// import tutorCancelTutorship from './tutorCancelTutorship.js';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "../utils/axios";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import Loader from "./Loader";
+import TutorCancelTutorship from "./tutorCancelTutorship.js";
+import TutorCompleteTutorship from "./TutorCompleteTutorship";
 
-import '../assets/styles/components/tutorProfileTutorships.scss';
+import "../assets/styles/components/tutorProfileTutorships.scss";
 // import { StaticRouter } from 'react-router';
 
 function TutorProfileTutorships() {
@@ -23,9 +24,22 @@ function TutorProfileTutorships() {
     const mySwal = withReactContent(Swal);
     const buttons = {
       Cancel: {
-        component: <tutorCancelTutorship swal={mySwal} tutorshipId={data.tutorshipId} setState={setState} />,
-        confirm: 'Yes, cancel',
-        cancel: 'No, return',
+        component: (
+          <TutorCancelTutorship
+            swal={mySwal}
+            tutorshipId={data.tutorshipId}
+            setState={setState}
+          />
+        ),
+      },
+      Complete: {
+        component: (
+          <TutorCompleteTutorship
+            swal={mySwal}
+            tutorshipId={data.tutorshipId}
+            setState={setState}
+          />
+        ),
       },
     };
 
@@ -56,7 +70,9 @@ function TutorProfileTutorships() {
       {!state.loading ? (
         <Loader />
       ) : state.tutorships.length === 0 ? (
-        <p className="tutor__tutorships__title">You don't have any pending tutorships</p>
+        <p className="tutor__tutorships__title">
+          You don't have any pending tutorships
+        </p>
       ) : (
         state.tutorships.map((tutorship, i) => {
           const { name, focus, email } = tutorship.tutor_id;
@@ -68,43 +84,64 @@ function TutorProfileTutorships() {
           return (
             <div key={id} className="tutor__tutorship-container">
               <div className="tutor__tutorship__image-container">
-                <img src={studentPhoto} alt={name} className="tutor__tutorship__image" />
+                <img
+                  src={studentPhoto}
+                  alt={name}
+                  className="tutor__tutorship__image"
+                />
               </div>
               <div className="tutor__tutorship__description-container">
                 <h2 className="tutor__tutorship__description-title">
                   {focus} tutorship with {studentName}
                 </h2>
                 <p className="tutor__tutorship__date">
-                  Tutorship scheduled for <strong>{date.toDateString()}</strong> at{' '}
-                  <strong>{date.getUTCHours() + ':' + date.getUTCMinutes()}</strong>
+                  Tutorship scheduled for <strong>{date.toDateString()}</strong>{" "}
+                  at{" "}
+                  <strong>
+                    {date.getUTCHours() + ":" + date.getUTCMinutes()}
+                  </strong>
                 </p>
                 <div className="tutor__tutorship__status-and-buttons-container">
                   <div className="tutor__tutorship__status-container">
                     <span>STATUS: {status}</span>
                   </div>
                   <div className="tutor__tutorship__buttons-container">
-                    {status === 'pending' && (
-                      <>
-                        {/* <button
-                          onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
-                          className="tutor__tutorship__buttons__cancel-button"
-                        >
-                          Cancel
-                        </button> */}
-                      </>
-                    )}
-                    {status === 'accepted' && (
-                      <a href={`mailto:${email}`} className="tutor__tutorship__buttons__contact-button">
-                        Contact
-                      </a>
-                    )}
-                    {status === 'completed' && (
+                    {status === "pending" && (
                       <button
-                        onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
-                        className="tutor__tutorship__buttons__rate-button"
+                        onClick={(e) =>
+                          handleClick(
+                            { tutor: tutorship.tutor_id._id, tutorshipId: id },
+                            e
+                          )
+                        }
+                        className="tutor__tutorship__buttons__cancel-button"
                       >
-                        Rate
+                        Cancel
                       </button>
+                    )}
+                    {status === "accepted" && (
+                      <>
+                        <a
+                          href={`mailto:${email}`}
+                          className="tutor__tutorship__buttons__contact-button"
+                        >
+                          Contact
+                        </a>
+                        <button
+                          onClick={(e) =>
+                            handleClick(
+                              {
+                                tutor: tutorship.tutor_id._id,
+                                tutorshipId: id,
+                              },
+                              e
+                            )
+                          }
+                          className="tutor__tutorship__buttons__complete-button"
+                        >
+                          Complete
+                        </button>
+                      </>
                     )}
                   </div>
                 </div>

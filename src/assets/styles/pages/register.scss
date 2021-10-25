@@ -7,9 +7,8 @@ $color-gray: #aaa;
 
 .register-form__container {
   font-family: 'Open Sans';
-  margin: 0 auto;
-  height: 100%;
-  padding: 40px;
+  min-height: 700px;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,6 +132,9 @@ $color-gray: #aaa;
   color: rgb(211, 66, 66);
 }
 @media (min-width: 768px) {
+  .register-form__container {
+    height: 80vh;
+  }
   .register-form {
     width: 50%;
   }
@@ -140,5 +142,8 @@ $color-gray: #aaa;
 @media (min-width: 992px) {
   .register-form {
     width: 35vw;
+  }
+  .register-form__container {
+    height: 80vh;
   }
 }
