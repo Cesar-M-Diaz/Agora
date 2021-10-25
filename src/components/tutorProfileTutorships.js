@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Loader from "./Loader";
 import TutorCancelTutorship from "./tutorCancelTutorship.js";
+import TutorCompleteTutorship from "./TutorCompleteTutorship";
 
 import "../assets/styles/components/tutorProfileTutorships.scss";
 // import { StaticRouter } from 'react-router';
@@ -30,14 +31,16 @@ function TutorProfileTutorships() {
             setState={setState}
           />
         ),
-        confirm: "Yes, cancel",
-        cancel: "No, return",
       },
       Complete: {
-        component: (<div>WIP</div>),
-        confirm: "Yes, complete",
-        cancel: "No, return"
-      }
+        component: (
+          <TutorCompleteTutorship
+            swal={mySwal}
+            tutorshipId={data.tutorshipId}
+            setState={setState}
+          />
+        ),
+      },
     };
 
     const action = buttons[button];
