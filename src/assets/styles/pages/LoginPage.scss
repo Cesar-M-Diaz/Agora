@@ -8,7 +8,7 @@ $alpha-background: #55555555;
 
 .login-form-container {
   font-family: 'Open Sans';
-  margin: 50px auto;
+  margin: 30px auto;
   height: 100%;
   display: flex;
   align-items: center;
@@ -16,7 +16,7 @@ $alpha-background: #55555555;
 }
 
 .login-form {
-  width: 70%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   border: 1px solid $primary-color;
@@ -115,13 +115,13 @@ $alpha-background: #55555555;
 
 @media (min-width: 768px) {
   .login-form {
-    width: 70%;
+    width: 50%;
   }
 }
 
 @media screen and(min-width: 992px) {
   .login-form {
-    width: 40vw;
+    width: 35vw;
   }
   .signup__text {
     font-size: 1rem;
