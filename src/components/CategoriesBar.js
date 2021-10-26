@@ -11,11 +11,9 @@ function CategoriesBar({ Categories, setFilter }) {
         className="categories__select-focus"
         onChange={(e) => setFilter(e.target.value)}
       >
-        <option className="categories__select-focus" hidden>
-          Choose an area
-        </option>
+        <option hidden>Choose an area</option>
         {Categories.map((category) => (
-          <option key={category._id} value={category.subject} className="categories__select-focus">
+          <option key={category._id} value={category.subject}>
             {category.subject}
           </option>
         ))}
