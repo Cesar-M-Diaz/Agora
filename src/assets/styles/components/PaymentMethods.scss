@@ -19,7 +19,7 @@ $warning-color: rgb(235, 99, 99);
 }
 
 .swal__actions {
-  width: 60%;
+  width: 90%;
   justify-content: space-evenly;
   align-items: center;
 }
@@ -50,6 +50,7 @@ $warning-color: rgb(235, 99, 99);
 
 .swal__delete {
   width: 80px;
+  margin: 20px;
   height: 40px;
   font-family: 'Open Sans';
   font-weight: 600;
@@ -62,6 +63,7 @@ $warning-color: rgb(235, 99, 99);
 
 .swal__delete-cancel {
   width: 80px;
+  margin: 20px;
   height: 40px;
   font-family: 'Open Sans';
   font-weight: 600;

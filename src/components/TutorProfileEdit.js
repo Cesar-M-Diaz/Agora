@@ -26,6 +26,7 @@ function TutorProfilePage() {
     description: '',
     schedule: '',
     price: '',
+    rating: '',
   });
   const [userData, setUserData] = useState({
     inputs: {
@@ -65,6 +66,7 @@ function TutorProfilePage() {
       description: globalUser.description,
       schedule: globalUser.schedule,
       price: globalUser.price,
+      rating: globalUser.rating || `You don't have any ratings yet`,
     }));
     setPreviewPhoto(globalUser.profile_photo);
   }, [globalUser]);
@@ -290,6 +292,17 @@ function TutorProfilePage() {
         <input type="file" id="upload" onChange={onChangeFile} hidden accept="image/png, image/jpeg" />
       </div>
       <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
+        <div className="tutor-edit__rating ">
+          <label>My Rating</label>
+          <input
+            onBlur={validateInput}
+            type="text"
+            name="name"
+            defaultValue={previewData.rating}
+            onChange={handleChange}
+            disabled={isDisabled.name}
+          />
+        </div>
         <div className="tutor-edit__form-slot">
           <label>Name</label>
           <div className="tutor-edit__form-slot-container">
@@ -313,7 +326,7 @@ function TutorProfilePage() {
             <input
               onBlur={validateInput}
               defaultValue={previewData.email}
-              type="text"
+              type="email"
               name="email"
               onChange={handleChange}
               disabled={isDisabled.email}
