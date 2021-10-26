@@ -21,7 +21,7 @@ const SelectPage = ({ Page, setPage, Pages }) => {
       </button>
 
       <p className="change__page_p">
-        Page {Page} / {Pages}
+        Page {Page} / {Pages>1? Pages: 1}
       </p>
       <button className={Page < Pages ? 'change__page_button' : 'change__page_button-hidden'} onClick={nextPage}>
         Next
