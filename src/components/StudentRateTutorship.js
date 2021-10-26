@@ -25,9 +25,16 @@ function StudentRateTutorship({ swal, student, tutor, tutorship, setState }) {
         token: localStorage.getItem('token'),
       })
       .then((result) => {
-        swal.fire({
+        const confirmSwal = swal.mixin({
+          customClass: {
+            confirmButton: "cancel-tutorship-button green"
+          },
+          buttonsStyling: false,
+        });
+        confirmSwal.fire({
           icon: 'success',
           html: <h1 style={{ fontFamily: 'open sans' }}>Tutorship rated successfully</h1>,
+          showConfirmButton: true,
         });
         setState((prevState) => ({ ...prevState, renderSwitch: !prevState.renderSwitch }));
       })
