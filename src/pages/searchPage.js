@@ -8,7 +8,7 @@ import history from '../utils/history.js';
 
 const SearchPage = () => {
   const params = new URLSearchParams(document.location.search.substring(1));
-  const query = params.get('query'); // is the string "Jonathan"
+  const query = params.get('query');
   const page = parseInt(params.get('page'));
   const [Tutors, setTutors] = useState([]);
   const [Page, setPage] = useState(page);
@@ -37,12 +37,13 @@ const SearchPage = () => {
       }
     };
     search();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Page]);
+  }, [Page, query]);
   
   useEffect(() => {
-    setPage(page)
+   if( page === 1)  setPage(page)
   }, [page])
+
+  console.log(Page)
 
   return (
     <div className="search-page">
@@ -61,7 +62,7 @@ const SearchPage = () => {
       ) : (
         <>
           <SearchResult Tutors={Tutors} />
-          <SelectPage Page={page} setPage={setPage} Pages={Pages} />
+          <SelectPage Page={Page} setPage={setPage} Pages={Pages} />
         </>
       )}
     </div>
