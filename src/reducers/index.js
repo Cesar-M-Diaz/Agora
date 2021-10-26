@@ -24,7 +24,6 @@ const initialState = {
     description: null,
     schedule: null,
     price: null,
-    rating: null,
   },
   login_failed: false,
   auth_status: LOADING,
@@ -65,7 +64,6 @@ const reducer = function (state = initialState, action) {
         description: action.payload.description || null,
         schedule: action.payload.schedule || null,
         price: action.payload.price || null,
-        rating: action.payload.rating || null,
       },
       auth_status: AUTHORIZED,
     };

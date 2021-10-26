@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 
-$select-color: #0de26f;
+$select-color: #33df63;
+$color-a: #22b8d9;
 
 * {
   box-sizing: border-box;
@@ -91,8 +92,9 @@ $select-color: #0de26f;
 }
 
 .price {
-  color: $select-color;
+  color: $color-a;
   font-size: 4vw;
+  font-weight: 600;
 }
 
 /* Tablets */
