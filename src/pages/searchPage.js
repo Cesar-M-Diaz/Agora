@@ -16,7 +16,6 @@ const SearchPage = () => {
   const [notFound, setNotFound] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
-console.log('page',page,'Page', Page)
   useEffect(() => {
     const search = async () => {
       try {
