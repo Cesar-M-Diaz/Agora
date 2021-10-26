@@ -24,7 +24,7 @@ $warning-color: rgb(235, 99, 99);
 }
 
 .tutor__tutorship-container {
-  width: 80%;
+  width: 100%;
   padding: 15px;
   background-color: white;
   margin: 5px 0;
@@ -143,12 +143,12 @@ $warning-color: rgb(235, 99, 99);
   color: white;
 }
 
-.tutor__tutorship__buttons__complete-button{
+.tutor__tutorship__buttons__complete-button {
   border: 3px solid $color-b;
   color: $color-b;
 }
 
-.tutor__tutorship__buttons__complete-button:hover{
+.tutor__tutorship__buttons__complete-button:hover {
   background-color: $color-b;
   color: white;
 }
@@ -278,6 +278,7 @@ $warning-color: rgb(235, 99, 99);
 
 @media screen and(min-width: 992px) {
   .tutor__tutorship-container {
+    width: 95%;
     flex-direction: row;
     gap: 0;
     text-align: left;
@@ -291,9 +292,9 @@ $warning-color: rgb(235, 99, 99);
   }
   .tutor__tutorship__image {
     min-width: 120px;
-  min-height: 120px;
-  max-width: 120px;
-  max-height: 120px;
+    min-height: 120px;
+    max-width: 120px;
+    max-height: 120px;
   }
   .tutor__tutorship__description-container {
     font-size: 1.2rem;

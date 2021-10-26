@@ -219,7 +219,7 @@ function Register() {
 
         <div className="register-form__inputs">
           <FaEnvelope className="register-form__icon" />
-          <input onBlur={validateInputs} type="text" placeholder="Email" name="email" onChange={handleChange} />
+          <input onBlur={validateInputs} type="email" placeholder="Email" name="email" onChange={handleChange} />
         </div>
         <span className="register-form__errors">{state.errors.email}</span>
 
