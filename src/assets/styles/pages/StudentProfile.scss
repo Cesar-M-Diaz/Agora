@@ -3,7 +3,7 @@ $primary-color: #22b8d9;
 $secondary-color: #ffffff;
 $secondary-color-dark: #d3d3d3;
 $alpha-background: #55555555;
-$color-b: #0de26f;
+$color-b: #33df63;
 $color-b-dark: #0b753d;
 
 .student-profile-main {
@@ -219,6 +219,8 @@ $color-b-dark: #0b753d;
 
 .student-profile-menu-item:hover {
   color: $color-b;
+  font-weight: 600;
+  border-width: 2px;
   border-color: $color-b;
 }
 

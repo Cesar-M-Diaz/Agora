@@ -61,7 +61,7 @@ function Register() {
         }));
         return;
       }
-      const re = /^[a-zA-Z\s]*$/;
+      const re = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
       if (re.test(String(e.target.value).toLowerCase())) {
         setState((prevState) => ({
           ...prevState,
@@ -139,7 +139,7 @@ function Register() {
         }));
         return;
       }
-      const re = /^[a-zA-Z\s]*$/;
+      const re = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
       if (re.test(String(e.target.value).toLowerCase())) {
         setState((prevState) => ({
           ...prevState,

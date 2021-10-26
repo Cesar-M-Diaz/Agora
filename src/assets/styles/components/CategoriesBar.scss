@@ -4,7 +4,7 @@
 $subtitle-color: #5b5b5b;
 $title-color: #3f3f3f;
 $color-a: #22b8d9;
-$color-b: #0de26f;
+$color-b: #33df63;
 $color-button-backgroud: #f7f7f7;
 
 .html {
@@ -29,7 +29,7 @@ $color-button-backgroud: #f7f7f7;
   background-color: $color-button-backgroud;
   font-family: 'Source Code Pro', monospace;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 600;
   color: $subtitle-color;
   letter-spacing: 3px;
 }
@@ -47,7 +47,7 @@ $color-button-backgroud: #f7f7f7;
   background-color: $color-b;
   color: white;
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .categories__select-focus {
@@ -66,16 +66,14 @@ $color-button-backgroud: #f7f7f7;
   background-color: $color-b;
   color: white;
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 600;
 }
 
-.categories__select-focus:focus {
-  transform: translateY(-3px);
-  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
-  background-color: $color-b;
-  color: white;
-  cursor: pointer;
+.categories__select-focus:hover {
+  background-color: white;
+  color: $color-b;
   font-weight: 800;
+  border: 2px solid $color-b;
 }
 
 @media (min-width: 768px) {
@@ -95,6 +93,7 @@ $color-button-backgroud: #f7f7f7;
     text-align: left;
     font-size: 0.9rem;
     padding-left: 25px;
+    font-weight: 400;
   }
 
   .category__button-selected {
