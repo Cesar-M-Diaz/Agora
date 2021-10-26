@@ -7,6 +7,7 @@ import history from '../utils/history';
 import StudentCancelTutorship from './StudentCancelTutorship';
 import StudentRateTutorship from './StudentRateTutorship';
 import Loader from './Loader';
+import { format } from 'date-fns';
 
 import '../assets/styles/components/StudentProfileTutorships.scss';
 
@@ -78,8 +79,10 @@ function StudentProfileTutorships() {
       ) : (
         state.tutorships.map((tutorship) => {
           const { name, focus, profile_photo, email } = tutorship.tutor_id;
-          const { status, _id: id, isRated } = tutorship;
-          const date = new Date(tutorship.date);
+          const { status, _id: id, isRated } = tutorship;    
+          const dateObject = new Date(tutorship.date);
+          const date = format(dateObject, 'dd/MM/yyyy');
+          const time = format(dateObject, 'K:mm a');
           return (
             <div key={id} className="student__tutorship-container">
               <div className="student__tutorship__image-container">
@@ -90,8 +93,8 @@ function StudentProfileTutorships() {
                   {focus} tutorship with {name}
                 </h2>
                 <p className="student__tutorship__date">
-                  Tutorship scheduled for <strong>{date.toDateString()}</strong> at{' '}
-                  <strong>{date.getUTCHours() + ':' + date.getUTCMinutes()}</strong>
+                  Tutorship scheduled for <strong>{date}</strong> at{' '}
+                  <strong>{time}</strong>
                 </p>
                 <div className="student__tutorship__status-and-buttons-container">
                   <div className="student__tutorship__status-container">
