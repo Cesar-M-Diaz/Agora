@@ -5,6 +5,7 @@ import history from '../utils/history';
 import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/pages/TutorEditProfile.scss';
 
 function TutorProfilePage() {
@@ -57,8 +58,19 @@ function TutorProfilePage() {
     },
     buttonsStyling: false,
   });
+  const starNodes = [];
+
+  for (let i = 1; i <= previewData.rating; i++) {
+    starNodes.push(<FontAwesomeIcon icon={faStar} key={i} title="tutor-rating-star" />);
+  }
 
   useEffect(() => {
+    axios.get(`/tutor/${globalUser._id}`).then((result) => {
+      setPreviewData((state) => ({
+        ...state,
+        rating: result.data.rating || 1,
+      }));
+    });
     setPreviewData((state) => ({
       ...state,
       name: globalUser.name,
@@ -66,7 +78,6 @@ function TutorProfilePage() {
       description: globalUser.description,
       schedule: globalUser.schedule,
       price: globalUser.price,
-      rating: globalUser.rating || `You don't have any ratings yet`,
     }));
     setPreviewPhoto(globalUser.profile_photo);
   }, [globalUser]);
@@ -290,19 +301,12 @@ function TutorProfilePage() {
           upload photo
         </label>
         <input type="file" id="upload" onChange={onChangeFile} hidden accept="image/png, image/jpeg" />
+        <div className="tutor-edit__rating">
+          <label>My Rating</label>
+          <div className="tutor-edit__stars">{starNodes}</div>
+        </div>
       </div>
       <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
-        <div className="tutor-edit__rating ">
-          <label>My Rating</label>
-          <input
-            onBlur={validateInput}
-            type="text"
-            name="name"
-            defaultValue={previewData.rating}
-            onChange={handleChange}
-            disabled={isDisabled.name}
-          />
-        </div>
         <div className="tutor-edit__form-slot">
           <label>Name</label>
           <div className="tutor-edit__form-slot-container">
