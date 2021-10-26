@@ -8,6 +8,7 @@ import TutorCancelTutorship from "./tutorCancelTutorship.js";
 import TutorCompleteTutorship from "./TutorCompleteTutorship";
 
 import "../assets/styles/components/tutorProfileTutorships.scss";
+import { format } from "date-fns";
 // import { StaticRouter } from 'react-router';
 
 function TutorProfileTutorships() {
@@ -77,9 +78,12 @@ function TutorProfileTutorships() {
         state.tutorships.map((tutorship, i) => {
           const { name, focus, email } = tutorship.tutor_id;
           const { status, _id: id } = tutorship;
-          const date = new Date(tutorship.date);
           const studentName = tutorship.student_id.name;
           const studentPhoto = tutorship.student_id.profile_photo;
+
+          const dateObject = new Date(tutorship.date);
+          const date = format(dateObject, 'dd/MM/yyyy');
+          const time = format(dateObject, 'K:mm a');
 
           return (
             <div key={id} className="tutor__tutorship-container">
@@ -95,10 +99,10 @@ function TutorProfileTutorships() {
                   {focus} tutorship with {studentName}
                 </h2>
                 <p className="tutor__tutorship__date">
-                  Tutorship scheduled for <strong>{date.toDateString()}</strong>{" "}
+                  Tutorship scheduled for <strong>{date}</strong>{" "}
                   at{" "}
                   <strong>
-                    {date.getUTCHours() + ":" + date.getUTCMinutes()}
+                    {time}
                   </strong>
                 </p>
                 <div className="tutor__tutorship__status-and-buttons-container">
