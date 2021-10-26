@@ -163,7 +163,7 @@ function TutorProfileCreateTutorship() {
         <label>Student Email</label>
         <input
           onBlur={validateInput}
-          type="text"
+          type="email"
           name="email"
           value={tutorshipData.email}
           placeholder="Student email"
