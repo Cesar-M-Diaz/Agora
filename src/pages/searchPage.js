@@ -43,8 +43,6 @@ const SearchPage = () => {
    if( page === 1)  setPage(page)
   }, [page])
 
-  console.log(Page)
-
   return (
     <div className="search-page">
       {isLoading ? (
