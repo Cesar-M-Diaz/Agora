@@ -457,7 +457,12 @@ export default function CheckoutPage(props) {
           <form action="" className="payment__form" onSubmit={handleSubmit}>
             <div className="payment__form-slot">
               <label>total ammount</label>
-              <input type="text" name="value" defaultValue={paymentInfo.value.toLocaleString()} disabled={true} />
+              <input
+                type="text"
+                name="value"
+                defaultValue={paymentInfo.value && paymentInfo.value.toLocaleString()}
+                disabled={true}
+              />
               <span className="payment__errors">{errors.value}</span>
               <label>installments</label>
               <input

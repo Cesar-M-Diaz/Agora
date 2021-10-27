@@ -136,6 +136,13 @@ $warning-color: rgb(235, 99, 99);
     color: #ffb319;
     margin: 10px 0px 50px;
   }
+  p {
+    font-family: 'Open Sans';
+    font-weight: 600;
+    margin-top: 10px;
+    color: $subtitle-color;
+    text-align: center;
+  }
 }
 
 .tutor-edit__button-container {

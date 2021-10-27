@@ -59,7 +59,6 @@ function TutorProfilePage() {
     buttonsStyling: false,
   });
   const starNodes = [];
-
   for (let i = 1; i <= previewData.rating; i++) {
     starNodes.push(<FontAwesomeIcon icon={faStar} key={i} title="tutor-rating-star" />);
   }
@@ -68,7 +67,7 @@ function TutorProfilePage() {
     axios.get(`/tutor/${globalUser._id}`).then((result) => {
       setPreviewData((state) => ({
         ...state,
-        rating: result.data.rating || 1,
+        rating: result.data.rating || `You don't have any ratings yet`,
       }));
     });
     setPreviewData((state) => ({
@@ -309,7 +308,7 @@ function TutorProfilePage() {
         <input type="file" id="upload" onChange={onChangeFile} hidden accept="image/png, image/jpeg" />
         <div className="tutor-edit__rating">
           <label>My Rating</label>
-          <div className="tutor-edit__stars">{starNodes}</div>
+          {starNodes.length !== 0 ? <div className="tutor-edit__stars">{starNodes}</div> : <p>{previewData.rating}</p>}
         </div>
       </div>
       <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
