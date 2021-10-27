@@ -2,7 +2,7 @@
 
 Agora is a web application created to facilitate the connection between students and expert tutors who can solve their specific doubts.
 
-## The theam
+## The Team
 
 in Alphabetical order:
 

@@ -28,7 +28,7 @@ function TutorProfileCreateTutorship() {
       time: '',
     },
     isValid: { email: false, date: false, time: false },
-    enableUpload: false,
+    enableUpload: email || false,
   });
   const swalStyled = Swal.mixin({
     customClass: {
