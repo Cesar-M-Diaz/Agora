@@ -8,6 +8,7 @@ import StudentCancelTutorship from './StudentCancelTutorship';
 import StudentRateTutorship from './StudentRateTutorship';
 import Loader from './Loader';
 import { format } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 
 import '../assets/styles/components/StudentProfileTutorships.scss';
 
@@ -79,10 +80,11 @@ function StudentProfileTutorships() {
       ) : (
         state.tutorships.map((tutorship) => {
           const { name, focus, profile_photo, email } = tutorship.tutor_id;
-          const { status, _id: id, isRated } = tutorship;    
+          const { status, _id: id, isRated } = tutorship;
           const dateObject = new Date(tutorship.date);
-          const date = format(dateObject, 'dd/MM/yyyy');
-          const time = format(dateObject, 'K:mm a');
+          const zonedDate = utcToZonedTime(dateObject, 'America/Argentina');
+          const date = format(zonedDate, 'dd/MM/yyyy');
+          const time = format(zonedDate, 'K:mm a');
           return (
             <div key={id} className="student__tutorship-container">
               <div className="student__tutorship__image-container">

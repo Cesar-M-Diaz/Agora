@@ -9,7 +9,7 @@ import TutorCompleteTutorship from "./TutorCompleteTutorship";
 
 import "../assets/styles/components/tutorProfileTutorships.scss";
 import { format } from "date-fns";
-// import { StaticRouter } from 'react-router';
+import { utcToZonedTime } from 'date-fns-tz';
 
 function TutorProfileTutorships() {
   const id = useSelector((state) => state.currentUser._id);
@@ -80,10 +80,10 @@ function TutorProfileTutorships() {
           const { status, _id: id } = tutorship;
           const studentName = tutorship.student_id.name;
           const studentPhoto = tutorship.student_id.profile_photo;
-
           const dateObject = new Date(tutorship.date);
-          const date = format(dateObject, 'dd/MM/yyyy');
-          const time = format(dateObject, 'K:mm a');
+          const zonedDate = utcToZonedTime(dateObject, 'America/Argentina');
+          const date = format(zonedDate, 'dd/MM/yyyy');
+          const time = format(zonedDate, 'K:mm a');
 
           return (
             <div key={id} className="tutor__tutorship-container">
