@@ -139,7 +139,7 @@ $warning-color: rgb(235, 99, 99);
   p {
     font-family: 'Open Sans';
     font-weight: 600;
-    margin-top: 10px;
+    margin: 10px 0px 50px;
     color: $subtitle-color;
     text-align: center;
   }
@@ -275,6 +275,9 @@ $warning-color: rgb(235, 99, 99);
     height: auto;
     width: 180px;
     .tutor-edit__stars {
+      margin: 15px 0px 0px;
+    }
+    p {
       margin: 15px 0px 0px;
     }
   }
