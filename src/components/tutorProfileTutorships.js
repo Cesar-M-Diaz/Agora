@@ -21,7 +21,7 @@ function TutorProfileTutorships() {
   });
 
   const handleClick = async (data, e) => {
-    const button = e.target.outerText;
+    const button = e.target.innerText;
     const mySwal = withReactContent(Swal);
     const buttons = {
       Cancel: {
