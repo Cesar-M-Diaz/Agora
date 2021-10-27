@@ -45,7 +45,7 @@ function TutorProfilePage() {
       schedule: '',
       price: '',
     },
-    isValid: { name: true, password: true, email: true, schedule: true, price: true },
+    isValid: { name: true, password: true, email: true, schedule: true, price: true, description: true },
     enableUpload: false,
   });
   const swalStyled = Swal.mixin({
@@ -206,7 +206,7 @@ function TutorProfilePage() {
           ...state,
           errors: {
             ...state.errors,
-            schedule: 'this field is mandatory',
+            price: 'this field is mandatory',
           },
           isValid: { ...state.isValid, price: false },
           enableUpload: false,
@@ -222,6 +222,12 @@ function TutorProfilePage() {
           enableUpload: state.isValid.name && state.isValid.password && state.isValid.email && state.isValid.schedule,
         }));
       }
+    }
+    if (input === 'description') {
+      setUserData((state) => ({
+        ...state,
+        enableUpload: true,
+      }));
     }
   }
 
@@ -400,6 +406,7 @@ function TutorProfilePage() {
               id="form"
               name="description"
               onChange={handleChange}
+              onBlur={validateInput}
               defaultValue={previewData.description}
               placeholder="Let our students know something about you"
               cols="30"
