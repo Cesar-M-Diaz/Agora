@@ -28,7 +28,7 @@ function TutorProfileCreateTutorship() {
       time: '',
     },
     isValid: { email: false, date: false, time: false },
-    enableUpload: (email && date && time) || false,
+    enableUpload: false,
   });
   const swalStyled = Swal.mixin({
     customClass: {
@@ -191,7 +191,11 @@ function TutorProfileCreateTutorship() {
           type="submit"
           value="Save Tutorship"
           className="tutorship__button-submit"
-          disabled={!errors.enableUpload}
+          disabled={
+            email && date && time && !errors.errors.email && !errors.errors.date && !errors.errors.time
+              ? false
+              : !errors.enableUpload
+          }
         />
       </div>
     </form>
